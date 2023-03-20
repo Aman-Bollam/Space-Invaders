@@ -15,7 +15,7 @@ public class SpaceInvaders {
         JLabel label = new JLabel();
         label.setIcon(bg);
         panel.add(label);
-        
+        System.out.print("HI");
         frame.add(panel);
         frame.setSize(500, 500);
         frame.setVisible(true);
