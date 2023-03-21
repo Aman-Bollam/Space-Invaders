@@ -17,7 +17,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private boolean mouseHoveredSettings;
 	private boolean mouseHoveredSkins;
 	public MenuView() {
-		this.setPreferredSize(new Dimension(720,720));
+		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -27,7 +27,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		super.paintComponent(g);
 		if(!settings && !skins){
 			if(mouseHoveredPlay){
-
+				
 			} else if(mouseHoveredSettings){
 
 			} else if(mouseHoveredSkins){
@@ -41,36 +41,45 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+			
+		} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+
+		} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+
+		}
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+
+		} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+
+		} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+
+		}
+		System.out.println("x: "+e.getX());
+		System.out.println("y: "+e.getY());
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
 	}
 }
