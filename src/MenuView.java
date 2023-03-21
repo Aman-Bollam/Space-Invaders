@@ -27,12 +27,11 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		super.paintComponent(g);
 		if(!settings && !skins){
 			if(mouseHoveredPlay){
-				System.out.println("hi");
 				display = new ImageIcon(path+"menuhoveredplay.png").getImage();
 			} else if(mouseHoveredSettings){
-
+				display = new ImageIcon(path+"menuhoveredsettings.png").getImage();
 			} else if(mouseHoveredSkins){
-
+				display = new ImageIcon(path+"menuhoveredskins.png").getImage();
 			} else{
 				display = new ImageIcon(path+"Menu.png").getImage();
 			}
