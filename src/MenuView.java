@@ -13,9 +13,9 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private String [] imageSlides = new String[]{};
 	private Image display;
 	private final String path = "images\\";
-	private boolean mouseHoveredPlay;
-	private boolean mouseHoveredSettings;
-	private boolean mouseHoveredSkins;
+	private boolean mouseHoveredPlay = false;
+	private boolean mouseHoveredSettings = false;
+	private boolean mouseHoveredSkins = false;
 	public MenuView() {
 		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
@@ -27,7 +27,8 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		super.paintComponent(g);
 		if(!settings && !skins){
 			if(mouseHoveredPlay){
-				
+				System.out.println("hi");
+				display = new ImageIcon(path+"menuhoveredplay.png").getImage();
 			} else if(mouseHoveredSettings){
 
 			} else if(mouseHoveredSkins){
@@ -44,12 +45,23 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
-			
-		} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
-
-		} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
-
+		if(!skins && !settings){
+			if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+				mouseHoveredPlay = true;
+			} else {
+				mouseHoveredPlay = false;
+			}
+			if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+				mouseHoveredSkins = true;
+			} else {
+				mouseHoveredSkins = false;
+			}
+			if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+				mouseHoveredSettings = true;
+			} else {
+				mouseHoveredSettings = false;
+			}
+			this.repaint();
 		}
 		// TODO Auto-generated method stub
 	}
@@ -62,8 +74,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
 
 		}
-		System.out.println("x: "+e.getX());
-		System.out.println("y: "+e.getY());
+		
 		// TODO Auto-generated method stub
 	}
 	@Override
