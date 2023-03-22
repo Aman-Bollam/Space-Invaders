@@ -35,8 +35,11 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			} else{
 				display = new ImageIcon(path+"Menu.png").getImage();
 			}
+		} else if(!skins){
+			// g.drawImage(new ImageIcon(path+"next.png").getImage(),517,622,null);
 		}
 		g.drawImage(display, 0, 0, null);
+		g.drawImage(new ImageIcon(path+"slide1.png").getImage(),0,100,null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
