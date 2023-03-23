@@ -7,17 +7,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
-	private boolean settings = false;
-	private boolean skins = false;
+	private boolean settings;
+	private boolean skins;
 	private int slideCounter = 0;
 	private String [] imageSlides = new String[]{};
 	private Image display;
 	private final String path = "images\\";
-	private boolean mouseHoveredPlay = false;
-	private boolean mouseHoveredSettings = false;
-	private boolean mouseHoveredSkins = false;
-	private boolean hoveredNext = false;
+	private boolean mouseHoveredPlay;
+	private boolean mouseHoveredSettings;
+	private boolean mouseHoveredSkins;
+	private boolean hoveredNext;
+	private boolean hoveredEquip;
+	private boolean back;
+	private boolean hoveredBack;
+	private boolean menuButt;
+	private boolean menuButtHovered;
 	public MenuView() {
+		settings = false;
+		skins = false;
+		mouseHoveredPlay = false;
+		mouseHoveredSettings = false;
+		mouseHoveredSkins = false;
+		hoveredNext = false;
+		hoveredEquip= false;
 		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
 		this.addMouseListener(this);
@@ -39,11 +51,12 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			g.drawImage(display, 0, 0, null);
 		} else if(skins){
 			g.drawImage(new ImageIcon(path+"skinsbackground.png").getImage(),0,0,null);
-			// display = new ImageIcon(path+imageSlides[slideCounter]).getImage();
+			// g.drawImage(new ImageIcon(path+imageSlides[slideCounter]).getImage(),0,100,null);
 			// g.drawImage(new ImageIcon(path+"next.png").getImage(),518,622,null);
+			
 		}
 		g.drawImage(new ImageIcon(path+"slide1.png").getImage(),0,100,null);
-		g.drawImage(new ImageIcon(path+"equipped.png").getImage(),160,347,null);
+		g.drawImage(new ImageIcon(path+"equip.png").getImage(),160,347,null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -74,10 +87,10 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			} else {
 				hoveredNext = false;
 			}
-			if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
-				mouseHoveredSettings = true;
+			if(e.getX()>=158 && e.getX()<=412 && e.getY()>=346 && e.getY()<=418) {
+				hoveredEquip = true;
 			} else {
-				mouseHoveredSettings = false;
+				hoveredEquip = false;
 			}
 			this.repaint();
 		}
@@ -101,6 +114,9 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		} else if(skins){
 			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694){
 				slideCounter++;
+				this.repaint();
+			} else if(e.getX()>=158 && e.getX()<=412 && e.getY()>=346 && e.getY()<=418){
+				// gets player ship
 			} 
 		}	
 		// TODO Auto-generated method stub
