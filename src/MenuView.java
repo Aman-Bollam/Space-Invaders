@@ -16,6 +16,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private boolean mouseHoveredPlay = false;
 	private boolean mouseHoveredSettings = false;
 	private boolean mouseHoveredSkins = false;
+	private boolean hoveredNext = false;
 	public MenuView() {
 		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
@@ -35,11 +36,14 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			} else{
 				display = new ImageIcon(path+"Menu.png").getImage();
 			}
-		} else if(!skins){
-			// g.drawImage(new ImageIcon(path+"next.png").getImage(),517,622,null);
+			g.drawImage(display, 0, 0, null);
+		} else if(skins){
+			g.drawImage(new ImageIcon(path+"skinsbackground.png").getImage(),0,0,null);
+			// display = new ImageIcon(path+imageSlides[slideCounter]).getImage();
+			// g.drawImage(new ImageIcon(path+"next.png").getImage(),518,622,null);
 		}
-		g.drawImage(display, 0, 0, null);
-		// g.drawImage(new ImageIcon(path+"slide1.png").getImage(),0,100,null);
+		g.drawImage(new ImageIcon(path+"slide1.png").getImage(),0,100,null);
+		g.drawImage(new ImageIcon(path+"equipped.png").getImage(),160,347,null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -64,19 +68,41 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 				mouseHoveredSettings = false;
 			}
 			this.repaint();
+		} else if(skins) {
+			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694) {
+				hoveredNext = true;
+			} else {
+				hoveredNext = false;
+			}
+			if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+				mouseHoveredSettings = true;
+			} else {
+				mouseHoveredSettings = false;
+			}
+			this.repaint();
 		}
 		// TODO Auto-generated method stub
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
-
-		} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
-
-		} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
-
-		}
-		
+		System.out.println("X:" + e.getX());
+		System.out.println("Y:" + e.getY());
+		if(!skins && !settings){
+			if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+			
+			} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+				skins = true;
+				slideCounter++;
+				this.repaint();
+			} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+				settings = true;
+				this.repaint();
+			}
+		} else if(skins){
+			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694){
+				slideCounter++;
+			} 
+		}	
 		// TODO Auto-generated method stub
 	}
 	@Override
