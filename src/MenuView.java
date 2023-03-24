@@ -4,7 +4,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean settings;

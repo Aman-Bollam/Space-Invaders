@@ -2,9 +2,11 @@ public class PlayerShip {
     private boolean [] equipped = {false,false,false,false,false,false,false,false,false};
     private String ship;
     private int phase;
+    private int shipNum;
     public PlayerShip(int num, int pos) {
         ship = "ship-phase-"+num+"-pos"+phase+".png";
         phase = pos;
+        shipNum = num;
         for(int i=0; i<9; i++) {
             if(equipped[i]){
                 equipped[i] = false;
@@ -33,5 +35,8 @@ public class PlayerShip {
     }
     public int getPhase(){
         return phase;
+    }
+    public int getNum() {
+        return shipNum;
     }
 }
