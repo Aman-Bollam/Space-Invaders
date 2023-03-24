@@ -10,7 +10,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private boolean settings;
 	private boolean skins;
 	private int slideCounter;
-	private String [] imageSlides = {"slide1.png","slide2.png","slide3.png"};
+	private String [] imageSlides = {"slide1.png","slide2.png","slide3.png","slide4.png","slide5.png","slide6.png","slide7.png","slide8.png","slide9.png"};
 	private Image display;
 	private final String path = "images\\";
 	private boolean mouseHoveredPlay;
@@ -32,7 +32,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		hoveredEquip= false;
 		hoveredBack=false;
 		menuButtHovered = false;
-		// ship = new PlayerShip(0);
+		ship = new PlayerShip(0,2);
 		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
 		this.addMouseListener(this);
@@ -70,16 +70,16 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			} else {
 				g.drawImage(new ImageIcon(path+"menubutton.png").getImage(),158,556,null);
 			}
-			// if(ship.isEquipped(slideCounter)) {
-			// 	g.drawImage(new ImageIcon(path+"equipped.png").getImage(),159,347,null);
-			// } else if(hoveredEquip) {
-			// 	g.drawImage(new ImageIcon(path+"equiphovered.png").getImage(),159,347,null);
-			// } else{
-			// 	g.drawImage(new ImageIcon(path+"equip.png").getImage(),159,347,null);
-			// }
+			if(ship.isEquipped(slideCounter)) {
+				g.drawImage(new ImageIcon(path+"equipped.png").getImage(),159,347,null);
+			} else if(hoveredEquip) {
+				g.drawImage(new ImageIcon(path+"equiphovered.png").getImage(),159,347,null);
+			} else{
+				g.drawImage(new ImageIcon(path+"equip.png").getImage(),159,347,null);
+			}
 			
 		}
-		// g.drawImage(new ImageIcon(path+"slide1.png").getImage(),0,100,null);
+		g.drawImage(new ImageIcon(path+"a.png").getImage(),0,100,null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -144,16 +144,18 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 				this.repaint();
 			}
 		} else if(skins){
-			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694 && slideCounter<9) {
+			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694 && slideCounter<8) {
 				slideCounter++;
 				this.repaint();
 			} else if(e.getX()>=158 && e.getX()<=412 && e.getY()>=346 && e.getY()<=418) {
-				// gets player ship
+				ship = new PlayerShip(slideCounter, 2);
+				this.repaint();
 			} else if(e.getX()>=319 && e.getX()<=513 && e.getY()>=624 && e.getY()<=696 && slideCounter>0) {
 				slideCounter--;
 				this.repaint();
 			} else if(e.getX()>=156 && e.getX()<=482 && e.getY()>=557 && e.getY()<=611){
 				skins = false;
+				slideCounter=0;
 				this.repaint();
 			}
 		}	

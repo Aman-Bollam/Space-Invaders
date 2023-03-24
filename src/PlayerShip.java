@@ -1,9 +1,10 @@
 public class PlayerShip {
-    private boolean [] equipped = {false,false,false,false,false,false,false,false};
-    private String [] ships = {};
+    private boolean [] equipped = {false,false,false,false,false,false,false,false,false};
     private String ship;
-    public PlayerShip(int num) {
-        ship = ships[num];
+    private int phase;
+    public PlayerShip(int num, int pos) {
+        ship = "ship-phase-"+num+"-pos"+phase+".png";
+        phase = pos;
         for(int i=0; i<9; i++) {
             if(equipped[i]){
                 equipped[i] = false;
@@ -19,5 +20,18 @@ public class PlayerShip {
     }
     public String getName() {
         return ship;
+    }
+    public int getShip() {
+        int num = 0;
+        for(int i=0; i<9; i++) {
+            if(equipped[i]){
+                num = i;
+                i=9;
+            }
+        }
+        return num;
+    }
+    public int getPhase(){
+        return phase;
     }
 }
