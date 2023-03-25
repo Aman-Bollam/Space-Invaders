@@ -3,7 +3,9 @@ public class PlayerShip {
     private String ship;
     private int phase;
     private int shipNum;
+    private int lives;
     public PlayerShip(int num, int pos) {
+        lives = 3;
         ship = "ship-phase-"+num+"-pos"+phase+".png";
         phase = pos;
         shipNum = num;
@@ -36,7 +38,15 @@ public class PlayerShip {
     public int getPhase(){
         return phase;
     }
-    public int getNum() {
+    public int getShipNum() {
         return shipNum;
+    }
+    public void subtractLife(){
+        if(lives>0){
+            lives--;
+        }
+    }
+    public int getLives(){
+        return lives;
     }
 }
