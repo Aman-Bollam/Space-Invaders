@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.EventQueue.*;
 import javax.swing.*;
 
 public class Intro {
