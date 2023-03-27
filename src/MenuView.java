@@ -83,6 +83,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		if(!skins && !settings){
+			System.out.println((e.getX()));
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				mouseHoveredPlay = true;
 			} else {
