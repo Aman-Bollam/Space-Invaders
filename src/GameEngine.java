@@ -3,22 +3,33 @@ import java.awt.Toolkit;
 import java.awt.*;
 import javax.swing.*;
 public class GameEngine {
-    private boolean menu;
-    private boolean game;
-    private boolean end;
+    private boolean menu = true;
+    private boolean game = false;
+    private boolean end = false;
+    private PlayerShip theShip;
     private JPanel screen;
     private JFrame window;
 	public GameEngine() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("test");
-		MenuView testing = new MenuView();
+        if(menu) {
+            screen = new MenuView();
+        } else if(game) {
+            // screen = new PlayGame();
+        }
+		
 		//testing.setPreferredSize(new Dimension(960,960));
 		//Toolkit.getDefaultToolkit().getScreenSize().getHeight()
-		testing.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
-		window.setContentPane(testing);
+		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
+		window.setContentPane(screen);
 		window.pack();
 		window.setVisible(true);
 	}
+    public void setGame(PlayerShip ship){
+        theShip = ship;
+        game = true;
+        menu = false;
+    }
 	private static void runGUI() {
 	  	JFrame.setDefaultLookAndFeelDecorated(true);
 	  	Intro drive = new Intro();
