@@ -82,6 +82,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		System.out.print(convert(e.getX()));
 		if(!skins && !settings){
 			System.out.println((e.getX()));
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
@@ -175,6 +176,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
-		return (int)((d/960)*(this.getHeight()));
+		return (int)(((double)d/(double)960)*(this.getHeight()));
 	}
 }
