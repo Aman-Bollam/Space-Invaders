@@ -84,39 +84,39 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		if(!skins && !settings){
-			if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				mouseHoveredPlay = true;
 			} else {
 				mouseHoveredPlay = false;
 			}
-			if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+			if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				mouseHoveredSkins = true;
 			} else {
 				mouseHoveredSkins = false;
 			}
-			if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+			if(e.getX()>=convert(347) && e.getX()<=convert(611) && e.getY()>=convert(807) && e.getY()<=convert(863)) {
 				mouseHoveredSettings = true;
 			} else {
 				mouseHoveredSettings = false;
 			}
 			this.repaint();
 		} else if(skins) {
-			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694) {
+			if(e.getX()>=convert(518) && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694)) {
 				hoveredNext = true;
 			} else {
 				hoveredNext = false;
 			}
-			if(e.getX()>=158 && e.getX()<=412 && e.getY()>=346 && e.getY()<=418) {
+			if(e.getX()>=convert(158) && e.getX()<=convert(412) && e.getY()>=convert(346) && e.getY()<=convert(418)) {
 				hoveredEquip = true;
 			} else {
 				hoveredEquip = false;
 			} 
-			if(e.getX()>=319 && e.getX()<=513 && e.getY()>=624 && e.getY()<=696 && slideCounter>0) {
+			if(e.getX()>=convert(319) && e.getX()<=convert(513) && e.getY()>=convert(624) && e.getY()<=convert(696) && slideCounter>0) {
 				hoveredBack = true;
 			} else {
 				hoveredBack = false;
 			} 
-			if(e.getX()>=156 && e.getX()<=482 && e.getY()>=557 && e.getY()<=611) {
+			if(e.getX()>=convert(156) && e.getX()<=convert(482) && e.getY()>=convert(557) && e.getY()<=convert(611)) {
 				menuButtHovered = true;
 			} else {
 				menuButtHovered = false;
@@ -130,26 +130,26 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		// System.out.println("X:" + e.getX());
 		// System.out.println("Y:" + e.getY());
 		if(!skins && !settings){
-			if(e.getX()>=325 && e.getX()<=637 && e.getY()>=558 && e.getY()<=678){
+			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 			
-			} else if(e.getX()>=397 && e.getX()<=559 && e.getY()>=714 && e.getY()<=768) {
+			} else if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				skins = true;
 				this.repaint();
-			} else if(e.getX()>=347 && e.getX()<=611 && e.getY()>=807 && e.getY()<=863) {
+			} else if(e.getX()>=convert(347) && e.getX()<=convert(611) && e.getY()>=convert(807) && e.getY()<=convert(863)) {
 				settings = true;
 				this.repaint();
 			}
 		} else if(skins){
-			if(e.getX()>=518 && e.getX()<=813 && e.getY()>=621 && e.getY()<=694 && slideCounter<8) {
+			if(e.getX()>=518 && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694) && slideCounter<8) {
 				slideCounter++;
 				this.repaint();
-			} else if(e.getX()>=158 && e.getX()<=412 && e.getY()>=346 && e.getY()<=418) {
+			} else if(e.getX()>=convert(158) && e.getX()<=convert(412) && e.getY()>=convert(346) && e.getY()<=convert(418)) {
 				ship = new PlayerShip(slideCounter, 2);
 				this.repaint();
-			} else if(e.getX()>=319 && e.getX()<=513 && e.getY()>=624 && e.getY()<=696 && slideCounter>0) {
+			} else if(e.getX()>=convert(319) && e.getX()<=convert(513) && e.getY()>=convert(624) && e.getY()<=convert(696) && slideCounter>0) {
 				slideCounter--;
 				this.repaint();
-			} else if(e.getX()>=156 && e.getX()<=482 && e.getY()>=557 && e.getY()<=611){
+			} else if(e.getX()>=convert(156) && e.getX()<=convert(482) && e.getY()>=convert(557) && e.getY()<=convert(611)){
 				skins = false;
 				slideCounter=0;
 				this.repaint();
