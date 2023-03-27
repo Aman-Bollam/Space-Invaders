@@ -78,7 +78,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			}
 			
 		}
-		g.drawImage(new ImageIcon(path+"a.png").getImage(),0,100,null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
