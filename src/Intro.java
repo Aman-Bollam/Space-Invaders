@@ -5,9 +5,12 @@ import javax.swing.*;
 public class Intro {
     private JFrame test;
 	public Intro() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		test = new JFrame("test");
 		MenuView testing = new MenuView();
-		testing.setPreferredSize(new Dimension(960,960));
+		//testing.setPreferredSize(new Dimension(960,960));
+		//Toolkit.getDefaultToolkit().getScreenSize().getHeight()
+		testing.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
 		test.setContentPane(testing);
 		test.pack();
 		test.setVisible(true);

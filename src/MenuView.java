@@ -1,10 +1,7 @@
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.io.File;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean settings;
 	private boolean skins;
@@ -175,5 +172,9 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+	}
+	public int convert(int d){
+		//return (int)((d/960)*(this.getHeight()-50));
+		return (int)((d/960)*(this.getHeight()));
 	}
 }
