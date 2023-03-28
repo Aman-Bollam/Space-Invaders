@@ -9,7 +9,7 @@ public class EndScreen extends JPanel implements MouseListener, MouseMotionListe
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
     }
-
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         // TODO Auto-generated method stub
