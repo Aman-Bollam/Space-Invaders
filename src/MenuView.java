@@ -54,26 +54,26 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 			g.drawImage(resizeMenu(new ImageIcon(path+imageSlides[slideCounter])).getImage(),0,convert(100),null);
 			//g.drawImage(new ImageIcon(path+imageSlides[slideCounter]).getImage(),0,100,null);
 			if(hoveredNext && slideCounter<8){
-				g.drawImage(new ImageIcon(path+"nexthovered.png").getImage(),518,622,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"nexthovered.png")).getImage(),convert(518),convert(622),null);
 			} else if(slideCounter<8) {
-				g.drawImage(new ImageIcon(path+"next.png").getImage(),518,622,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"next.png")).getImage(),convert(518),convert(622),null);
 			} 	
 			if(hoveredBack && slideCounter>0){
-				g.drawImage(new ImageIcon(path+"backhovered.png").getImage(),320,625,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"backhovered.png")).getImage(),convert(320),convert(625),null);
 			} else if(slideCounter>0) {
-				g.drawImage(new ImageIcon(path+"back.png").getImage(),320,625,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"back.png")).getImage(),convert(320),convert(625),null);
 			}
 			if(menuButtHovered){
-				g.drawImage(new ImageIcon(path+"menubuttonhover.png").getImage(),158,556,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"menubuttonhover.png")).getImage(),convert(158),convert(556),null);
 			} else {
-				g.drawImage(new ImageIcon(path+"menubutton.png").getImage(),158,556,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"menubutton.png")).getImage(),convert(158),convert(556),null);
 			}
 			if(ship.isEquipped(slideCounter)) {
-				g.drawImage(new ImageIcon(path+"equipped.png").getImage(),159,347,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"equipped.png")).getImage(),convert(159),convert(347),null);
 			} else if(hoveredEquip) {
-				g.drawImage(new ImageIcon(path+"equiphovered.png").getImage(),159,347,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"equiphovered.png")).getImage(),convert(159),convert(347),null);
 			} else{
-				g.drawImage(new ImageIcon(path+"equip.png").getImage(),159,347,null);
+				g.drawImage(resizeMenu(new ImageIcon(path+"equip.png")).getImage(),convert(159),convert(347),null);
 			}
 			
 		}
@@ -142,7 +142,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 				this.repaint();
 			}
 		} else if(skins){
-			if(e.getX()>=518 && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694) && slideCounter<8) {
+			if(e.getX()>=convert(518) && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694) && slideCounter<8) {
 				slideCounter++;
 				this.repaint();
 			} else if(e.getX()>=convert(158) && e.getX()<=convert(412) && e.getY()>=convert(346) && e.getY()<=convert(418)) {
