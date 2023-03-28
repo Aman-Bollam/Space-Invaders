@@ -1,9 +1,12 @@
+import java.awt.*;
+
 public class PlayerShip {
     private boolean [] equipped = {false,false,false,false,false,false,false,false,false};
     private String ship;
     private int phase;
     private int shipNum;
     private int lives;
+    private Rectangle hitbox;
     public PlayerShip(int num, int pos) {
         lives = 3;
         ship = "ship-phase-"+num+"-pos"+phase+".png";
@@ -15,6 +18,7 @@ public class PlayerShip {
             }
         }
         equipped[num]=true;
+        //hitbox = new Dimension(x,y);
     }
     public boolean isEquipped(int num) {
         if(equipped[num]){

@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
+
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean settings;
 	private boolean skins;
@@ -39,18 +40,19 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		super.paintComponent(g);
 		if(!settings && !skins){
 			if(mouseHoveredPlay){
-				display = new ImageIcon(path+"menuhoveredplay.png").getImage();
+				display = resize(new ImageIcon(path+"menuhoveredplay.png"), this.getHeight()).getImage();
 			} else if(mouseHoveredSettings){
-				display = new ImageIcon(path+"menuhoveredsettings.png").getImage();
+				display = resize(new ImageIcon(path+"menuhoveredsettings.png"), this.getHeight()).getImage();
 			} else if(mouseHoveredSkins){
-				display = new ImageIcon(path+"menuhoveredskins.png").getImage();
+				display = resize(new ImageIcon(path+"menuhoveredskins.png"), this.getHeight()).getImage();
 			} else{
-				display = new ImageIcon(path+"Menu.png").getImage();
+				display = resize(new ImageIcon(path+"Menu.png"), this.getHeight()).getImage();
 			}
 			g.drawImage(display, 0, 0, null);
 		} else if(skins){
-			g.drawImage(new ImageIcon(path+"BlackHole.png").getImage(),0,0,null);
-			g.drawImage(new ImageIcon(path+imageSlides[slideCounter]).getImage(),0,100,null);
+			g.drawImage(resize(new ImageIcon(path+"BlackHole.png"), this.getHeight()).getImage(),0,0,null);
+			g.drawImage(resizeMenu(new ImageIcon(path+imageSlides[slideCounter])).getImage(),0,convert(100),null);
+			//g.drawImage(new ImageIcon(path+imageSlides[slideCounter]).getImage(),0,100,null);
 			if(hoveredNext && slideCounter<8){
 				g.drawImage(new ImageIcon(path+"nexthovered.png").getImage(),518,622,null);
 			} else if(slideCounter<8) {
@@ -82,9 +84,8 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.print(convert(e.getX()));
+		//System.out.println(convert(e.getX()));
 		if(!skins && !settings){
-			System.out.println((e.getX()));
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				mouseHoveredPlay = true;
 			} else {
@@ -177,5 +178,13 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(this.getHeight()));
+	}
+	private ImageIcon resize(ImageIcon img, int height) {
+		Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
+		return new ImageIcon(image);
+	}
+	private ImageIcon resizeMenu(ImageIcon img) {
+		Image image = img.getImage().getScaledInstance(convert(img.getIconWidth()), convert(img.getIconHeight()), Image.SCALE_SMOOTH);
+		return new ImageIcon(image);
 	}
 }
