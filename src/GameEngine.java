@@ -19,9 +19,10 @@ public class GameEngine {
         } else if(end) {
             screen = new EndScreen();
         }
-		
 		//testing.setPreferredSize(new Dimension(960,960));
 		//Toolkit.getDefaultToolkit().getScreenSize().getHeight()
+        window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
+
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
 		window.setContentPane(screen);
 		window.pack();
