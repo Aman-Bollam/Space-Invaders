@@ -16,6 +16,8 @@ public class GameEngine {
             screen = new MenuView();
         } else if(game) {
             // screen = new PlayGame();
+        } else if(end) {
+            screen = new EndScreen();
         }
 		
 		//testing.setPreferredSize(new Dimension(960,960));
@@ -30,9 +32,13 @@ public class GameEngine {
         game = true;
         menu = false;
     }
+    public void setMenu(){
+        menu = true;
+        game = false;
+        end = false;
+    }
 	private static void runGUI() {
-	  	JFrame.setDefaultLookAndFeelDecorated(true);
-	  	Intro drive = new Intro();
+	  	GameEngine drive = new GameEngine();
 	}
 	public static void main(String[] args) {
 	    /* Methods that create and show a GUI should be 
