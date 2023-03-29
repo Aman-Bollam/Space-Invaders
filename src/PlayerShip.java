@@ -39,18 +39,21 @@ public class PlayerShip {
         }
         return num;
     }
-    public int getPhase(){
+    public int getPhase() {
         return phase;
     }
     public int getShipNum() {
         return shipNum;
     }
-    public void subtractLife(){
+    public void subtractLife() {
         if(lives>0){
             lives--;
         }
     }
     public int getLives(){
         return lives;
+    }
+    public Rectangle getHitBox() {
+        return hitbox;
     }
 }
