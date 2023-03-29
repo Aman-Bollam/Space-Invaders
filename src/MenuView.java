@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
