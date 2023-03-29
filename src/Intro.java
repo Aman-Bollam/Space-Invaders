@@ -15,7 +15,6 @@ public class Intro {
 		test.setVisible(true);
 	}
 	private static void runGUI() {
-	  	JFrame.setDefaultLookAndFeelDecorated(true);
 	  	Intro drive = new Intro();
 	}
 	public static void main(String[] args) {
