@@ -38,7 +38,6 @@ public class GameEngine {
         end = false;
     }
 	private static void runGUI() {
-	  	JFrame.setDefaultLookAndFeelDecorated(true);
 	  	GameEngine drive = new GameEngine();
 	}
 	public static void main(String[] args) {
