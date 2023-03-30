@@ -14,7 +14,7 @@ public class GameEngine {
         if(menu) {
             screen = new MenuView();
         } else if(game) {
-            // screen = new PlayGame();
+            screen = new PlayGame();
         } else if(end) {
             screen = new EndScreen();
         }
