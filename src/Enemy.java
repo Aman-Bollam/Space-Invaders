@@ -1,7 +1,7 @@
-Public Class Enemy {
+public class Enemy {
     int model;
     boolean life;
-    Public Enemy(int type, boolean alive) {
+    public Enemy(int type, boolean alive) {
         model = type;
         life = alive;
     }
