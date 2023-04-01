@@ -1,5 +1,9 @@
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+
 import javax.swing.*;
+import javax.swing.event.InternalFrameListener;
 public class GameEngine {
     private boolean menu = true;
     private boolean game = false;
@@ -7,6 +11,8 @@ public class GameEngine {
     private PlayerShip theShip;
     private JPanel screen;
     private JFrame window;
+    int panelHeight;
+    int panelWidth;
 	public GameEngine() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("test");
