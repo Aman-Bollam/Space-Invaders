@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.*;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean settings;
 	private boolean skins;
@@ -16,7 +17,8 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private boolean hoveredBack;
 	private boolean menuButtHovered;
 	private PlayerShip ship;
-	public MenuView() {
+	private GameEngine engine;
+	public MenuView(GameEngine run) {
 		slideCounter = 0;
 		settings = false;
 		skins = false;
@@ -28,11 +30,10 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		hoveredBack=false;
 		menuButtHovered = false;
 		ship = new PlayerShip(0,2);
-		this.setPreferredSize(new Dimension(960,960));
 		this.setFocusable(true);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-
+		engine = run;
 	}
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
@@ -50,7 +51,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		} else if(skins){
 			g.drawImage(resize(new ImageIcon(path+"BlackHole.png"), this.getHeight()).getImage(),0,0,null);
 			g.drawImage(resizeMenu(new ImageIcon(path+imageSlides[slideCounter])).getImage(),0,convert(100),null);
-			//g.drawImage(new ImageIcon(path+imageSlides[slideCounter]).getImage(),0,100,null);
 			if(hoveredNext && slideCounter<8){
 				g.drawImage(resizeMenu(new ImageIcon(path+"nexthovered.png")).getImage(),convert(518),convert(622),null);
 			} else if(slideCounter<8) {
@@ -132,7 +132,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		// System.out.println("Y:" + e.getY());
 		if(!skins && !settings){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
-			
+				engine.setGame(ship);
 			} else if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				skins = true;
 				this.repaint();
