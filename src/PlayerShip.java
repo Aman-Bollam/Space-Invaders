@@ -9,9 +9,9 @@ public class PlayerShip {
     private Rectangle hitbox;
     public PlayerShip(int num, int pos) {
         lives = 3;
-        ship = "ship-phase-"+num+"-pos"+phase+".png";
+        ship = "ship-phase-"+(num+1)+"-pos"+pos+".png";
         phase = pos;
-        shipNum = num;
+        shipNum = num+1;
         for(int i=0; i<9; i++) {
             if(equipped[i]){
                 equipped[i] = false;
