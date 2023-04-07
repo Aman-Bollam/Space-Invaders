@@ -22,7 +22,7 @@ public class GameEngine {
 	}
     public void setGame(PlayerShip ship){
         theShip = ship;
-        screen = new PlayGame(this);
+        screen = new PlayGame(this,theShip);
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
         window.pack();

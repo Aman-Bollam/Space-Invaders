@@ -131,7 +131,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		// System.out.println("Y:" + e.getY());
 		if(!skins && !settings){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
-				engine.setGame(ship);
+				engine.setGame(new PlayerShip(ship.getShip(),1));
 			} else if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				skins = true;
 				this.repaint();
