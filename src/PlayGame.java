@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 public class PlayGame extends JPanel implements KeyListener {
+  private int x;
+  private int y;
   private final String path = "images\\";
   private GameEngine run;
   private PlayerShip ship;
@@ -13,10 +15,14 @@ public class PlayGame extends JPanel implements KeyListener {
 		this.addKeyListener(null);
     run = engine;
     ship = player;
+    x = 407;
+    y = 650;
   }
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(), convert(159),convert(347),null);
+    g.drawImage(resize(new ImageIcon(path+"background6.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
+    g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(x),convert(y),null);
   }
   private ImageIcon resize(ImageIcon img, int height) {
     Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
