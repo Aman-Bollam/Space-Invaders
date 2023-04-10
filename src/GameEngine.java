@@ -12,7 +12,7 @@ public class GameEngine {
     private Dimension screenSize;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		window = new JFrame("test");
+		window = new JFrame("Space Invaders");
         screen = new MenuView(this);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
