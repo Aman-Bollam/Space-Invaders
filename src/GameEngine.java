@@ -1,9 +1,6 @@
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import javax.swing.*;
-import javax.swing.event.InternalFrameListener;
-public class GameEngine {
+public class GameEngine{
     private PlayerShip theShip;
     private JPanel screen;
     private JFrame window;

@@ -1,25 +1,27 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
-public class PlayGame extends JPanel implements ActionListener {
+public class PlayGame extends JPanel implements ActionListener, KeyListener {
   private int x;
   private int y;
   private int lives;
   private final String path = "images\\";
   private GameEngine run;
   private PlayerShip ship;
+  private Timer moving;
   public PlayGame(GameEngine engine, PlayerShip player) {
 		this.setFocusable(true);
-		this.addKeyListener(new PlayerPress());
+    this.addKeyListener(this);
     run = engine;
     ship = player;
     x = 407;
     y = 725;
     lives = 3;
+    moving = new Timer(0, this);
+    // moving.start();
   }
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -28,11 +30,6 @@ public class PlayGame extends JPanel implements ActionListener {
     g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(j),convert(842),null);
-    }
-  }
-  private class PlayerPress extends KeyAdapter {
-    public void PlayerPress(KeyEvent e) {
-      System.out.println(e.getKeyCode());
     }
   }
   public int convert(int d){
@@ -47,6 +44,21 @@ public class PlayGame extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    x++;
+    this.repaint();
+  }
+  @Override
+  public void keyPressed(KeyEvent e) {
+    System.out.println("hi");
+  }
+  @Override
+  public void keyReleased(KeyEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+  }
+  @Override
+  public void keyTyped(KeyEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
   }
 }
