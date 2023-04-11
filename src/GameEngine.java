@@ -9,6 +9,8 @@ public class GameEngine{
     int panelHeight;
     int panelWidth;
     private Dimension screenSize;
+	private boolean game = false;
+	private PlayGame myGame;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -22,7 +24,9 @@ public class GameEngine{
 	}
     public void setGame(PlayerShip ship){
         theShip = ship;
-        screen = new PlayGame(this,theShip);
+		game = true;
+        myGame = new PlayGame(this,theShip);
+		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
 		window.addKeyListener(new PlayerInput());
@@ -34,7 +38,9 @@ public class GameEngine{
     }
 	private class PlayerInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  System.out.println(e.getKeyCode());
+		  if(e.getKeyCode()==39 && game) {
+			myGame.setPosRight();
+		  }
 		}
 		// public void keyReleased(KeyEvent e) {
 		//   // TODO Auto-generated method stub

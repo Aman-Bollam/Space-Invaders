@@ -38,12 +38,15 @@ public class PlayGame extends JPanel implements ActionListener{
     Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
     return new ImageIcon(image);
   }
-
   @Override
   public void actionPerformed(ActionEvent e) {
     // TODO Auto-generated method stub
     this.repaint();
   }
-  
-  
+  public void setPosRight() {
+    x++;
+  }
+  public void setPosLeft() {
+    x--;
+  }
 }
