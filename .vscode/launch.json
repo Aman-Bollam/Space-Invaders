@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GameEngine",
+            "request": "launch",
+            "mainClass": "GameEngine",
+            "projectName": "Space-Invaders_c1a0c322"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

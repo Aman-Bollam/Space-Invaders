@@ -30,6 +30,7 @@ public class PlayGame extends JPanel implements ActionListener{
       g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(j),convert(842),null);
     }
   }
+
   public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(this.getHeight()));
