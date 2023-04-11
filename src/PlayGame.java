@@ -21,6 +21,17 @@ public class PlayGame extends JPanel implements ActionListener{
     moving = new Timer(0, this);
     moving.start();
   }
+  public void setPosRight() {
+    x++;
+  }
+  public void setPosLeft() {
+    x--;
+  }
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+    this.repaint();
+  }
+  @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(resize(new ImageIcon(path+"background7.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
@@ -38,16 +49,5 @@ public class PlayGame extends JPanel implements ActionListener{
   private ImageIcon resize(ImageIcon img, int height) {
     Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
     return new ImageIcon(image);
-  }
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    this.repaint();
-  }
-  public void setPosRight() {
-    x++;
-  }
-  public void setPosLeft() {
-    x--;
   }
 }
