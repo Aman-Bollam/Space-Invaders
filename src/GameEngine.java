@@ -40,7 +40,8 @@ public class GameEngine{
 		public void keyPressed(KeyEvent e) {
 		  if(e.getKeyCode()==39 && game) {
 			myGame.setPosRight();
-		  } else if(e.getKeyCode()==39 && game) {
+		  } 
+		  if(e.getKeyCode()==37 && game) {
 			myGame.setPosLeft();
 		  }
 		}
