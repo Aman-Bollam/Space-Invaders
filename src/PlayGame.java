@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 public class PlayGame extends JPanel implements ActionListener{
-  private int x;
+  int x;
   private int y;
   private int lives;
   private final String path = "images\\";

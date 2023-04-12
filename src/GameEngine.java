@@ -38,10 +38,10 @@ public class GameEngine{
     }
 	private class PlayerInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  if(e.getKeyCode()==39 && game) {
+		  if(e.getKeyCode()==39) {
 			myGame.setPosRight();
 		  } 
-		  if(e.getKeyCode()==37 && game) {
+		  if(e.getKeyCode()==37) {
 			myGame.setPosLeft();
 		  }
 		}
