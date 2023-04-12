@@ -9,7 +9,6 @@ public class GameEngine{
     int panelHeight;
     int panelWidth;
     private Dimension screenSize;
-	private boolean game = false;
 	private PlayGame myGame;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -23,8 +22,7 @@ public class GameEngine{
 		window.setVisible(true);
 	}
     public void setGame(PlayerShip ship){
-        theShip = ship;
-		game = true;
+        theShip = ship;     
         myGame = new PlayGame(this,theShip);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
@@ -38,19 +36,18 @@ public class GameEngine{
     }
 	private class PlayerInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			
-		  	if(e.getKeyCode()==39 && game) {
+		  	if(e.getKeyCode()==39) {
 				myGame.setPosRight();
 		  	} 
-		  	if(e.getKeyCode()==37 && game) {
+		  	if(e.getKeyCode()==37) {
 				myGame.setPosLeft();
 		  	}
-		  	if(e.getKeyCode()==32 && game) {
+		  	if(e.getKeyCode()==32) {
 				myGame.setShip(new PlayerShip(theShip.getShip(), 3));
 		  	}
 		}
 		public void keyReleased(KeyEvent e) {
-			if(e.getKeyCode()==32 && game) {
+			if(e.getKeyCode()==32) {
 				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
 			}
 		}
