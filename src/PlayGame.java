@@ -23,9 +23,11 @@ public class PlayGame extends JPanel implements ActionListener{
   }
   public void setPosRight() {
     x++;
+    this.repaint();
   }
   public void setPosLeft() {
     x--;
+    this.repaint();
   }
   public void actionPerformed(ActionEvent e) {
     // TODO Auto-generated method stub
