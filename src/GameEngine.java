@@ -38,17 +38,22 @@ public class GameEngine{
     }
 	private class PlayerInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  if(e.getKeyCode()==39) {
-			myGame.setPosRight();
-		  } 
-		  if(e.getKeyCode()==37) {
-			myGame.setPosLeft();
-		  }
+			
+		  	if(e.getKeyCode()==39 && game) {
+				myGame.setPosRight();
+		  	} 
+		  	if(e.getKeyCode()==37 && game) {
+				myGame.setPosLeft();
+		  	}
+		  	if(e.getKeyCode()==32 && game) {
+				myGame.setShip(new PlayerShip(theShip.getShip(), 3));
+		  	}
 		}
-		// public void keyReleased(KeyEvent e) {
-		//   // TODO Auto-generated method stub
-		//   throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-		// }
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode()==32 && game) {
+				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
+			}
+		}
 		// public void keyTyped(KeyEvent e) {
 		//   // TODO Auto-generated method stub
 		//   throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");

@@ -14,11 +14,11 @@ public class PlayGame extends JPanel implements ActionListener{
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
-    ship = player;
+    ship = new PlayerShip(player.getShip(), 2);
     x = 407;
     y = 725;
     lives = 3;
-    moving = new Timer(0, this);
+    moving = new Timer(-10000, this);
     moving.start();
   }
   public void setPosRight() {
@@ -27,6 +27,9 @@ public class PlayGame extends JPanel implements ActionListener{
   public void setPosLeft() {
     x--;
   }
+  public void setShip(PlayerShip myShip) {
+    ship = myShip;
+  }
   public void actionPerformed(ActionEvent e) {
     // TODO Auto-generated method stub
     this.repaint();
@@ -34,11 +37,12 @@ public class PlayGame extends JPanel implements ActionListener{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawImage(resize(new ImageIcon(path+"background7.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    PlayerShip life = new PlayerShip(ship.getShip(), 1);
+    g.drawImage(resize(new ImageIcon(path+"background3.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
     g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
-      g.drawImage(resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage(),convert(j),convert(842),null);
+      g.drawImage(resize(new ImageIcon(path+life.getName()),this.getHeight()/7).getImage(),convert(j),convert(842),null);
     }
   }
 
