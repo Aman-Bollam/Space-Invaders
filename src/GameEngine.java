@@ -50,12 +50,12 @@ public class GameEngine{
 			if(e.getKeyCode()==32) {
 			  myGame.setShip(new PlayerShip(theShip.getShip(), 3));
 			}
-	  }
-	  public void keyReleased(KeyEvent e) {
-		  if(e.getKeyCode()==32) {
-			  myGame.setShip(new PlayerShip(theShip.getShip(), 2));
-		  }
-	  }
+	  	}
+	  	public void keyReleased(KeyEvent e) {
+		 	if(e.getKeyCode()==32) {
+				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
+		  	}
+	  	}
 	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
