@@ -7,6 +7,8 @@ public class PlayerShip {
     private int shipNum;
     private int lives;
     private Rectangle hitbox;
+    private int x;
+    private int y;
     public PlayerShip(int num, int pos) {
         lives = 3;
         ship = "ship-phase-"+(num+1)+"-pos"+pos+".png";
@@ -16,9 +18,23 @@ public class PlayerShip {
             if(equipped[i]){
                 equipped[i] = false;
             }
+        x = 407;
+        y = 725;
         }
         equipped[num]=true;
-        //hitbox = new Dimension(x,y);
+        // hitbox = new Rectangle(x, y, , pos);
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setPosRight() {
+        x+=3;
+    }
+    public void setPosLeft() {
+        x-=3;
     }
     public boolean isEquipped(int num) {
         if(equipped[num]){

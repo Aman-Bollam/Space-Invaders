@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 public class PlayGame extends JPanel implements ActionListener{
-  int x;
+  private int x;
   private int y;
   private int lives;
   private final String path = "images\\";
@@ -22,15 +22,15 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving9;
   private Timer moving10;
   private Image shipLives;
-  private Image player;
+  private Image myPlayer;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
-    x = 407;
-    y = 725;
     lives = 3;
+    x = ship.getX();
+    y = ship.getY();
     moving = new Timer(0, this);
     moving2 = new Timer(0, this);
     moving3 = new Timer(0, this);
@@ -51,15 +51,18 @@ public class PlayGame extends JPanel implements ActionListener{
     moving8.start();
     moving9.start();
     moving10.start();
+    
   }
   public void setPosRight() {
     if(x+3<=this.getHeight()-convert(1)){
-      x+=3;
+      ship.setPosRight();
+      x=ship.getX();
     }
   }
   public void setPosLeft() {
     if(x-3>=convert(1)){
-      x-=3;
+      ship.setPosLeft();
+      x=ship.getX();
     }
   }
   public void setShip(PlayerShip myShip) {
@@ -71,11 +74,11 @@ public class PlayGame extends JPanel implements ActionListener{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    player = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
+    myPlayer = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
     g.drawImage(resize(new ImageIcon(path+"background6.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
-    g.drawImage(player,convert(x),convert(y),null);
+    g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
