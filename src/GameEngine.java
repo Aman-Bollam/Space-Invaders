@@ -9,7 +9,6 @@ public class GameEngine{
     int panelHeight;
     int panelWidth;
     private Dimension screenSize;
-	private boolean game = false;
 	private PlayGame myGame;
 
 	public GameEngine() {
@@ -25,42 +24,41 @@ public class GameEngine{
 	}
 
     public void setGame(PlayerShip ship){
-        theShip = ship;
-		game = true;
+        theShip = ship;     
         myGame = new PlayGame(this,theShip);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
-		window.addKeyListener(new PlayerInput());
+		window.addKeyListener(new PlayerHorizontal());
+		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
     }
     public void setMenu(){
         
     }
-	private class PlayerInput extends KeyAdapter {
+	private class PlayerHorizontal extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			
-		  	if(e.getKeyCode()==39 && game) {
+		  	if(e.getKeyCode()==39) {
 				myGame.setPosRight();
 		  	} 
-		  	if(e.getKeyCode()==37 && game) {
+		  	if(e.getKeyCode()==37) {
 				myGame.setPosLeft();
 		  	}
-		  	if(e.getKeyCode()==32 && game) {
-				myGame.setShip(new PlayerShip(theShip.getShip(), 3));
-		  	}
 		}
-		public void keyReleased(KeyEvent e) {
-			if(e.getKeyCode()==32 && game) {
-				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
-			}
-		}
-		// public void keyTyped(KeyEvent e) {
-		//   // TODO Auto-generated method stub
-		//   throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-		// }
 	  }
+	private class PlayerShoot extends KeyAdapter {
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode()==32) {
+			  myGame.setShip(new PlayerShip(theShip.getShip(), 3));
+			}
+	  	}
+	  	public void keyReleased(KeyEvent e) {
+		 	if(e.getKeyCode()==32) {
+				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
+		  	}
+	  	}
+	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
