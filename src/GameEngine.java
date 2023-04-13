@@ -11,6 +11,7 @@ public class GameEngine{
     private Dimension screenSize;
 	private boolean game = false;
 	private PlayGame myGame;
+
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -22,6 +23,7 @@ public class GameEngine{
 		window.pack();
 		window.setVisible(true);
 	}
+
     public void setGame(PlayerShip ship){
         theShip = ship;
 		game = true;
