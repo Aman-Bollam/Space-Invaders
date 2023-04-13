@@ -31,10 +31,10 @@ public class PlayerShip {
         return y;
     }
     public void setPosRight() {
-        x+=3;
+        x+=2;
     }
     public void setPosLeft() {
-        x-=3;
+        x-=2;
     }
     public boolean isEquipped(int num) {
         if(equipped[num]){

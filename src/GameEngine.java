@@ -10,7 +10,8 @@ public class GameEngine{
     int panelWidth;
     private Dimension screenSize;
 	private PlayGame myGame;
-
+	private boolean leftRel;
+	private boolean rightRel;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -21,6 +22,8 @@ public class GameEngine{
 		window.setContentPane(screen);
 		window.pack();
 		window.setVisible(true);
+		leftRel = true;
+		rightRel = true;
 	}
 
     public void setGame(PlayerShip ship){
@@ -41,12 +44,24 @@ public class GameEngine{
 		public void keyPressed(KeyEvent e) {
 		  	if(e.getKeyCode()==39) {
 				myGame.setPosRight();
+				rightRel = false;
+				leftRel = true;    
 		  	} 
 		  	if(e.getKeyCode()==37) {
 				myGame.setPosLeft();
+				leftRel = false;
+				rightRel = true;
 		  	}
 		}
-	  }
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode()==39) {
+			   	rightRel = true;
+			}
+			if(e.getKeyCode()==37) {
+				leftRel = true;
+			}
+		}
+	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==32) {
@@ -58,6 +73,14 @@ public class GameEngine{
 				myGame.switchShip(false);
 		  	}
 	  	}
+	}
+	public void moveShip() {
+		if(!rightRel) {
+			myGame.setPosRight();
+		} 
+		if(!leftRel) {
+			myGame.setPosLeft();
+		}
 	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();

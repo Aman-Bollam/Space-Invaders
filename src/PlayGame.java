@@ -75,6 +75,7 @@ public class PlayGame extends JPanel implements ActionListener{
     }
   }
   public void actionPerformed(ActionEvent e) {
+    run.moveShip();
     this.repaint();    
   }
   @Override
