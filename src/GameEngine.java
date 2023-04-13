@@ -50,12 +50,12 @@ public class GameEngine{
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==32) {
-			  myGame.setShip(new PlayerShip(theShip.getShip(), 3));
+			  myGame.switchShip(true);
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
 		 	if(e.getKeyCode()==32) {
-				myGame.setShip(new PlayerShip(theShip.getShip(), 2));
+				myGame.switchShip(false);
 		  	}
 	  	}
 	}

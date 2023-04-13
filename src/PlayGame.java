@@ -11,6 +11,7 @@ public class PlayGame extends JPanel implements ActionListener{
   private final String path = "images\\";
   private GameEngine run;
   private PlayerShip ship;
+  private String shipName;
   private Timer moving;
   private Timer moving2;
   private Timer moving3;
@@ -31,6 +32,7 @@ public class PlayGame extends JPanel implements ActionListener{
     lives = 3;
     x = ship.getX();
     y = ship.getY();
+    shipName = ship.getName();
     moving = new Timer(0, this);
     moving2 = new Timer(0, this);
     moving3 = new Timer(0, this);
@@ -56,17 +58,21 @@ public class PlayGame extends JPanel implements ActionListener{
   public void setPosRight() {
     if(x+3<=this.getHeight()-convert(1)){
       ship.setPosRight();
-      x=ship.getX();
     }
+    x=ship.getX();
   }
   public void setPosLeft() {
     if(x-3>=convert(1)){
       ship.setPosLeft();
-      x=ship.getX();
     }
+    x=ship.getX();
   }
-  public void setShip(PlayerShip myShip) {
-    ship = myShip;
+  public void switchShip(boolean pic) {
+    if(!pic) {
+      shipName = ship.getName();
+    } else {
+      shipName = "ship-phase-" + ship.getShipNum() + "-pos3.png";
+    }
   }
   public void actionPerformed(ActionEvent e) {
     this.repaint();    
@@ -74,7 +80,7 @@ public class PlayGame extends JPanel implements ActionListener{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    myPlayer = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
+    myPlayer = resize(new ImageIcon(path+shipName),this.getHeight()/7).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
     g.drawImage(resize(new ImageIcon(path+"background6.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
