@@ -39,10 +39,14 @@ public class PlayGame extends JPanel implements ActionListener{
     moving6.start();
   }
   public void setPosRight() {
-    x+=3;
+    if(x+3<=this.getHeight()-25){
+      x+=3;
+    }
   }
   public void setPosLeft() {
-    x-=3;
+    if(x-3>=25){
+      x-=3;
+    }
   }
   public void setShip(PlayerShip myShip) {
     ship = myShip;
@@ -55,7 +59,7 @@ public class PlayGame extends JPanel implements ActionListener{
     super.paintComponent(g);
     player = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
-    g.drawImage(resize(new ImageIcon(path+"background11.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    g.drawImage(resize(new ImageIcon(path+"background6.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
     g.drawImage(player,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
