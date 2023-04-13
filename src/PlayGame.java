@@ -39,12 +39,12 @@ public class PlayGame extends JPanel implements ActionListener{
     moving6.start();
   }
   public void setPosRight() {
-    if(x+3<=this.getHeight()-25){
+    if(x+3<=this.getHeight()-convert(1)){
       x+=3;
     }
   }
   public void setPosLeft() {
-    if(x-3>=25){
+    if(x-3>=convert(1)){
       x-=3;
     }
   }
