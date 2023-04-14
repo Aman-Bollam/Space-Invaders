@@ -10,7 +10,7 @@ public class PlayGame extends JPanel implements ActionListener{
   private int lives;
   private final String path = "images\\";
   private GameEngine run;
-  private PlayerShip ship;
+  PlayerShip ship;
   private Timer moving;
   private Timer moving2;
   private Timer moving3;
@@ -18,7 +18,7 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving5;
   private Timer moving6;
   private Image shipLives;
-  private Image player;
+  Image myPlayer;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -59,11 +59,11 @@ public class PlayGame extends JPanel implements ActionListener{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    player = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
+    myPlayer = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
-    g.drawImage(resize(new ImageIcon(path+"background6.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    g.drawImage(resize(new ImageIcon(path+"background9.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
-    g.drawImage(player,convert(x),convert(y),null);
+    g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }

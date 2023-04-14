@@ -18,7 +18,7 @@ public class PlayerShip {
             }
         }
         equipped[num]=true;
-        //hitbox = new Dimension(x,y);
+        //hitbox = new Rectangle(new Dimension(num, pos))
     }
     public boolean isEquipped(int num) {
         if(equipped[num]){
