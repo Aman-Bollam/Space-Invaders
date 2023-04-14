@@ -19,9 +19,9 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving5;
   private Timer moving6;
   private Timer moving7;
-  private Timer moving8;
-  private Timer moving9;
-  private Timer moving10;
+  // private Timer moving8;
+  // private Timer moving9;
+  // private Timer moving10;
   private Image shipLives;
   private Image myPlayer;
   public PlayGame(GameEngine engine, PlayerShip player) {
@@ -40,9 +40,9 @@ public class PlayGame extends JPanel implements ActionListener{
     moving5 = new Timer(0, this);
     moving6 = new Timer(0, this);
     moving7 = new Timer(0, this);
-    moving8 = new Timer(0, this);
-    moving9 = new Timer(0, this);
-    moving10 = new Timer(0, this);
+    // moving8 = new Timer(0, this);
+    // moving9 = new Timer(0, this);
+    // moving10 = new Timer(0, this);
     moving.start();
     moving2.start();
     moving3.start();
@@ -50,9 +50,9 @@ public class PlayGame extends JPanel implements ActionListener{
     moving5.start();
     moving6.start();
     moving7.start();
-    moving8.start();
-    moving9.start();
-    moving10.start();
+    // moving8.start();
+    // moving9.start();
+    // moving10.start();
     
   }
   public void setPosRight() {
