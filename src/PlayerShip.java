@@ -22,9 +22,6 @@ public class PlayerShip {
         y = 725;
         }
         equipped[num]=true;
-<<<<<<< HEAD
-        //hitbox = new Rectangle(new Dimension(num, pos))
-=======
         // hitbox = new Rectangle(x, y, , pos);
     }
     public int getX() {
@@ -38,7 +35,6 @@ public class PlayerShip {
     }
     public void setPosLeft() {
         x-=2;
->>>>>>> 122cf249bfb4a908259746c2b60032aed83970c7
     }
     public boolean isEquipped(int num) {
         if(equipped[num]){
