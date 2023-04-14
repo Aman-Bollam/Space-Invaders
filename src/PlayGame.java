@@ -10,12 +10,8 @@ public class PlayGame extends JPanel implements ActionListener{
   private int lives;
   private final String path = "images\\";
   private GameEngine run;
-<<<<<<< HEAD
-  PlayerShip ship;
-=======
   private PlayerShip ship;
   private String shipName;
->>>>>>> 122cf249bfb4a908259746c2b60032aed83970c7
   private Timer moving;
   private Timer moving2;
   private Timer moving3;
@@ -27,11 +23,7 @@ public class PlayGame extends JPanel implements ActionListener{
   // private Timer moving9;
   // private Timer moving10;
   private Image shipLives;
-<<<<<<< HEAD
-  Image myPlayer;
-=======
   private Image myPlayer;
->>>>>>> 122cf249bfb4a908259746c2b60032aed83970c7
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -89,15 +81,9 @@ public class PlayGame extends JPanel implements ActionListener{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-<<<<<<< HEAD
-    myPlayer = resize(new ImageIcon(path+ship.getName()),this.getHeight()/7).getImage();
-    shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
-    g.drawImage(resize(new ImageIcon(path+"background9.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
-=======
     myPlayer = resize(new ImageIcon(path+shipName),this.getHeight()/7).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
     g.drawImage(resize(new ImageIcon(path+"background7.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
->>>>>>> 122cf249bfb4a908259746c2b60032aed83970c7
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
