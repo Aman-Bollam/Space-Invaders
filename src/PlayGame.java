@@ -56,7 +56,7 @@ public class PlayGame extends JPanel implements ActionListener{
     
   }
   public void setPosRight() {
-    if(x+3<=this.getHeight()-convert(1)){
+    if(x+3<=convert(960)){
       ship.setPosRight();
     }
     x=ship.getX();

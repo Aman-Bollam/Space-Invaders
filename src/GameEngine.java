@@ -5,7 +5,7 @@ import javax.swing.*;
 public class GameEngine{
     private PlayerShip theShip;
     private JPanel screen;
-    private JFrame window;
+    JFrame window;
     int panelHeight;
     int panelWidth;
     private Dimension screenSize;
