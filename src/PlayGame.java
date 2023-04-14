@@ -19,7 +19,7 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving5;
   private Timer moving6;
   private Timer moving7;
-  // private Timer moving8;
+  private Timer moving8;
   // private Timer moving9;
   // private Timer moving10;
   private Image shipLives;
@@ -40,7 +40,7 @@ public class PlayGame extends JPanel implements ActionListener{
     moving5 = new Timer(0, this);
     moving6 = new Timer(0, this);
     moving7 = new Timer(0, this);
-    // moving8 = new Timer(0, this);
+    moving8 = new Timer(0, this);
     // moving9 = new Timer(0, this);
     // moving10 = new Timer(0, this);
     moving.start();
@@ -50,19 +50,19 @@ public class PlayGame extends JPanel implements ActionListener{
     moving5.start();
     moving6.start();
     moving7.start();
-    // moving8.start();
+    moving8.start();
     // moving9.start();
     // moving10.start();
     
   }
   public void setPosRight() {
-    if(x+3<=this.getHeight()-convert(1)){
+    if(x+3<=convert(960)){
       ship.setPosRight();
     }
     x=ship.getX();
   }
   public void setPosLeft() {
-    if(x-3>=convert(1)){
+    if(x-3>=10){
       ship.setPosLeft();
     }
     x=ship.getX();
