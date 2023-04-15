@@ -30,6 +30,7 @@ public class GameEngine{
         theShip = ship;     
         myGame = new PlayGame(this,theShip);
 		screen = myGame;
+		myGame.setEnemies();
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
 		window.addKeyListener(new PlayerHorizontal());

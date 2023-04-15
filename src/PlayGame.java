@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 public class PlayGame extends JPanel implements ActionListener{
+  private Enemy [][] enemies = new Enemy[5][10];
   private int x;
   private int y;
   private int lives;
@@ -20,10 +21,11 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving6;
   private Timer moving7;
   private Timer moving8;
-  // private Timer moving9;
-  // private Timer moving10;
+  private Timer moving9;
+  private Timer moving10;
   private Image shipLives;
   private Image myPlayer;
+  private int enemyNum;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -32,6 +34,7 @@ public class PlayGame extends JPanel implements ActionListener{
     lives = 3;
     x = ship.getX();
     y = ship.getY();
+    enemyNum = 50;
     shipName = ship.getName();
     moving = new Timer(0, this);
     moving2 = new Timer(0, this);
@@ -41,8 +44,8 @@ public class PlayGame extends JPanel implements ActionListener{
     moving6 = new Timer(0, this);
     moving7 = new Timer(0, this);
     moving8 = new Timer(0, this);
-    // moving9 = new Timer(0, this);
-    // moving10 = new Timer(0, this);
+    moving9 = new Timer(0, this);
+    moving10 = new Timer(0, this);
     moving.start();
     moving2.start();
     moving3.start();
@@ -51,9 +54,24 @@ public class PlayGame extends JPanel implements ActionListener{
     moving6.start();
     moving7.start();
     moving8.start();
-    // moving9.start();
-    // moving10.start();
+    moving9.start();
+    moving10.start();
     
+  }
+  public void setEnemies() {
+    for(int i=0,j=5; i<10; i++, j=j+85) {
+      enemies[0][i] = new Enemy(3, true, j, 85);
+    }
+    for(int j=1, k=160; j<3; j++, k=k+75) {
+      for(int i=0, l=5; i<10; i++, l=l+85){
+        enemies[j][i] = new Enemy(2, true, l, k);
+      }
+    }
+    for(int j=3, k=310; j<5; j++, k=k+75) {
+      for(int i=0, l=5; i<10; i++, l=l+85){
+        enemies[j][i] = new Enemy(1, true, l, k);
+      }
+    }
   }
   public void setPosRight() {
     if(x+3<=convert(960)){
@@ -88,6 +106,11 @@ public class PlayGame extends JPanel implements ActionListener{
     g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
+    }
+    for(int j=0; j<5; j++) {
+      for(int i=0; i<10; i++){
+        g.drawImage(resize(new ImageIcon(path+(enemies[j][i]).getName()),this.getHeight()/7).getImage(), convert((enemies[j][i]).getX()),convert((enemies[j][i]).getY()),null);
+      }
     }
   }
 
