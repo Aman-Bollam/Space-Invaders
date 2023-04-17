@@ -5,11 +5,27 @@ public class Enemy {
     private boolean life;
     private String name;
     private Rectangle hitbox;
-    public Enemy(int type, boolean alive) {
+    private int x;
+    private int y;
+    public Enemy(int type, boolean alive, int xPos, int yPos) {
         model = type;
         life = alive;
-        name = "enemy-type"+type;
+        name = "enemy-type"+type+".png";
+        x = xPos;
+        y = yPos;;
         //hitbox = new Dimension(x,y);
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setX(int pos) {
+        x=pos;
+    }
+    public void setY(int pos) {
+        y=pos;
     }
     public int getType() {
         return model;
