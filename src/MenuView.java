@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.*;
+//import javax.swing.*;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean settings;
 	private boolean skins;
