@@ -1,5 +1,5 @@
 import java.awt.*;
-import javax.swing.*;
+//import javax.swing.*;
 public class PlayerShip {
     private boolean [] equipped = {false,false,false,false,false,false,false,false,false};
     private String ship;
