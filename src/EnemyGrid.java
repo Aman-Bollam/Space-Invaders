@@ -18,18 +18,28 @@ public class EnemyGrid {
             enemies[4][i] = new Enemy(1, true, j, eneY+340);
         }
     }
-    public void setEnemies() {
+    public void setEnemies(Enemy [][] grid) {
         for(int i=0, j=eneX; i<10; i++, j=j+85) {
-          enemies[0][i] = new Enemy(3, true, j, eneY);
+            boolean life = enemies[0][i]
+            enemies[0][i] = new Enemy(3, true, j, eneY);
         }
         for(int i=0, j=eneX; i<10; i++, j=j+85){
-          enemies[2][i] = new Enemy(2, true, j, eneY+170);
+            enemies[2][i] = new Enemy(2, true, j, eneY+170);
         }
         for(int i=0, j=eneX; i<10; i++, j=j+85){
-          enemies[3][i] = new Enemy(1, true, j, eneY+255);
+            enemies[3][i] = new Enemy(1, true, j, eneY+255);
         }
         for(int i=0, j=eneX; i<10; i++, j=j+85){
-          enemies[4][i] = new Enemy(1, true, j, eneY+340);
+            enemies[4][i] = new Enemy(1, true, j, eneY+340);
         }
+    }
+    public void setPosRight() {
+        eneX+=2;
+    }
+    public void setPosLeft() {
+        eneX-=2;
+    }
+    public void setPosDown() {
+        eneY+=20;
     }
 }

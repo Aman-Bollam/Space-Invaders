@@ -10,6 +10,7 @@ public class GameEngine{
     int panelWidth;
     private Dimension screenSize;
 	private PlayGame myGame;
+	private EnemyGrid grid;
 	private boolean leftRel;
 	private boolean rightRel;
 	public GameEngine() {
@@ -27,10 +28,10 @@ public class GameEngine{
 	}
 
     public void setGame(PlayerShip ship){
-        theShip = ship;     
-        myGame = new PlayGame(this,theShip);
+        theShip = ship;
+		grid = new EnemyGrid();
+        myGame = new PlayGame(this,theShip,grid);
 		screen = myGame;
-		myGame.setEnemies();
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
 		window.addKeyListener(new PlayerHorizontal());
