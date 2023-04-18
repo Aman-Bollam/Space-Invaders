@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
-public class GameEngine{
+public class GameEngine implements Runnable{
     private PlayerShip theShip;
     private JPanel screen;
     JFrame window;
@@ -13,6 +13,8 @@ public class GameEngine{
 	private EnemyGrid grid;
 	private boolean leftRel;
 	private boolean rightRel;
+	private Thread gameThread;
+	private final int FPS_SET =120;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -26,6 +28,37 @@ public class GameEngine{
 		leftRel = true;
 		rightRel = true;
 	}
+	private void startGameLoop(){
+		gameThread= new Thread(this);
+		gameThread.start();
+	}
+	public void run() {
+
+		double timePerFrame = 1000000000.0 / FPS_SET;
+		long lastFrame = System.nanoTime();
+		long now = System.nanoTime();
+
+		int frames = 0;
+		long lastCheck = System.currentTimeMillis();
+
+		while (true) {
+
+			now = System.nanoTime();
+			if (now - lastFrame >= timePerFrame) {
+				screen.repaint();
+				lastFrame = now;
+				frames++;
+			}
+
+			if (System.currentTimeMillis() - lastCheck >= 1000) {
+				lastCheck = System.currentTimeMillis();
+				System.out.println("FPS: " + frames);
+				frames = 0;
+			}
+		}
+
+	}
+
 
     public void setGame(PlayerShip ship){
         theShip = ship;
@@ -38,6 +71,7 @@ public class GameEngine{
 		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
+		startGameLoop();
     }
     public void setMenu(){
         

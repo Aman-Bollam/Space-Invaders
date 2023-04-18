@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 //import java.util.TimerTask;
 
 import javax.swing.*;
-public class PlayGame extends JPanel implements ActionListener{
+public class PlayGame extends JPanel{
   private int x;
   private int y;
   private int lives;
@@ -12,16 +12,16 @@ public class PlayGame extends JPanel implements ActionListener{
   private GameEngine run;
   private PlayerShip ship;
   private String shipName;
-  private Timer moving;
-  private Timer moving2;
-  private Timer moving3;
-  private Timer moving4;
-  private Timer moving5;
-  private Timer moving6;
-  private Timer moving7;
-  private Timer moving8;
-  private Timer moving9;
-  private Timer moving10;
+  // private Timer moving;
+  // private Timer moving2;
+  // private Timer moving3;
+  // private Timer moving4;
+  // private Timer moving5;
+  // private Timer moving6;
+  // private Timer moving7;
+  // private Timer moving8;
+  // private Timer moving9;
+  // private Timer moving10;
   private Timer enemyMove;
   private Image shipLives;
   private Image myPlayer;
@@ -44,26 +44,26 @@ public class PlayGame extends JPanel implements ActionListener{
     enemyNum = 50;
     time = 0;
     shipName = ship.getName();
-    moving = new Timer(0, this);
-    moving2 = new Timer(0, this);
-    moving3 = new Timer(0, this);
-    moving4 = new Timer(0, this);
-    moving5 = new Timer(0, this);
-    moving6 = new Timer(0, this);
-    moving7 = new Timer(0, this);
-    moving8 = new Timer(0, this);
-    moving9 = new Timer(0, this);
-    moving10 = new Timer(0, this);
-    moving.start();
-    moving2.start();
-    moving3.start();
-    moving4.start();
-    moving5.start();
-    moving6.start();
-    moving7.start();
-    moving8.start();
-    moving9.start();
-    moving10.start();
+    // moving = new Timer(0, this);
+    // moving2 = new Timer(0, this);
+    // moving3 = new Timer(0, this);
+    // moving4 = new Timer(0, this);
+    // moving5 = new Timer(0, this);
+    // moving6 = new Timer(0, this);
+    // moving7 = new Timer(0, this);
+    // moving8 = new Timer(0, this);
+    // moving9 = new Timer(0, this);
+    // moving10 = new Timer(0, this);
+    // moving.start();
+    // moving2.start();
+    // moving3.start();
+    // moving4.start();
+    // moving5.start();
+    // moving6.start();
+    // moving7.start();
+    // moving8.start();
+    // moving9.start();
+    // moving10.start();
     
   }
   public void setPosRight() {
@@ -85,15 +85,15 @@ public class PlayGame extends JPanel implements ActionListener{
       shipName = "ship-phase-" + ship.getShipNum() + "-pos3.png";
     }
   }
-  public void actionPerformed(ActionEvent e) {
-    if(time==4) {
-      time = 0;
-    } else {
-      time++;
-    }
-    run.moveShip();
-    this.repaint();    
-  }
+  // public void actionPerformed(ActionEvent e) {
+  //   if(time==4) {
+  //     time = 0;
+  //   } else {
+  //     time++;
+  //   }
+  //   run.moveShip();
+  //   this.repaint();    
+  // }
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
