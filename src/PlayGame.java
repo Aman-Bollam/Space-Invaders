@@ -22,20 +22,27 @@ public class PlayGame extends JPanel implements ActionListener{
   private Timer moving8;
   private Timer moving9;
   private Timer moving10;
+  private Timer enemyMove;
   private Image shipLives;
   private Image myPlayer;
   private EnemyGrid enemies;
+  private Enemy [][] theEnemy;
   private int enemyNum;
+  private int time;
+  private boolean allDrawn;
   public PlayGame(GameEngine engine, PlayerShip player, EnemyGrid grid) {
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
     enemies = grid;
+    theEnemy = grid.getGrid();
     lives = 3;
+    allDrawn = false;
     x = ship.getX();
     y = ship.getY();
     enemyNum = 50;
+    time = 0;
     shipName = ship.getName();
     moving = new Timer(0, this);
     moving2 = new Timer(0, this);
@@ -60,7 +67,7 @@ public class PlayGame extends JPanel implements ActionListener{
     
   }
   public void setPosRight() {
-    if(x+3<=convert(960)){
+    if(x+3<=convert(this.getHeight())){
       ship.setPosRight();
     }
     x=ship.getX();
@@ -79,13 +86,18 @@ public class PlayGame extends JPanel implements ActionListener{
     }
   }
   public void actionPerformed(ActionEvent e) {
+    if(time==4) {
+      time = 0;
+    } else {
+      time++;
+    }
     run.moveShip();
     this.repaint();    
   }
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    myPlayer = resize(new ImageIcon(path+shipName),this.getHeight()/7).getImage();
+    myPlayer = resize(new ImageIcon(path+shipName),this.getHeight()/8).getImage();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),this.getHeight()/7).getImage();
     g.drawImage(resize(new ImageIcon(path+"background9.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
@@ -93,6 +105,29 @@ public class PlayGame extends JPanel implements ActionListener{
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
+    for(int i=0; i<10; i++) {
+      Image ene = resize(new ImageIcon(path+(theEnemy[0][i]).getName()),this.getHeight()/9).getImage();
+      g.drawImage(ene,convert((theEnemy[0][i]).getX()),convert((theEnemy[0][i]).getY()),null);
+    }
+    for(int i=0; i<10; i++) {
+      Image ene = resize(new ImageIcon(path+(theEnemy[1][i]).getName()),this.getHeight()/9).getImage();
+      g.drawImage(ene,convert((theEnemy[1][i]).getX()),convert((theEnemy[1][i]).getY()),null);
+      
+    }
+    for(int i=0; i<10; i++) {
+      Image ene = resize(new ImageIcon(path+(theEnemy[2][i]).getName()),this.getHeight()/9).getImage();
+      g.drawImage(ene,convert((theEnemy[2][i]).getX()),convert((theEnemy[2][i]).getY()),null);
+    }
+    for(int i=0; i<10; i++) {
+      Image ene = resize(new ImageIcon(path+(theEnemy[3][i]).getName()),this.getHeight()/9).getImage();
+      g.drawImage(ene,convert((theEnemy[3][i]).getX()),convert((theEnemy[3][i]).getY()),null);
+    }
+    for(int i=0; i<10; i++) {
+      Image ene = resize(new ImageIcon(path+(theEnemy[4][i]).getName()),this.getHeight()/9).getImage();
+      g.drawImage(ene,convert((theEnemy[4][i]).getX()),convert((theEnemy[4][i]).getY()),null);
+      
+    }
+    allDrawn = true;
   }
 
   public int convert(int d){

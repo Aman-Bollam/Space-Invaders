@@ -19,7 +19,7 @@ public class PlayerShip {
                 equipped[i] = false;
             }
         x = 407;
-        y = 725;
+        y = 740;
         }
         equipped[num]=true;
         // hitbox = new Rectangle(x, y, , pos);
