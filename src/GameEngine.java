@@ -31,6 +31,7 @@ public class GameEngine implements Runnable{
 	private void startGameLoop(){
 		gameThread= new Thread(this);
 		gameThread.start();
+		//push
 	}
 	public void run() {
 
