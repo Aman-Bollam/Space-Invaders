@@ -4,28 +4,35 @@ public class EnemyGrid {
     private int eneY;
     public EnemyGrid(){
         eneX = 5;
-        eneY = 85;
-        for(int i=0, j=eneX; i<10; i++, j=j+85) {
+        eneY = 100;
+        for(int i=0, j=eneX; i<10; i++, j=j+75) {
             enemies[0][i] = new Enemy(3, true, j, eneY);
-            enemies[1][i] = new Enemy(2, true, j, eneY+85);
-            enemies[2][i] = new Enemy(2, true, j, eneY+170);
-            enemies[3][i] = new Enemy(1, true, j, eneY+255);
-            enemies[4][i] = new Enemy(1, true, j, eneY+340);
+            enemies[1][i] = new Enemy(2, true, j, eneY+60);
+            enemies[2][i] = new Enemy(2, true, j, eneY+120);
+            enemies[3][i] = new Enemy(1, true, j, eneY+180);
+            enemies[4][i] = new Enemy(1, true, j, eneY+240);
         }
     }
-    public void setEnemies(Enemy [][] grid) {
+    public void setGrid(Enemy [][] grid) {
         for(int i=0, j=eneX; i<10; i++, j=j+85) {
             boolean life = enemies[0][i].getLife();
             enemies[0][i] = new Enemy(3, life, j, eneY);
         }
-        for(int i=0, j=eneX; i<10; i++, j=j+85){
-            enemies[2][i] = new Enemy(2, true, j, eneY+170);
+        for(int i=0, j=eneX; i<10; i++, j=j+85) {
+            boolean life = enemies[0][i].getLife();
+            enemies[1][i] = new Enemy(3, life, j, eneY+85);
         }
         for(int i=0, j=eneX; i<10; i++, j=j+85){
-            enemies[3][i] = new Enemy(1, true, j, eneY+255);
+            boolean life = enemies[0][i].getLife();
+            enemies[2][i] = new Enemy(2, life, j, eneY+170);
         }
         for(int i=0, j=eneX; i<10; i++, j=j+85){
-            enemies[4][i] = new Enemy(1, true, j, eneY+340);
+            boolean life = enemies[0][i].getLife();
+            enemies[3][i] = new Enemy(1, life, j, eneY+255);
+        }
+        for(int i=0, j=eneX; i<10; i++, j=j+85){
+            boolean life = enemies[0][i].getLife();
+            enemies[4][i] = new Enemy(1, life, j, eneY+340);
         }
     }
     public Enemy[][] getGrid() {
