@@ -56,13 +56,13 @@ public class PlayGame extends JPanel{
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(resize(new ImageIcon(path+"background9.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    for(int i=0; i<one.getSize(); i++) {
+      g.drawImage(getEnemyImage(i),convert((one.getEnemy(i)).getX()),convert((one.getEnemy(i)).getY()),null);
+    }
     // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
-    }
-    for(int i=0; i<one.getSize(); i++) {
-      g.drawImage(getEnemyImage(i),convert((one.getEnemy(i)).getX()),convert((one.getEnemy(i)).getY()),null);
     }
   }
   public Image getEnemyImage(int num) {
