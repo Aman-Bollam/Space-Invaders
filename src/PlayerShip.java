@@ -24,6 +24,10 @@ public class PlayerShip {
         equipped[num]=true;
         // hitbox = new Rectangle(x, y, , pos);
     }
+    public void setPos(int pos) {
+        phase = pos;
+        ship = "ship-phase-"+shipNum+"-pos"+pos+".png";
+    }
     public int getX() {
         return x;
     }
