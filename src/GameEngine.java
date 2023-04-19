@@ -11,26 +11,29 @@ public class GameEngine implements Runnable{
     int panelWidth;
     private Dimension screenSize;
 	private PlayGame myGame;
-	private EnemyGrid grid;
+	// private EnemyGrid grid;
 	private boolean leftRel;
 	private boolean rightRel;
 	private Thread gameThread;
 	private final int FPS_SET =120;
+	private int size;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
         screen = new MenuView(this);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
+		size = (int)screenSize.getHeight()-50;
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
 		window.setContentPane(screen);
 		window.pack();
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
+		startGameLoop();
 	}
 	private void startGameLoop(){
-		gameThread= new Thread(this);
+		gameThread = new Thread(this);
 		gameThread.start();
 		//push
 	}
@@ -47,6 +50,7 @@ public class GameEngine implements Runnable{
 
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
+				moveShip();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -61,11 +65,13 @@ public class GameEngine implements Runnable{
 
 	}
 
-
+	public int getSize() {
+		return size;
+	}
     public void setGame(PlayerShip ship){
         theShip = ship;
-		grid = new EnemyGrid();
-        myGame = new PlayGame(this,theShip,grid);
+		// grid = new EnemyGrid();
+        myGame = new PlayGame(this,theShip);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
@@ -73,7 +79,6 @@ public class GameEngine implements Runnable{
 		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
-		startGameLoop();
     }
     public void setMenu(){
         
@@ -103,7 +108,7 @@ public class GameEngine implements Runnable{
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode()==32) {
-			  myGame.switchShip(true);
+			  	myGame.switchShip(true);
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
@@ -120,6 +125,10 @@ public class GameEngine implements Runnable{
 			myGame.setPosLeft();
 		}
 	}
+	public void moveEnemy() {
+		// grid.setPosRight();
+	}
+	
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
