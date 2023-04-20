@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+
 public class GameEngine implements Runnable{
     private PlayerShip theShip;
     private JPanel screen;
@@ -58,7 +59,7 @@ public class GameEngine implements Runnable{
 
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				// System.out.println("FPS: " + frames);
+				//System.out.println("FPS: " + frames);
 				frames = 0;
 			}
 		}
