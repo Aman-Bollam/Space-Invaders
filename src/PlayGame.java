@@ -22,6 +22,7 @@ public class PlayGame extends JPanel{
   private Image enemyOne;
   private Image enemyTwo;
   private Image enemyThree;
+  private Image boss;
   private int height;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
@@ -39,15 +40,15 @@ public class PlayGame extends JPanel{
     enemyNum = 50;
     shipName = ship.getName();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),run.getSize()/7).getImage();
-    backG = resize(new ImageIcon(path+"background9.jpg"),run.getSize()).getImage();
+    backG = resize(new ImageIcon(path+"background6.jpg"),run.getSize()).getImage();
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
+    boss = resize(new ImageIcon(path+"boss.png"),run.getSize()/9).getImage();
     switchShip(false);
   }
   public void setPosRight() {
     if(x+3<=convert(run.getSize())+136){
-      System.out.println(this.getHeight());
       ship.setPosRight();
     }
     x=ship.getX();
@@ -77,7 +78,7 @@ public class PlayGame extends JPanel{
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
-    // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
+    // g.drawImage(boss,convert(200),convert(40),null);
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
@@ -107,9 +108,6 @@ public class PlayGame extends JPanel{
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
   }
-  // public void getEnemyImage(int num) {
-  //   enemy = resize(new ImageIcon(path+(one.getEnemy(num)).getName()),this.getHeight()/9).getImage();
-  // }
   public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(this.getHeight()));
