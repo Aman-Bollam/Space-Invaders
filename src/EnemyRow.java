@@ -44,6 +44,9 @@ public class EnemyRow {
         }
         return null;
     }
+    public boolean getLife(int num) {
+        return (enemies[num]).getLife();
+    }
     public void setPosRight() {
         eneX+=2;
     }
