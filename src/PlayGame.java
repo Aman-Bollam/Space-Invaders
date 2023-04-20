@@ -18,22 +18,26 @@ public class PlayGame extends JPanel{
   private int enemyNum;
   private Image shipLives;
   private Image myPlayer;
+  private Image backG;
+  private int height;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
-    one = new EnemyRow(3, 11,1);
+    one = new EnemyRow(3, 10  ,1);
     lives = 3;
     x = ship.getX();
     y = ship.getY();
     enemyNum = 50;
     shipName = ship.getName();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),run.getSize()/7).getImage();
+    backG = resize(new ImageIcon(path+"background9.jpg"),run.getSize()).getImage();
     switchShip(false);
   }
   public void setPosRight() {
-    if(x+3<=convert(960)){
+    if(x+3<=convert(run.getSize())){
+      System.out.println(this.getHeight());
       ship.setPosRight();
     }
     x=ship.getX();
@@ -55,12 +59,12 @@ public class PlayGame extends JPanel{
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawImage(resize(new ImageIcon(path+"background9.jpg"),this.getHeight()).getImage(), convert(0),convert(0),null);
+    g.drawImage(backG, convert(0),convert(0),null);
+    g.drawImage(myPlayer,convert(x),convert(y),null);
+    // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
     for(int i=0; i<one.getSize(); i++) {
       g.drawImage(getEnemyImage(i),convert((one.getEnemy(i)).getX()),convert((one.getEnemy(i)).getY()),null);
     }
-    // g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/7).getImage(), convert(50),convert(347),null);
-    g.drawImage(myPlayer,convert(x),convert(y),null);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }

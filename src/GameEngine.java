@@ -20,6 +20,7 @@ public class GameEngine implements Runnable{
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
+		window.setResizable(false);
         screen = new MenuView(this);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
 		size = (int)screenSize.getHeight()-50;
