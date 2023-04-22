@@ -6,7 +6,7 @@ public class EnemyRow {
     private int y;
     public EnemyRow(int type, int length, int level){
         eneX = 5;
-        eneY = ((level-1)*85)+100;
+        eneY = ((level-1)*55)+90;
         size = length;
         y = level;
         enemies = new Enemy[length];
@@ -43,6 +43,9 @@ public class EnemyRow {
             return enemies[pos];
         }
         return null;
+    }
+    public boolean getLife(int num) {
+        return (enemies[num]).getLife();
     }
     public void setPosRight() {
         eneX+=2;
