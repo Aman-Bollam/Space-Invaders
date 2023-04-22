@@ -44,7 +44,8 @@ public class PlayGame extends JPanel{
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
-    boss = resize(new ImageIcon(path+"boss.png"),run.getSize()/9).getImage();
+    // boss = resize(new ImageIcon(path+"shield.png"),run.getSize()/9).getImage();
+    boss = resize(new ImageIcon(path+"shield1.png"),run.getSize()/6).getImage();
     switchShip(false);
   }
   public void setPosRight() {
@@ -79,6 +80,7 @@ public class PlayGame extends JPanel{
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     // g.drawImage(boss,convert(200),convert(40),null);
+    g.drawImage(boss,convert(388),convert(590),null);
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
