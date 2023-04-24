@@ -52,7 +52,6 @@ public class GameEngine implements Runnable{
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
 				moveShip();
-				// myGame.setShields();
 				screen.repaint();
 				lastFrame = now;
 				frames++;

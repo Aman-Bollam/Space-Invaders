@@ -18,6 +18,7 @@ public class PlayGame extends JPanel{
   private EnemyRow four;
   private EnemyRow five;
   private Timer enemyMove;
+  private Timer shield;
   private int enemyNum;
   private Image shipLives;
   private Image myPlayer;
@@ -95,7 +96,6 @@ public class PlayGame extends JPanel{
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
-    // g.drawImage(boss,convert(200),convert(40),null);
     g.drawImage(shieldOne,convert(110),convert(555),null);
     g.drawImage(shieldOne,convert(372),convert(555),null);
     g.drawImage(shieldOne,convert(634),convert(555),null);
