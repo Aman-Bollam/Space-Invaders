@@ -5,6 +5,6 @@ public class ShieldShip {
     private Rectangle hitbox;
     private boolean life;
     public ShieldShip() {
-        health = 200;
+        health = 140;
     }
 }

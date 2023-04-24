@@ -31,7 +31,6 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
-		startGameLoop();
 	}
 	private void startGameLoop(){
 		gameThread = new Thread(this);
@@ -70,6 +69,7 @@ public class GameEngine implements Runnable{
 		return size;
 	}
     public void setGame(PlayerShip ship){
+		startGameLoop();
         theShip = ship;
 		// grid = new EnemyGrid();
         myGame = new PlayGame(this,theShip);
