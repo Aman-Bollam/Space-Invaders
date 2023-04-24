@@ -8,6 +8,9 @@ public class PlayGame extends JPanel{
   private final String path = "images\\";
   private GameEngine run;
   private PlayerShip ship;
+  private ShieldShip shield1;
+  private ShieldShip shield2;
+  private ShieldShip shield3;
   private String shipName;
   private EnemyRow one;
   private EnemyRow two;
@@ -22,8 +25,12 @@ public class PlayGame extends JPanel{
   private Image enemyOne;
   private Image enemyTwo;
   private Image enemyThree;
+  private Image shieldOne;
+  private Image shieldTwo;
+  private Image shieldThree;
   private Image boss;
   private int height;
+  private ShieldShip [] shields;
   public PlayGame(GameEngine engine, PlayerShip player) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -39,6 +46,10 @@ public class PlayGame extends JPanel{
     y = ship.getY();
     enemyNum = 50;
     shipName = ship.getName();
+    shield1 = new ShieldShip();
+    shield2 = new ShieldShip();
+    shield3 = new ShieldShip();
+    setShields();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),run.getSize()/7).getImage();
     backG = resize(new ImageIcon(path+"background6.jpg"),run.getSize()).getImage();
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
@@ -47,6 +58,11 @@ public class PlayGame extends JPanel{
     // boss = resize(new ImageIcon(path+"shield.png"),run.getSize()/9).getImage();
     boss = resize(new ImageIcon(path+"shield14.png"),run.getSize()/5).getImage();
     switchShip(false);
+  }
+  public void setShields() {
+    shieldOne = resize(new ImageIcon(path+(shield1.getName())),run.getSize()/5).getImage();
+    shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
+    shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
   }
   public void setPosRight() {
     if(x+3<=convert(run.getSize())+136){
@@ -80,7 +96,9 @@ public class PlayGame extends JPanel{
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     // g.drawImage(boss,convert(200),convert(40),null);
-    g.drawImage(boss,convert(372),convert(555),null);
+    g.drawImage(shieldOne,convert(110),convert(555),null);
+    g.drawImage(shieldOne,convert(372),convert(555),null);
+    g.drawImage(shieldOne,convert(634),convert(555),null);
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);

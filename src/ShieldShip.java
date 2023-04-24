@@ -7,8 +7,11 @@ public class ShieldShip {
     private String name;
     public ShieldShip() {
         health = 140;
-        name = "ship1.png";
+        name = "shield1.png";
         life = true;
+    }
+    public String getName() {
+        return name;
     }
     public void setHealth() {
         int num;
@@ -16,7 +19,7 @@ public class ShieldShip {
             health-=10;
         }
         num = (14)-(((health)/10)-1);
-        name = "ship"+num+".png";
+        name = "shield"+num+".png";
     }
     public boolean getLife() {
         return life;

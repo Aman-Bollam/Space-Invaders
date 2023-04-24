@@ -3,7 +3,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 import java.io.*;
-
 public class GameEngine implements Runnable{
 	//private static Font ourFont = Font.createFont(Font.TRUETYPE_FONT, GameEngine.class.getResourceAsStream("fonts/minecraft_font.ttf"));
     private PlayerShip theShip;
@@ -53,6 +52,7 @@ public class GameEngine implements Runnable{
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
 				moveShip();
+				// myGame.setShields();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -71,7 +71,6 @@ public class GameEngine implements Runnable{
 		return size;
 	}
     public void setGame(PlayerShip ship){
-		startGameLoop();
         theShip = ship;
 		// grid = new EnemyGrid();
         myGame = new PlayGame(this,theShip);
@@ -82,6 +81,7 @@ public class GameEngine implements Runnable{
 		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
+		startGameLoop();
     }
     public void setMenu(){
         
