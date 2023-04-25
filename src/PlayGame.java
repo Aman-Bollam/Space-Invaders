@@ -143,7 +143,7 @@ public class PlayGame extends JPanel{
     shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
   }
   public void setPosRight() {
-    if(x+3<=800){
+    if(x+3<=(820)){
       ship.setPosRight();
     }
     x=ship.getX();
