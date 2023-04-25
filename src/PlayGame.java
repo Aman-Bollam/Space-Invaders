@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 public class PlayGame extends JPanel{
@@ -19,7 +21,7 @@ public class PlayGame extends JPanel{
   private EnemyRow three;
   private EnemyRow four;
   private EnemyRow five;
-  private Timer enemyMove;
+  private int enemySpeed;
   private int enemyNum;
   private Image shipLives;
   private Image myPlayer;
@@ -47,6 +49,7 @@ public class PlayGame extends JPanel{
     x = ship.getX();
     y = ship.getY();
     enemyNum = 50;
+    enemySpeed = 100;
     shipName = ship.getName();
     shield1 = new ShieldShip();
     shield2 = new ShieldShip();
@@ -62,6 +65,9 @@ public class PlayGame extends JPanel{
     right = true;
     left = false;
     switchShip(false);
+  }
+  public int getEnemySpeed() {
+    return enemySpeed;
   }
   public EnemyRow rowLife() {
     for(int i=0; i<five.getSize(); i++) {
@@ -168,7 +174,7 @@ public class PlayGame extends JPanel{
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     g.drawImage(shieldOne,convert(110),convert(555),null);
-    g.drawImage(shieldOne,convert(372),convert(555),null);
+    g.drawImage(shieldTwo,convert(372),convert(555),null);
     g.drawImage(shieldOne,convert(634),convert(555),null);
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
