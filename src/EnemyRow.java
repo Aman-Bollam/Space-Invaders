@@ -4,7 +4,9 @@ public class EnemyRow {
     private int eneY;
     private int size;
     private int y;
+    private int enemy;
     public EnemyRow(int type, int length, int level){
+        enemy = type;
         eneX = 5;
         eneY = ((level-1)*55)+90;
         size = length;
@@ -12,9 +14,18 @@ public class EnemyRow {
         enemies = new Enemy[length];
         for(int i=0; i<length; i++){
             enemies[i] = new Enemy(type, true, eneX, eneY);;
-            eneX = eneX + 75;
+            eneX = eneX + 60;
         }
         resetCoord();
+    }
+    public int getType() {
+        return enemy;
+    }
+    public int getX(){
+        return eneX;
+    }
+    public int getY(){
+        return eneY;
     }
     public int getLevel() {
         return y;
@@ -24,13 +35,13 @@ public class EnemyRow {
     }
     public void resetCoord(){
         eneX = 5;
-        eneY = ((y-1)*85)+100;
+        eneY = ((y-1)*55)+100;
     }
-    public void setGrid(Enemy [] grid) {
-        for(int i=0, j=eneX; i<size; i++, j=j+85) {
+    // public void setRow(Enemy [] grid) {
+    //     for(int i=0, j=eneX; i<size; i++, j=j+85) {
         
-        }
-    }
+    //     }
+    // }
     public Enemy[] getRow() {
         Enemy[] myEnemies = new Enemy[size];
         for(int i=0; i<10; i++) {
@@ -48,12 +59,30 @@ public class EnemyRow {
         return (enemies[num]).getLife();
     }
     public void setPosRight() {
-        eneX+=2;
+        int num;
+        eneX++;
+        num = eneX;
+        for(int i=0; i<size; i++){
+            enemies[i] = new Enemy(enemy, enemies[i].getLife(), num, eneY);
+            num = num + 75;
+        }
     }
     public void setPosLeft() {
-        eneX-=2;
+        int num;
+        eneX--;
+        num = eneX;
+        for(int i=0; i<size; i++){
+            enemies[i] = new Enemy(enemy, enemies[i].getLife(), num, eneY);;
+            num = num + 75;
+        }
     }
     public void setPosDown() {
+        int num;
         eneY+=20;
+        num = eneY;
+        for(int i=0; i<size; i++){
+            enemies[i] = new Enemy(enemy, enemies[i].getLife(), eneX, num);;
+            num = num + 75;
+        }
     }
 }

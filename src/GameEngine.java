@@ -10,13 +10,13 @@ public class GameEngine implements Runnable{
     JFrame window;
     int panelHeight;
     int panelWidth;
+	private int eneFrame;
     private Dimension screenSize;
 	private PlayGame myGame;
-	// private EnemyGrid grid;
 	private boolean leftRel;
 	private boolean rightRel;
 	private Thread gameThread;
-	private final int FPS_SET =120;
+	private final int FPS_SET = 120;
 	private int size;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -43,20 +43,20 @@ public class GameEngine implements Runnable{
 		double timePerFrame = 1000000000.0 / FPS_SET;
 		long lastFrame = System.nanoTime();
 		long now = System.nanoTime();
-
+		
 		int frames = 0;
 		long lastCheck = System.currentTimeMillis();
 
 		while (true) {
-
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
+				moveEnemy();
 				moveShip();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
 			}
-
+			
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
 				//System.out.println("FPS: " + frames);
@@ -65,7 +65,6 @@ public class GameEngine implements Runnable{
 		}
 
 	}
-
 	public int getSize() {
 		return size;
 	}
@@ -128,9 +127,26 @@ public class GameEngine implements Runnable{
 		}
 	}
 	public void moveEnemy() {
-		// grid.setPosRight();
+		if(myGame.getEnePos("x")<convert(getSize())-510 && myGame.getRight()) {
+			myGame.enePosChange("right");
+		} 
+		if(myGame.getEnePos("x")>=convert(getSize())-510 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+			myGame.setRight(false);
+			myGame.enePosChange("down");
+			myGame.setLeft(true);
+		}
+		if(myGame.getLeft()) {
+			myGame.enePosChange("left");
+		}
+		if(myGame.getLeft() && myGame.getEnePos("x")<=5) {
+			myGame.setLeft(false);
+			myGame.setRight(true);
+		}
 	}
-	
+	public int convert(int d){
+		//return (int)((d/960)*(this.getHeight()-50));
+		return (int)(((double)d/(double)960)*(size));
+	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
