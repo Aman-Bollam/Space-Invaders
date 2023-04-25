@@ -127,10 +127,10 @@ public class GameEngine implements Runnable{
 		}
 	}
 	public void moveEnemy() {
-		if(myGame.getEnePos("x")<convert(getSize())-510 && myGame.getRight()) {
+		if(myGame.getEnePos("x")<convert(getSize())-convert(510) && myGame.getRight()) {
 			myGame.enePosChange("right");
 		} 
-		if(myGame.getEnePos("x")>=convert(getSize())-510 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+		if(myGame.getEnePos("x")>=convert(getSize())-convert(510) && myGame.getRight() && myGame.getEnePos("y")<=740) {
 			myGame.setRight(false);
 			myGame.enePosChange("down");
 			myGame.setLeft(true);
