@@ -12,7 +12,6 @@ public class GameEngine implements Runnable{
     int panelWidth;
     private Dimension screenSize;
 	private PlayGame myGame;
-	// private EnemyGrid grid;
 	private boolean leftRel;
 	private boolean rightRel;
 	private Thread gameThread;
@@ -52,6 +51,7 @@ public class GameEngine implements Runnable{
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
 				moveShip();
+				moveEnemy();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -128,9 +128,26 @@ public class GameEngine implements Runnable{
 		}
 	}
 	public void moveEnemy() {
-		// grid.setPosRight();
+		if(myGame.getEnePos("x")<convert(getSize())-510 && myGame.getRight()) {
+			myGame.enePosChange("right");
+		} 
+		if(myGame.getEnePos("x")>=convert(getSize())-510 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+			myGame.setRight(false);
+			myGame.enePosChange("down");
+			myGame.setLeft(true);
+		}
+		if(myGame.getLeft()) {
+			myGame.enePosChange("left");
+		}
+		if(myGame.getLeft() && myGame.getEnePos("x")<=5) {
+			myGame.setLeft(false);
+			myGame.setRight(true);
+		}
 	}
-	
+	public int convert(int d){
+		//return (int)((d/960)*(this.getHeight()-50));
+		return (int)(((double)d/(double)960)*(size));
+	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
