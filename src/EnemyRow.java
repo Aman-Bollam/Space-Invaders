@@ -8,7 +8,7 @@ public class EnemyRow {
     public EnemyRow(int type, int length, int level){
         enemy = type;
         eneX = 5;
-        eneY = ((level-1)*55)+90;
+        eneY = ((level-1)*55)+10;
         size = length;
         y = level;
         enemies = new Enemy[length];
@@ -35,7 +35,7 @@ public class EnemyRow {
     }
     public void resetCoord(){
         eneX = 5;
-        eneY = ((y-1)*55)+100;
+        eneY = ((y-1)*55)+10;
     }
     // public void setRow(Enemy [] grid) {
     //     for(int i=0, j=eneX; i<size; i++, j=j+85) {
