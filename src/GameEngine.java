@@ -18,6 +18,7 @@ public class GameEngine implements Runnable{
 	private Thread gameThread;
 	private final int FPS_SET = 120;
 	private int size;
+	private int move;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -32,6 +33,7 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
+		move = 0;
 	}
 	private void startGameLoop(){
 		gameThread = new Thread(this);
@@ -129,6 +131,7 @@ public class GameEngine implements Runnable{
 	public void moveEnemy() {
 		if(myGame.getEnePos("x")<175 && myGame.getRight()) {
 			myGame.enePosChange("right");
+			move++;
 		} 
 		if(myGame.getEnePos("x")>=175 && myGame.getRight() && myGame.getEnePos("y")<=740) {
 			myGame.setRight(false);

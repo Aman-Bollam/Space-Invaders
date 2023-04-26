@@ -35,13 +35,8 @@ public class EnemyRow {
     }
     public void resetCoord(){
         eneX = 5;
-        eneY = ((y-1)*55)+10;
+        eneY = ((y-1)*55)+20;
     }
-    // public void setRow(Enemy [] grid) {
-    //     for(int i=0, j=eneX; i<size; i++, j=j+85) {
-        
-    //     }
-    // }
     public Enemy[] getRow() {
         Enemy[] myEnemies = new Enemy[size];
         for(int i=0; i<10; i++) {
@@ -78,7 +73,7 @@ public class EnemyRow {
     }
     public void setPosDown() {
         int num;
-        eneY+=20;
+        eneY+=10;
         num = eneY;
         for(int i=0; i<size; i++){
             enemies[i] = new Enemy(enemy, enemies[i].getLife(), eneX, num);;
