@@ -179,6 +179,7 @@ public class PlayGame extends JPanel{
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
+        g.drawRect(getEneX(i,one)+20, getEneY(i,one)+32, 48, 22);
       }
     }
     for(int i=0; i<two.getSize(); i++) {
