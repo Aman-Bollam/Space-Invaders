@@ -73,7 +73,7 @@ public class EnemyRow {
     }
     public void setPosDown() {
         int num;
-        eneY+=4;
+        eneY+=10;
         num = eneY;
         for(int i=0; i<size; i++){
             enemies[i] = new Enemy(enemy, enemies[i].getLife(), eneX, num);;
