@@ -52,6 +52,7 @@ public class GameEngine implements Runnable{
 		while (true) {
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
+				setEneHitBox();
 				moveEnemy();
 				moveShip();
 				screen.repaint();
@@ -119,6 +120,9 @@ public class GameEngine implements Runnable{
 				myGame.switchShip(false);
 		  	}
 	  	}
+	}
+	public void setEneHitBox() {
+		myGame.setEneBox();
 	}
 	public void moveShip() {
 		if(!rightRel) {

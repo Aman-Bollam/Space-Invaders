@@ -66,6 +66,23 @@ public class PlayGame extends JPanel{
     left = false;
     switchShip(false);
   }
+  public void setEneBox() {
+    for(int i=0; i<one.getSize(); i++) {
+      one.getEnemy(i).setHitBox(new Rectangle(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28)),convert(52), convert(28));
+    }
+    for(int i=0; i<two.getSize(); i++) {
+      two.getEnemy(i).setHitBox(new Rectangle(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28)),convert(52), convert(28));
+    }
+    for(int i=0; i<three.getSize(); i++) {
+      three.getEnemy(i).setHitBox(new Rectangle(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28)),convert(52), convert(28));
+    }
+    for(int i=0; i<four.getSize(); i++) {
+      four.getEnemy(i).setHitBox(new Rectangle(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28)),convert(52), convert(28));
+    }
+    for(int i=0; i<five.getSize(); i++) {
+      five.getEnemy(i).setHitBox(new Rectangle(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28)),convert(52), convert(28));
+    }
+  }
   public int getEnemySpeed() {
     return enemySpeed;
   }
@@ -174,12 +191,15 @@ public class PlayGame extends JPanel{
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     g.drawImage(shieldOne,convert(110),convert(555),null);
+    g.drawRect(convert(155), convert(636), convert(100), convert(55));
     g.drawImage(shieldTwo,convert(372),convert(555),null);
+    g.drawRect(convert(417), convert(636), convert(100), convert(55));
     g.drawImage(shieldOne,convert(634),convert(555),null);
+    g.drawRect(convert(679), convert(636), convert(100), convert(55));
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-        g.drawRect(getEneX(i,one)+20, getEneY(i,one)+32, 48, 22);
+        // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52), convert(28));
       }
     }
     for(int i=0; i<two.getSize(); i++) {

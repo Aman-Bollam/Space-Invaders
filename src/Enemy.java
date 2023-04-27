@@ -15,17 +15,6 @@ public class Enemy {
         name = "enemy-type"+type+".png";
         x = xPos;
         y = yPos;;
-        if(type==1) {
-            width = 48;
-            height = 22;
-        } else if(type==2) {
-            width = 48;
-            height = 22;
-        } else if(type==3) {
-            width = 48;
-            height = 22;
-        }
-        hitbox = new Rectangle(xPos, yPos, width, height);
     }
     public int getWidth() {
         return width;
@@ -59,5 +48,10 @@ public class Enemy {
     }
     public Rectangle getHitbox() {
         return hitbox;
+    }
+    public void setHitBox(Rectangle box, int x, int y) {
+        width = x;
+        height = y;
+        hitbox = box;
     }
 }

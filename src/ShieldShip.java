@@ -21,10 +21,16 @@ public class ShieldShip {
         num = (14)-(((health)/10)-1);
         name = "shield"+num+".png";
     }
+    public int getHealth() {
+        return health;
+    }
     public boolean getLife() {
         return life;
     }
     public void setLife(boolean alive) {
         life = alive;
+    }
+    public void setHitBox(Rectangle box) {
+        hitbox = box;
     }
 }
