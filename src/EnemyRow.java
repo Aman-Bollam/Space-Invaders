@@ -7,7 +7,7 @@ public class EnemyRow {
     private int enemy;
     public EnemyRow(int type, int length, int level){
         enemy = type;
-        eneX = 5;
+        eneX = 4;
         eneY = ((level-1)*55)+10;
         size = length;
         y = level;
@@ -34,7 +34,7 @@ public class EnemyRow {
         return size;
     }
     public void resetCoord(){
-        eneX = 5;
+        eneX = 4;
         eneY = ((y-1)*55)+20;
     }
     public Enemy[] getRow() {
