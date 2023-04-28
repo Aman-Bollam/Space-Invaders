@@ -9,23 +9,21 @@ public class Enemy {
     private int y;
     private int width;
     private int height;
+    private int hitX;
+    private int hitY;
     public Enemy(int type, boolean alive, int xPos, int yPos) {
         model = type;
         life = alive;
         name = "enemy-type"+type+".png";
         x = xPos;
         y = yPos;;
-        if(type==1) {
-            width = 48;
-            height = 22;
-        } else if(type==2) {
-            width = 48;
-            height = 22;
-        } else if(type==3) {
-            width = 48;
-            height = 22;
-        }
-        hitbox = new Rectangle(xPos, yPos, width, height);
+    }
+    public int hitX() {
+        
+        return hitX;
+    }
+    public int hitY() {
+        return hitY;
     }
     public int getWidth() {
         return width;
@@ -59,5 +57,12 @@ public class Enemy {
     }
     public Rectangle getHitbox() {
         return hitbox;
+    }
+    public void setHitBox(int posX, int posY, int x, int y) {
+        width = x;
+        height = y;
+        hitX = posX;
+        hitY = posY;
+        hitbox = new Rectangle(posX, posY, x, y);
     }
 }

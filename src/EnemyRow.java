@@ -57,8 +57,17 @@ public class EnemyRow {
         int num;
         eneX++;
         num = eneX;
+        int x;
+        int y;
+        int width;
+        int height;
         for(int i=0; i<size; i++){
+            x = enemies[i].hitX();
+            y = enemies[i].hitY();
+            width = enemies[i].getWidth();
+            height = enemies[i].getHeight();
             enemies[i] = new Enemy(enemy, enemies[i].getLife(), num, eneY);
+            enemies[i].setHitBox(x, y, width, height);
             num = num + 75;
         }
     }
@@ -66,8 +75,17 @@ public class EnemyRow {
         int num;
         eneX--;
         num = eneX;
+        int x;
+        int y;
+        int width;
+        int height;
         for(int i=0; i<size; i++){
-            enemies[i] = new Enemy(enemy, enemies[i].getLife(), num, eneY);;
+            x = enemies[i].hitX();
+            y = enemies[i].hitY();
+            width = enemies[i].getWidth();
+            height = enemies[i].getHeight();
+            enemies[i] = new Enemy(enemy, enemies[i].getLife(), num, eneY);
+            enemies[i].setHitBox(x, y, width, height);
             num = num + 75;
         }
     }
@@ -75,8 +93,17 @@ public class EnemyRow {
         int num;
         eneY+=10;
         num = eneY;
+        int x;
+        int y;
+        int width;
+        int height;
         for(int i=0; i<size; i++){
-            enemies[i] = new Enemy(enemy, enemies[i].getLife(), eneX, num);;
+            x = enemies[i].hitX();
+            y = enemies[i].hitY();
+            width = enemies[i].getWidth();
+            height = enemies[i].getHeight();
+            enemies[i] = new Enemy(enemy, enemies[i].getLife(), eneX, num);
+            enemies[i].setHitBox(x, y, width, height);
             num = num + 75;
         }
     }
