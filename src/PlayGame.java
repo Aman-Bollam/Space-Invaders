@@ -270,11 +270,7 @@ public class PlayGame extends JPanel{
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-<<<<<<< HEAD
         g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
-=======
-        g.drawRect(one.getEnemy(i).hitX(), one.getEnemy(i).hitY(),one.getEnemy(i).getWidth(), one.getEnemy(i).getHeight());
->>>>>>> bf17d252d5a6e935f1a629df91a0d2f71f20bfad
       }
     }
     if(explosions.size()>0) {
@@ -284,41 +280,25 @@ public class PlayGame extends JPanel{
     for(int i=0; i<two.getSize(); i++) {
       if(two.getLife(i)) {
         g.drawImage(enemyTwo,getEneX(i,two),getEneY(i,two),null);
-<<<<<<< HEAD
         g.drawRect(getEneX(i,one)+convert(28), getEneY(i,two)+convert(35), convert(52),convert(28));
-=======
-        g.drawRect(two.getEnemy(i).hitX(), two.getEnemy(i).hitY(),two.getEnemy(i).getWidth(), two.getEnemy(i).getHeight());
->>>>>>> bf17d252d5a6e935f1a629df91a0d2f71f20bfad
       }
     }
     for(int i=0; i<three.getSize(); i++) {
       if(three.getLife(i)) {
         g.drawImage(enemyTwo,getEneX(i,three),getEneY(i,three),null);
-<<<<<<< HEAD
         g.drawRect(getEneX(i,one)+convert(28), getEneY(i,three)+convert(35), convert(52),convert(28));
-=======
-        g.drawRect(three.getEnemy(i).hitX(), three.getEnemy(i).hitY(),three.getEnemy(i).getWidth(), three.getEnemy(i).getHeight());
->>>>>>> bf17d252d5a6e935f1a629df91a0d2f71f20bfad
       }
     }
     for(int i=0; i<four.getSize(); i++) {
       if(four.getLife(i)) {
         g.drawImage(enemyThree,getEneX(i,four),getEneY(i,four),null);
-<<<<<<< HEAD
         g.drawRect(getEneX(i,one)+convert(28), getEneY(i,four)+convert(35), convert(52),convert(28));
-=======
-        g.drawRect(four.getEnemy(i).hitX(), four.getEnemy(i).hitY(),four.getEnemy(i).getWidth(), four.getEnemy(i).getHeight());
->>>>>>> bf17d252d5a6e935f1a629df91a0d2f71f20bfad
       }
     }
     for(int i=0; i<five.getSize(); i++) {
       if(five.getLife(i)) {
         g.drawImage(enemyThree,getEneX(i,five),getEneY(i,five),null);
-<<<<<<< HEAD
         g.drawRect(getEneX(i,one)+convert(28), getEneY(i,five)+convert(35), convert(52),convert(28));
-=======
-        g.drawRect(five.getEnemy(i).hitX(), five.getEnemy(i).hitY(),five.getEnemy(i).getWidth(), five.getEnemy(i).getHeight());
->>>>>>> bf17d252d5a6e935f1a629df91a0d2f71f20bfad
       }
     }
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
