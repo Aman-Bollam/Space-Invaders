@@ -54,6 +54,7 @@ public class GameEngine implements Runnable{
 			if (now - lastFrame >= timePerFrame) {
 				setEneHitBox();
 				moveEnemy();
+				getCollisions();
 				moveShip();
 				screen.repaint();
 				lastFrame = now;
@@ -67,6 +68,12 @@ public class GameEngine implements Runnable{
 			}
 		}
 
+	}
+	public void setDefenses() {
+		
+	}
+	public void getCollisions() {
+		
 	}
 	public int getSize() {
 		return size;
@@ -123,6 +130,7 @@ public class GameEngine implements Runnable{
 	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
+		myGame.detectCollisions();
 	}
 	public void moveShip() {
 		if(!rightRel) {
