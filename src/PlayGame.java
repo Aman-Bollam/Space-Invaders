@@ -69,7 +69,8 @@ public class PlayGame extends JPanel{
     boss = resize(new ImageIcon(path+"shield14.png"),run.getSize()/5).getImage();
     right = true;
     left = false;
-    explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/9).getImage();
+    explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/8).getImage();
+    explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/3).getImage();
     switchShip(false);
   }
   public void addToArrays(Image exp, int x, int y) {
@@ -139,14 +140,23 @@ public class PlayGame extends JPanel{
     addToArrays(explosion1,getEneX(enemy,row),getEneY(enemy,row));
     row.getEnemy(enemy).setLife(false);
     if(shield==1) {
-      shieldOne = resize(new ImageIcon(path+(shield1.getName())),run.getSize()/5).getImage();
       shield1.setHealth();
+      shieldOne = resize(new ImageIcon(path+(shield1.getName())),run.getSize()/5).getImage();
+      if(!(shield1.getLife())) {
+        addToArrays(explosion2,convert(110),convert(555));
+      }
     } else if(shield==2) {
-      shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
       shield2.setHealth();
+      shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
+      if(!(shield2.getLife())) {
+        addToArrays(explosion2,convert(372),convert(555));
+      }
     } else {
-      shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
       shield3.setHealth();
+      shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
+      if(!(shield3.getLife())) {
+        addToArrays(explosion2,convert(634),convert(555));
+      }
     }
         
   }
@@ -259,7 +269,7 @@ public class PlayGame extends JPanel{
     g.drawImage(myPlayer,convert(x),convert(y),null);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
-      g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
+      // g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
     }
     if(shield2.getLife()) {
       g.drawImage(shieldTwo,convert(372),convert(555),null);
