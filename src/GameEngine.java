@@ -73,7 +73,7 @@ public class GameEngine implements Runnable{
 		
 	}
 	public void getCollisions() {
-		
+		myGame.detectCollisions();
 	}
 	public int getSize() {
 		return size;
@@ -130,7 +130,6 @@ public class GameEngine implements Runnable{
 	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
-		myGame.detectCollisions();
 	}
 	public void moveShip() {
 		if(!rightRel) {
