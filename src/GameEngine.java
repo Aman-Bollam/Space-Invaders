@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -19,6 +21,8 @@ public class GameEngine implements Runnable{
 	private final int FPS_SET = 120;
 	private int size;
 	private int move;
+	private Timer coolDown;
+	private int timer = 0;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -33,6 +37,7 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
+		coolDown = new Timer(0,new cool());
 		move = 0;
 	}
 	private void startGameLoop(){
@@ -118,15 +123,29 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32) {
+			if(e.getKeyCode()==32 && timer==0) {
 			  	myGame.switchShip(true);
+				coolDown.start();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32) {
+		 	if(e.getKeyCode()==32) {     
 				myGame.switchShip(false);
+				coolDown.stop();
+				timer = 0;
 		  	}
 	  	}
+	}
+	private class cool implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(timer<50) {
+				timer++;
+			} else {
+				timer = 0;
+			}
+		}
+		
 	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
