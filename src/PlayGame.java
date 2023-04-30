@@ -41,7 +41,7 @@ public class PlayGame extends JPanel{
   private ShieldShip [] shields;
   private Image explosion1;
   private Image explosion2;
-  public PlayGame(GameEngine engine, PlayerShip player) {
+  public PlayGame(GameEngine engine, PlayerShip player, String background) {
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
@@ -57,12 +57,12 @@ public class PlayGame extends JPanel{
     enemyNum = 50;
     enemySpeed = 100;
     shipName = ship.getName();
-    shield1 = new ShieldShip(convert(155), convert(636), convert(100), convert(55));
-    shield2 = new ShieldShip(convert(417), convert(636), convert(100), convert(55));
-    shield3 = new ShieldShip(convert(679), convert(636), convert(100), convert(55));
+    shield1 = new ShieldShip(convert(155), convert(628), convert(100), convert(63));
+    shield2 = new ShieldShip(convert(417), convert(628), convert(100), convert(63));
+    shield3 = new ShieldShip(convert(679), convert(628), convert(100), convert(63));
     setShields();
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),run.getSize()/7).getImage();
-    backG = resize(new ImageIcon(path+"background6.jpg"),run.getSize()).getImage();
+    backG = resize(new ImageIcon(path+background),run.getSize()).getImage();
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
@@ -269,7 +269,7 @@ public class PlayGame extends JPanel{
     g.drawImage(myPlayer,convert(x),convert(y),null);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
-      // g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
+      g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
     }
     if(shield2.getLife()) {
       g.drawImage(shieldTwo,convert(372),convert(555),null);
@@ -280,7 +280,7 @@ public class PlayGame extends JPanel{
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-        g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
+        // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
       }
     }
     if(explosions.size()>0) {

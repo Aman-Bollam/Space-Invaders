@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.*;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
-	private boolean settings;
 	private boolean skins;
 	private int slideCounter;
 	private String [] imageSlides = {"slide1.png","slide2.png","slide3.png","slide4.png","slide5.png","slide6.png","slide7.png","slide8.png","slide9.png"};
@@ -18,9 +16,9 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private boolean menuButtHovered;
 	private PlayerShip ship;
 	private GameEngine engine;
-	public MenuView(GameEngine run) {
+	private String back;
+	public MenuView(GameEngine run, PlayerShip theShip, String background) {
 		slideCounter = 0;
-		settings = false;
 		skins = false;
 		mouseHoveredPlay = false;
 		mouseHoveredSettings = false;
@@ -29,15 +27,16 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		hoveredEquip= false;
 		hoveredBack=false;
 		menuButtHovered = false;
-		ship = new PlayerShip(0,2);
 		this.setFocusable(true);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+		ship = theShip;
+		back = background;
 		engine = run;
 	}
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
-		if(!settings && !skins){
+		if(!skins){
 			if(mouseHoveredPlay){
 				display = resize(new ImageIcon(path+"menuhoveredplay.png"), this.getHeight()).getImage();
 			} else if(mouseHoveredSettings){
@@ -83,7 +82,7 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		//System.out.println(convert(e.getX()));
-		if(!skins && !settings){
+		if(!skins){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				mouseHoveredPlay = true;
 			} else {
@@ -129,15 +128,14 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	public void mouseClicked(MouseEvent e) {
 		// System.out.println("X:" + e.getX());
 		// System.out.println("Y:" + e.getY());
-		if(!skins && !settings){
+		if(!skins){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
-				engine.setGame(new PlayerShip(ship.getShip(),1));
+				engine.setGame(new PlayerShip(ship.getShip(),1),back);
 			} else if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				skins = true;
 				this.repaint();
 			} else if(e.getX()>=convert(347) && e.getX()<=convert(611) && e.getY()>=convert(807) && e.getY()<=convert(863)) {
-				settings = true;
-				this.repaint();
+				engine.setSettings(engine, ship, back);
 			}
 		} else if(skins){
 			if(e.getX()>=convert(518) && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694) && slideCounter<8) {
