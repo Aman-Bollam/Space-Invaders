@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -19,12 +21,15 @@ public class GameEngine implements Runnable{
 	private final int FPS_SET = 120;
 	private int size;
 	private int move;
+	private Timer coolDown;
+	private int timer = 0;
+	private PlayerShip ship = new PlayerShip(0,2);
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
 		window.setResizable(false);
-        screen = new MenuView(this);
+        setMenu(this, ship, "background1.jpg");
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
 		size = (int)screenSize.getHeight()-50;
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
@@ -33,6 +38,7 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
+		coolDown = new Timer(0,new cool());
 		move = 0;
 	}
 	private void startGameLoop(){
@@ -78,10 +84,9 @@ public class GameEngine implements Runnable{
 	public int getSize() {
 		return size;
 	}
-    public void setGame(PlayerShip ship){
+    public void setGame(PlayerShip ship, String background){
         theShip = ship;
-		// grid = new EnemyGrid();
-        myGame = new PlayGame(this,theShip);
+        myGame = new PlayGame(this,theShip,background);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
@@ -91,9 +96,18 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		startGameLoop();
     }
-    public void setMenu(){
-        
+    public void setMenu(GameEngine run, PlayerShip ship, String background) {
+        screen = new MenuView(this,ship,background);
     }
+	public void setSettings(GameEngine run, PlayerShip ship, String background) {
+		screen = new Settings(run, ship, background);
+        screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
+        window.setContentPane(screen);
+		window.addKeyListener(new PlayerHorizontal());
+		window.addKeyListener(new PlayerShoot());
+        window.pack();
+		window.setVisible(true);
+	}
 	private class PlayerHorizontal extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 		  	if(e.getKeyCode()==39) {
@@ -118,15 +132,29 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32) {
+			if(e.getKeyCode()==32 && timer==0) {
 			  	myGame.switchShip(true);
+				coolDown.start();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32) {
+		 	if(e.getKeyCode()==32) {     
 				myGame.switchShip(false);
+				coolDown.stop();
+				timer = 0;
 		  	}
 	  	}
+	}
+	private class cool implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(timer<50) {
+				timer++;
+			} else {
+				timer = 0;
+			}
+		}
+		
 	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
