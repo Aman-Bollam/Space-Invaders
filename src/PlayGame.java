@@ -8,6 +8,8 @@ public class PlayGame extends JPanel{
   private int x;
   private int y;
   private int lives;
+  private int wave;
+  private int score;
   private final String path = "images\\";
   private boolean right;
   private boolean left;
