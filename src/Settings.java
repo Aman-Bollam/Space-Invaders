@@ -110,8 +110,6 @@ public class Settings extends JPanel implements MouseListener{
                 repaint();
             }
         }
-        System.out.println(convert(e.getX()));
-        System.out.println(convert(e.getY()));
     }
 
     @Override

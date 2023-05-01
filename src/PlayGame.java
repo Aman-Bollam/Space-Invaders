@@ -275,9 +275,11 @@ public class PlayGame extends JPanel{
     }
     if(shield2.getLife()) {
       g.drawImage(shieldTwo,convert(372),convert(555),null);
+      g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
     }
     if(shield3.getLife()) {
       g.drawImage(shieldThree,convert(634),convert(555),null);
+      g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
     }
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
