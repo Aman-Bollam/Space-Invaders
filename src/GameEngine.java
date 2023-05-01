@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
 public class GameEngine implements Runnable{
 	//private static Font ourFont = Font.createFont(Font.TRUETYPE_FONT, GameEngine.class.getResourceAsStream("fonts/minecraft_font.ttf"));
     private PlayerShip theShip;
@@ -62,6 +63,7 @@ public class GameEngine implements Runnable{
 				moveEnemy();
 				getCollisions();
 				moveShip();
+				movebullet();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -137,8 +139,7 @@ public class GameEngine implements Runnable{
 			if(e.getKeyCode()==32 && timer==0) {
 			  	myGame.switchShip(true);
 				coolDown.start();
-				myGame.shoot();
-				//movebullet();
+				myGame.bullet();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
@@ -160,6 +161,15 @@ public class GameEngine implements Runnable{
 		}
 		
 	}
+	public void movebullet(){
+		for(int i=0;i<myGame.getBullets().size();i++){
+			if(myGame.getBullets().get(i).getY()>0){
+				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
+			}else{
+				myGame.getBullets().remove(i);
+			}
+		}
+	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
 	}
@@ -171,15 +181,6 @@ public class GameEngine implements Runnable{
 			myGame.setPosLeft();
 		}
 	}
-	// public void movebullet(){
-	// 	for(Rectangle bullet:myGame.getBullets()){
-	// 		if(bullet.getMaxY()<screen.getHeight()){
-	// 			bullet.setBounds((int)bullet.getX(), (int)(bullet.getY()+10), (int)bullet.getWidth(), (int)bullet.getHeight());
-	// 		}else{
-	// 			myGame.getBullets().remove(bullet);
-	// 		}
-	// 	}
-	// }
 	public void moveEnemy() {
 		if(myGame.getEnePos("x")<165 && myGame.getRight()) {
 			myGame.enePosChange("right");

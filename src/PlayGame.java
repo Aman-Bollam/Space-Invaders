@@ -137,7 +137,8 @@ public class PlayGame extends JPanel{
       } else if((five.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife()) {
         eneShieldCollided(3, i, five);
       }
-    } 
+      
+    }
   }
   public void eneShieldCollided(int shield,int enemy,EnemyRow row) {
     addToArrays(explosion1,getEneX(enemy,row),getEneY(enemy,row));
@@ -265,13 +266,14 @@ public class PlayGame extends JPanel{
   public int getEneY(int num, EnemyRow lvl) {
     return convert((lvl.getEnemy(num)).getY());
   }
-  public void shoot(){
+  public void bullet(){
     Rectangle r = new Rectangle(convert(ship.getX()+57), convert(ship.getY()-25), convert(7), convert(30));
     bullets.add(r);
   }
   public ArrayList<Rectangle> getBullets(){
     return bullets;
   }
+
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -328,7 +330,6 @@ public class PlayGame extends JPanel{
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
     g.setColor(Color.white);
-    //g.fillRect(1, 1, 200, 200);
     for(Rectangle bullet: bullets){
       g.fillRect((int)bullet.getX(), (int)bullet.getY(), (int)bullet.getWidth(), (int)bullet.getHeight());
     }
