@@ -107,4 +107,17 @@ public class EnemyRow {
             num = num + 75;
         }
     }
+    public boolean allDead(){
+        int count=0;
+        for(int i=0;i<enemies.length;i++){
+            if(!enemies[i].getLife()){
+                count++;
+            }
+        }
+        if(count==enemies.length){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

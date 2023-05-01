@@ -64,6 +64,7 @@ public class GameEngine implements Runnable{
 				getCollisions();
 				moveShip();
 				movebullet();
+				getallRowsDead();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -76,6 +77,9 @@ public class GameEngine implements Runnable{
 			}
 		}
 
+	}
+	public void getallRowsDead(){
+		myGame.allRowsdead();
 	}
 	public void setDefenses() {
 		

@@ -44,6 +44,7 @@ public class PlayGame extends JPanel{
   private Image explosion1;
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
+  private Font font;
   public PlayGame(GameEngine engine, PlayerShip player, String background) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -75,6 +76,7 @@ public class PlayGame extends JPanel{
     explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/8).getImage();
     explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/3).getImage();
     switchShip(false);
+    font = new Font("fonts\\minecraft_font.ttf", Font.TRUETYPE_FONT, 40);
   }
   public void addToArrays(Image exp, int x, int y) {
       explosions.add(exp);
@@ -292,6 +294,16 @@ public class PlayGame extends JPanel{
   public ArrayList<Rectangle> getBullets(){
     return bullets;
   }
+  public void allRowsdead(){
+    if(one.allDead() && two.allDead() && three.allDead() && four.allDead() && five.allDead()){
+      one = new EnemyRow(3, 10 ,1);
+      two = new EnemyRow(2, 10 ,2);
+      three = new EnemyRow(2, 10 ,3);
+      four = new EnemyRow(1, 10 ,4);
+      five = new EnemyRow(1, 10 ,5);
+      wave++;
+    }
+  }
 
   @Override
   public void paintComponent(Graphics g) {
@@ -352,6 +364,11 @@ public class PlayGame extends JPanel{
     for(Rectangle bullet: bullets){
       g.fillRect((int)bullet.getX(), (int)bullet.getY(), (int)bullet.getWidth(), (int)bullet.getHeight());
     }
+    g.setColor(Color.CYAN);
+    g.setFont(font);
+    g.drawString(Integer.toString(wave), convert(800),convert(47));
+    g.drawString(Integer.toString(score), convert(160),convert(47));
+
   }
   public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
