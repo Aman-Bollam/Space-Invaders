@@ -181,11 +181,11 @@ public class GameEngine implements Runnable{
 	// 	}
 	// }
 	public void moveEnemy() {
-		if(myGame.getEnePos("x")<175 && myGame.getRight()) {
+		if(myGame.getEnePos("x")<165 && myGame.getRight()) {
 			myGame.enePosChange("right");
 			move++;
 		} 
-		if(myGame.getEnePos("x")>=175 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+		if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
 			myGame.setRight(false);
 			myGame.enePosChange("down");
 			myGame.setLeft(true);
@@ -193,7 +193,7 @@ public class GameEngine implements Runnable{
 		if(myGame.getLeft()) {
 			myGame.enePosChange("left");
 		}
-		if(myGame.getLeft() && myGame.getEnePos("x")<=5) {
+		if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
 			myGame.setLeft(false);
 			myGame.setRight(true);
 		}

@@ -240,13 +240,13 @@ public class PlayGame extends JPanel{
     shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
   }
   public void setPosRight() {
-    if(x+3<=(820)){
+    if(x+3<=(830)){
       ship.setPosRight();
     }
     x=ship.getX();
   }
   public void setPosLeft() {
-    if(x-3>=10){
+    if(x-3>=0){
       ship.setPosLeft();
     }
     x=ship.getX();
@@ -266,7 +266,7 @@ public class PlayGame extends JPanel{
     return convert((lvl.getEnemy(num)).getY());
   }
   public void shoot(){
-    Rectangle r = new Rectangle(407, 740, convert(200), convert(200));
+    Rectangle r = new Rectangle(convert(ship.getX()+57), convert(ship.getY()-25), convert(7), convert(30));
     bullets.add(r);
   }
   public ArrayList<Rectangle> getBullets(){
@@ -277,6 +277,7 @@ public class PlayGame extends JPanel{
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
+    // ship.getHitBox().add(x, y);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
       g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
