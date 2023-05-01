@@ -41,6 +41,7 @@ public class PlayGame extends JPanel{
   private ShieldShip [] shields;
   private Image explosion1;
   private Image explosion2;
+  private ArrayList<Rectangle> bullets = new ArrayList<>();
   public PlayGame(GameEngine engine, PlayerShip player, String background) {
     this.setFocusable(true);
     this.requestFocusInWindow();
@@ -262,6 +263,13 @@ public class PlayGame extends JPanel{
   public int getEneY(int num, EnemyRow lvl) {
     return convert((lvl.getEnemy(num)).getY());
   }
+  public void shoot(){
+    Rectangle r = new Rectangle(407, 740, convert(200), convert(200));
+    bullets.add(r);
+  }
+  public ArrayList<Rectangle> getBullets(){
+    return bullets;
+  }
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -313,6 +321,11 @@ public class PlayGame extends JPanel{
     }
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
+    }
+    g.setColor(Color.white);
+    //g.fillRect(1, 1, 200, 200);
+    for(Rectangle bullet: bullets){
+      g.fillRect((int)bullet.getX(), (int)bullet.getY(), (int)bullet.getWidth(), (int)bullet.getHeight());
     }
   }
   public int convert(int d){

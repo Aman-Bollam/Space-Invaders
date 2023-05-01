@@ -135,6 +135,8 @@ public class GameEngine implements Runnable{
 			if(e.getKeyCode()==32 && timer==0) {
 			  	myGame.switchShip(true);
 				coolDown.start();
+				myGame.shoot();
+				//movebullet();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
@@ -167,6 +169,15 @@ public class GameEngine implements Runnable{
 			myGame.setPosLeft();
 		}
 	}
+	// public void movebullet(){
+	// 	for(Rectangle bullet:myGame.getBullets()){
+	// 		if(bullet.getMaxY()<screen.getHeight()){
+	// 			bullet.setBounds((int)bullet.getX(), (int)(bullet.getY()+10), (int)bullet.getWidth(), (int)bullet.getHeight());
+	// 		}else{
+	// 			myGame.getBullets().remove(bullet);
+	// 		}
+	// 	}
+	// }
 	public void moveEnemy() {
 		if(myGame.getEnePos("x")<175 && myGame.getRight()) {
 			myGame.enePosChange("right");
