@@ -98,13 +98,15 @@ public class GameEngine implements Runnable{
     }
     public void setMenu(GameEngine run, PlayerShip ship, String background) {
         screen = new MenuView(this,ship,background);
+		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
+		window.setContentPane(screen);
+        window.pack();
+		window.setVisible(true);
     }
 	public void setSettings(GameEngine run, PlayerShip ship, String background) {
 		screen = new Settings(run, ship, background);
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
-		window.addKeyListener(new PlayerHorizontal());
-		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
 	}
