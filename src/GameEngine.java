@@ -167,7 +167,7 @@ public class GameEngine implements Runnable{
 	}
 	public void movebullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
-			if(myGame.getBullets().get(i).getY()>0){
+			if(myGame.getBullets().get(i).getY()>37){
 				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
 			}else{
 				myGame.getBullets().remove(i);
