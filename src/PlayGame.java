@@ -141,30 +141,21 @@ public class PlayGame extends JPanel{
     for(int i=0; i<10; i++) {
       for(int j=0;j<bullets.size();j++){
         Rectangle bullet = bullets.get(j);
-      if((one.getEnemy(i).getHitbox()).intersects(bullet)) {
+      if((one.getEnemy(i).getHitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
         bullets.remove(j);
         one.getEnemy(i).setLife(false);
-        one.getEnemy(i).setHitBox(0, 0, 0, 0);
-      } else if((two.getEnemy(i).getHitbox()).intersects(bullet)) {
+      } else if((two.getEnemy(i).getHitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
         bullets.remove(j);
         two.getEnemy(i).setLife(false);
-        two.getEnemy(i).setHitBox(0, 0, 0, 0);
-
-      } else if((three.getEnemy(i).getHitbox()).intersects(bullet)) {
+      } else if((three.getEnemy(i).getHitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
         bullets.remove(j);
         three.getEnemy(i).setLife(false);
-        three.getEnemy(i).setHitBox(0, 0, 0, 0);
-
-      } else if((four.getEnemy(i).getHitbox()).intersects(bullet)) {
+      } else if((four.getEnemy(i).getHitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
         bullets.remove(j);
         four.getEnemy(i).setLife(false);
-        four.getEnemy(i).setHitBox(0, 0, 0, 0);
-
-      } else if((five.getEnemy(i).getHitbox()).intersects(bullet)) {
+      } else if((five.getEnemy(i).getHitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
         bullets.remove(j);
         five.getEnemy(i).setLife(false);
-        five.getEnemy(i).setHitBox(0, 0, 0, 0);
-
       }
     }
     }
