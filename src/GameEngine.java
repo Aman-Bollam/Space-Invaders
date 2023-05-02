@@ -64,6 +64,7 @@ public class GameEngine implements Runnable{
 				getCollisions();
 				moveShip();
 				movebullet();
+				getallRowsDead();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -76,6 +77,9 @@ public class GameEngine implements Runnable{
 			}
 		}
 
+	}
+	public void getallRowsDead(){
+		myGame.allRowsdead();
 	}
 	public void setDefenses() {
 		
@@ -163,8 +167,13 @@ public class GameEngine implements Runnable{
 	}
 	public void movebullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
+<<<<<<< HEAD
 			if(myGame.getBullets().get(i).getY()>0){
 				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-3), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
+=======
+			if(myGame.getBullets().get(i).getY()>37){
+				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
+>>>>>>> 09ed8dc0de8fb59a6d850c543daa8785ee7b3929
 			}else{
 				myGame.getBullets().remove(i);
 			}
