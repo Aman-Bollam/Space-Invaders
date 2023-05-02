@@ -16,10 +16,9 @@ public class Enemy {
         life = alive;
         name = "enemy-type"+type+".png";
         x = xPos;
-        y = yPos;;
+        y = yPos;
     }
-    public int hitX() {
-        
+    public int hitX() { 
         return hitX;
     }
     public int hitY() {

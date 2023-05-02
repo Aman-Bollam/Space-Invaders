@@ -145,18 +145,18 @@ public class GameEngine implements Runnable{
 	  	public void keyReleased(KeyEvent e) {
 		 	if(e.getKeyCode()==32) {     
 				myGame.switchShip(false);
-				coolDown.stop();
-				timer = 0;
 		  	}
 	  	}
 	}
 	private class cool implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(timer<50) {
+			if(timer<4000) {
+				System.out.println(timer);
 				timer++;
 			} else {
 				timer = 0;
+				coolDown.stop();
 			}
 		}
 		
@@ -164,7 +164,7 @@ public class GameEngine implements Runnable{
 	public void movebullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
 			if(myGame.getBullets().get(i).getY()>0){
-				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
+				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-3), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
 			}else{
 				myGame.getBullets().remove(i);
 			}
