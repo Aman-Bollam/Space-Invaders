@@ -15,6 +15,7 @@ public class PlayGame extends JPanel{
   private boolean left;
   private GameEngine run;
   private PlayerShip ship;
+  private int shipNum;
   private ShieldShip shield1;
   private ShieldShip shield2;
   private ShieldShip shield3;
@@ -49,6 +50,7 @@ public class PlayGame extends JPanel{
     this.requestFocusInWindow();
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
+    shipNum = player.getShip();
     one = new EnemyRow(3, 10 ,1);
     two = new EnemyRow(2, 10 ,2);
     three = new EnemyRow(2, 10 ,3);
@@ -104,6 +106,29 @@ public class PlayGame extends JPanel{
       five.getEnemy(i).setHitBox(getEneX(i,five)+convert(28), getEneY(i,five)+convert(35),convert(52), convert(28));
     }
   }
+  public void setPlayerBox() {
+    if(shipNum==0) {
+
+    } else if(shipNum==1) {
+
+    } else if(shipNum==2) {
+
+    } else if(shipNum==3) {
+
+    } else if(shipNum==4) {
+
+    } else if(shipNum==5) {
+
+    } else if(shipNum==6) {
+
+    } else if(shipNum==7) {
+
+    } else if(shipNum==8) {
+
+    } else if(shipNum==9) {
+      
+    }
+  }
   public void detectCollisions() {
     for(int i=0; i<10; i++) {
       if((one.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && one.getEnemy(i).getLife()) {
@@ -116,11 +141,7 @@ public class PlayGame extends JPanel{
         eneShieldCollided(1, i, two);
       } else if((two.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && two.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, two);
-<<<<<<< HEAD
       } else if((two.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife()&& two.getEnemy(i).getLife()) {
-=======
-      } else if((two.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && two.getEnemy(i).getLife()) {
->>>>>>> 09ed8dc0de8fb59a6d850c543daa8785ee7b3929
         eneShieldCollided(3, i, two);
       } else if((three.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && three.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, three);
@@ -145,7 +166,6 @@ public class PlayGame extends JPanel{
     for(int i=0; i<10; i++) {
       for(int j=0;j<bullets.size();j++){
         Rectangle bullet = bullets.get(j);
-<<<<<<< HEAD
         if((one.getEnemy(i).getHitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
           bullets.remove(j);
           one.getEnemy(i).setLife(false);
@@ -173,23 +193,6 @@ public class PlayGame extends JPanel{
           five.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,five),getEneY(i,five));
         }
-=======
-      if((one.getEnemy(i).getHitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
-        bullets.remove(j);
-        one.getEnemy(i).setLife(false);
-      } else if((two.getEnemy(i).getHitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
-        bullets.remove(j);
-        two.getEnemy(i).setLife(false);
-      } else if((three.getEnemy(i).getHitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
-        bullets.remove(j);
-        three.getEnemy(i).setLife(false);
-      } else if((four.getEnemy(i).getHitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
-        bullets.remove(j);
-        four.getEnemy(i).setLife(false);
-      } else if((five.getEnemy(i).getHitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
-        bullets.remove(j);
-        five.getEnemy(i).setLife(false);
->>>>>>> 09ed8dc0de8fb59a6d850c543daa8785ee7b3929
       }
     }
   }
@@ -315,6 +318,12 @@ public class PlayGame extends JPanel{
   public int getEneY(int num, EnemyRow lvl) {
     return convert((lvl.getEnemy(num)).getY());
   }
+  public int getPlayerY() {
+    return convert(ship.getY());
+  }
+  public int getPlayerX() {
+    return convert(ship.getX());
+  }
   public void bullet(){
     Rectangle r = new Rectangle(convert(ship.getX()+57), convert(ship.getY()-25), convert(7), convert(30));
     bullets.add(r);
@@ -351,15 +360,15 @@ public class PlayGame extends JPanel{
       g.drawImage(shieldThree,convert(634),convert(555),null);
       g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
     }
+    if(explosions.size()>0) {
+      g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
+      removeArrays();  
+    }
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {
         g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
         // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
       }
-    }
-    if(explosions.size()>0) {
-      g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
-      removeArrays();
     }
     for(int i=0; i<two.getSize(); i++) {
       if(two.getLife(i)) {

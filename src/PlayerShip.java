@@ -9,6 +9,10 @@ public class PlayerShip {
     private Rectangle hitbox;
     private int x;
     private int y;
+    private int width;
+    private int height;
+    private int hitX;
+    private int hitY;
     public PlayerShip(int num, int pos) {
         lives = 3;
         ship = "ship-phase-"+(num+1)+"-pos"+pos+".png";
@@ -73,7 +77,26 @@ public class PlayerShip {
     public int getLives(){
         return lives;
     }
-    public Rectangle getHitBox() {
+    public Rectangle getHitbox() {
         return hitbox;
+    }
+    public void setHitBox(int posX, int posY, int x, int y) {
+        width = x;
+        height = y;
+        hitX = posX;
+        hitY = posY;
+        hitbox = new Rectangle(posX, posY, x, y);
+    }
+    public int hitX() { 
+        return hitX;
+    }
+    public int hitY() {
+        return hitY;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
     }
 }

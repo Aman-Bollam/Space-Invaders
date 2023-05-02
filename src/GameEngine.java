@@ -25,6 +25,7 @@ public class GameEngine implements Runnable{
 	private Timer coolDown;
 	private int timer = 0;
 	private PlayerShip ship = new PlayerShip(0,2);
+	private boolean released;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
@@ -39,8 +40,9 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
-		coolDown = new Timer(0,new cool());
+		coolDown = new Timer(100,new cool());
 		move = 0;
+		released = false;
 	}
 	private void startGameLoop(){
 		gameThread = new Thread(this);
@@ -140,23 +142,25 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32 && timer==0) {
+			if(e.getKeyCode()==32) {
 			  	myGame.switchShip(true);
-				coolDown.start();
-				myGame.bullet();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
 		 	if(e.getKeyCode()==32) {     
 				myGame.switchShip(false);
+				coolDown.start();
+				if(timer==0) {
+					myGame.bullet();
+				}
+				// 
 		  	}
 	  	}
 	}
 	private class cool implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(timer<4000) {
-				System.out.println(timer);
+			if(timer<5) {
 				timer++;
 			} else {
 				timer = 0;
@@ -167,13 +171,8 @@ public class GameEngine implements Runnable{
 	}
 	public void movebullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
-<<<<<<< HEAD
 			if(myGame.getBullets().get(i).getY()>0){
 				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-3), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
-=======
-			if(myGame.getBullets().get(i).getY()>37){
-				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
->>>>>>> 09ed8dc0de8fb59a6d850c543daa8785ee7b3929
 			}else{
 				myGame.getBullets().remove(i);
 			}
