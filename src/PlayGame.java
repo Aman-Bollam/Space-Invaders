@@ -10,6 +10,7 @@ public class PlayGame extends JPanel{
   private int lives;
   private int wave;
   private int score;
+  private int highScore;
   private final String path = "images\\";
   private boolean right;
   private boolean left;
@@ -45,7 +46,7 @@ public class PlayGame extends JPanel{
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
   private Font font;
-  public PlayGame(GameEngine engine, PlayerShip player, String background) {
+  public PlayGame(GameEngine engine, PlayerShip player, String background, int maxScore) {
     this.setFocusable(true);
     this.requestFocusInWindow();
     run = engine;
@@ -60,6 +61,8 @@ public class PlayGame extends JPanel{
     x = ship.getX();
     y = ship.getY();
     waveStart = true;
+    highScore = maxScore;
+    wave = 1;
     shipName = ship.getName();
     shield1 = new ShieldShip(convert(155), convert(628), convert(100), convert(63));
     shield2 = new ShieldShip(convert(417), convert(628), convert(100), convert(63));
@@ -164,27 +167,32 @@ public class PlayGame extends JPanel{
       for(int j=0;j<bullets.size();j++){
         Rectangle bullet = bullets.get(j);
         if((one.getEnemy(i).hitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
+          score+=30;
           bullets.remove(j);
           one.getEnemy(i).setLife(false);
           one.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,one),getEneY(i,one));
         } else if((two.getEnemy(i).hitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
+          score+=20;
           bullets.remove(j);
           two.getEnemy(i).setLife(false);
           two.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,two),getEneY(i,two));
 
         } else if((three.getEnemy(i).hitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
+          score+=20;
           bullets.remove(j);
           three.getEnemy(i).setLife(false);
           three.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,three),getEneY(i,three));
         } else if((four.getEnemy(i).hitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
+          score+=10;
           bullets.remove(j);
           four.getEnemy(i).setLife(false);
           four.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,four),getEneY(i,four));
         } else if((five.getEnemy(i).hitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
+          score+=10;
           bullets.remove(j);
           five.getEnemy(i).setLife(false);
           five.getEnemy(i).setHitBox(0, 0, 0, 0);

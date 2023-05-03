@@ -4,6 +4,7 @@ import javax.swing.*;
 public class MenuView extends JPanel implements MouseListener, MouseMotionListener{
 	private boolean skins;
 	private int slideCounter;
+	private int highScore;
 	private String [] imageSlides = {"slide1.png","slide2.png","slide3.png","slide4.png","slide5.png","slide6.png","slide7.png","slide8.png","slide9.png"};
 	private Image display;
 	private final String path = "images\\";
@@ -17,9 +18,10 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	private PlayerShip ship;
 	private GameEngine engine;
 	private String back;
-	public MenuView(GameEngine run, PlayerShip theShip, String background) {
+	public MenuView(GameEngine run, PlayerShip theShip, String background, int maxScore) {
 		slideCounter = 0;
 		skins = false;
+		highScore = maxScore;
 		mouseHoveredPlay = false;
 		mouseHoveredSettings = false;
 		mouseHoveredSkins = false;
@@ -130,12 +132,12 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		// System.out.println("Y:" + e.getY());
 		if(!skins){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
-				engine.setGame(new PlayerShip(ship.getShip(),1),back);
+				engine.setGame(new PlayerShip(ship.getShip(),1),back,highScore);
 			} else if(e.getX()>=convert(397) && e.getX()<=convert(559) && e.getY()>=convert(714) && e.getY()<=convert(768)) {
 				skins = true;
 				this.repaint();
 			} else if(e.getX()>=convert(347) && e.getX()<=convert(611) && e.getY()>=convert(807) && e.getY()<=convert(863)) {
-				engine.setSettings(engine, ship, back);
+				engine.setSettings(engine, ship, back, highScore);
 			}
 		} else if(skins){
 			if(e.getX()>=convert(518) && e.getX()<=convert(813) && e.getY()>=convert(621) && e.getY()<=convert(694) && slideCounter<8) {

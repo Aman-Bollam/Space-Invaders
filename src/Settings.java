@@ -10,9 +10,10 @@ public class Settings extends JPanel implements MouseListener{
     private String back;
     private GameEngine game;
     private int backNum;
+    private int highScore;
     private String [] backgrounds = {"background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg","background9.jpg","background10.jpg","background11.jpg"};
     private String [] backChoices = {"settingback1.png","settingback2.png","settingback3.png","settingback4.png","settingback5.png","settingback6.png","settingback7.png","settingback8.png","settingback9.png","settingback10.png","settingback11.png"};
-    public Settings(GameEngine run, PlayerShip theShip, String background) {
+    public Settings(GameEngine run, PlayerShip theShip, String background, int maxScore) {
         this.setFocusable(true);
 		this.addMouseListener(this);
         backPage = false;
@@ -22,6 +23,7 @@ public class Settings extends JPanel implements MouseListener{
         back = background;
         game = run;
         backNum = matchBackgrounds(background);
+        highScore = maxScore;
     }
     public int matchBackgrounds(String background) {
         int num = 0;
@@ -61,7 +63,7 @@ public class Settings extends JPanel implements MouseListener{
             instructions = false;
             repaint();
         } else if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(886) && e.getY()>=convert(717)) {
-            game.setMenu(game,ship,back);
+            game.setMenu(game,ship,back,highScore);
         }
         if(backPage) {
             if(e.getX()<=convert(400) && e.getX()>=convert(237) && e.getY()<=convert(292) && e.getY()>=convert(129)) {

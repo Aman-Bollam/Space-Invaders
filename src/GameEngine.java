@@ -26,12 +26,15 @@ public class GameEngine implements Runnable{
 	private int timer = 0;
 	private PlayerShip ship = new PlayerShip(0,2);
 	private boolean released;
+	private ArrayList <Integer> highScores = new ArrayList(10);
+	private int highScore;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
 		window.setResizable(false);
-        setMenu(this, ship, "background1.jpg");
+		highScore = getHighScore();
+        setMenu(this, ship, "background1.jpg",highScore);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
 		size = (int)screenSize.getHeight()-50;
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
@@ -80,6 +83,20 @@ public class GameEngine implements Runnable{
 		}
 
 	}
+	public int getHighScore() {
+		int max;
+		if(highScores.size()==0) {
+			highScores.add(0);
+			return 0;
+		}
+		max = highScores.get(0);
+		for(int i=0; i<highScores.size(); i++) {
+			if(max<highScores.get(i)) {
+				max = highScores.get(i);
+			}
+		}
+		return max;
+	}
 	public void getallRowsDead(){
 		myGame.allRowsdead();
 	}
@@ -92,9 +109,9 @@ public class GameEngine implements Runnable{
 	public int getSize() {
 		return size;
 	}
-    public void setGame(PlayerShip ship, String background){
+    public void setGame(PlayerShip ship, String background, int maxScore){
         theShip = ship;
-        myGame = new PlayGame(this,theShip,background);
+        myGame = new PlayGame(this,theShip,background,maxScore);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
@@ -104,15 +121,15 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		startGameLoop();
     }
-    public void setMenu(GameEngine run, PlayerShip ship, String background) {
-        screen = new MenuView(this,ship,background);
+    public void setMenu(GameEngine run, PlayerShip ship, String background, int maxScore) {
+        screen = new MenuView(this,ship,background,maxScore);
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
 		window.setContentPane(screen);
         window.pack();
 		window.setVisible(true);
     }
-	public void setSettings(GameEngine run, PlayerShip ship, String background) {
-		screen = new Settings(run, ship, background);
+	public void setSettings(GameEngine run, PlayerShip ship, String background, int maxScore) {
+		screen = new Settings(run, ship, background, maxScore);
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
         window.pack();
