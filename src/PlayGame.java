@@ -91,7 +91,6 @@ public class PlayGame extends JPanel{
   public void setEneBox() {
     for(int i=0; i<one.getSize(); i++) {
       one.getEnemy(i).setHitBox(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35),convert(52), convert(28));
-      // System.out.println(one.getEnemy(i).getWidth());
     }
     for(int i=0; i<two.getSize(); i++) {
       two.getEnemy(i).setHitBox(getEneX(i,two)+convert(28), getEneY(i,two)+convert(35),convert(52), convert(28));
@@ -108,26 +107,24 @@ public class PlayGame extends JPanel{
   }
   public void setPlayerBox() {
     if(shipNum==0) {
-
+      ship.setHitBox(getPlayerX()+convert(35), getPlayerY()+convert(10), convert(50), convert(68));
     } else if(shipNum==1) {
-
+      ship.setHitBox(getPlayerX()+convert(35), getPlayerY()+convert(13), convert(50), convert(73));
     } else if(shipNum==2) {
-
+      ship.setHitBox(getPlayerX()+convert(32), getPlayerY()+convert(25), convert(55), convert(52));
     } else if(shipNum==3) {
-
+      ship.setHitBox(getPlayerX()+convert(32), getPlayerY()+convert(29), convert(55), convert(45));
     } else if(shipNum==4) {
-
+      ship.setHitBox(getPlayerX()+convert(32), getPlayerY()+convert(24), convert(55), convert(55));
     } else if(shipNum==5) {
-
+      ship.setHitBox(getPlayerX()+convert(32), getPlayerY()+convert(21), convert(55), convert(57));
     } else if(shipNum==6) {
-
+      ship.setHitBox(getPlayerX()+convert(28), getPlayerY()+convert(26), convert(64), convert(55));
     } else if(shipNum==7) {
-
+      ship.setHitBox(getPlayerX()+convert(32), getPlayerY()+convert(32), convert(55), convert(66));
     } else if(shipNum==8) {
-
-    } else if(shipNum==9) {
-      
-    }
+      ship.setHitBox(getPlayerX()+convert(27), getPlayerY()+convert(33), convert(67), convert(52));
+    } 
   }
   public void detectCollisions() {
     for(int i=0; i<10; i++) {
@@ -195,6 +192,47 @@ public class PlayGame extends JPanel{
         }
       }
     }
+    for(int j=0;j<bullets.size();j++){
+      Rectangle bullet = bullets.get(j);
+      if((shield1.getHitBox()).intersects(bullet) && shield1.getLife()) {
+        shieldShot(1);
+        if(shield1.getLife()) {
+          bullets.remove(j);
+          if(shield1.getHealth()==0) {
+            addToArrays(explosion2,convert(100),convert(545));
+          }
+        }
+      } else if(shield2.getHitBox().intersects(bullet) && shield2.getLife()) {
+        shieldShot(2);
+        if(shield2.getLife()) {
+          bullets.remove(j);
+          if(shield2.getHealth()==0) {
+            addToArrays(explosion2,convert(362),convert(545));
+          }
+        }
+      } else if(shield3.getHitBox().intersects(bullet) && shield3.getLife()) {
+        shieldShot(3);
+        if(shield3.getLife()) {
+          bullets.remove(j);
+          if(shield3.getHealth()==0) {
+            addToArrays(explosion2,convert(624),convert(545));
+          }
+        }
+      }
+    }
+  }
+  public void shieldShot(int shield) {
+    if(shield==1) {
+      shield1.setHealth();
+      shieldOne = resize(new ImageIcon(path+(shield1.getName())),run.getSize()/5).getImage();
+    } else if(shield==2) {
+      shield2.setHealth();
+      shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
+      
+    } else {
+      shield3.setHealth();
+      shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
+    }
   }
   public void eneShieldCollided(int shield,int enemy,EnemyRow row) {
     addToArrays(explosion1,getEneX(enemy,row),getEneY(enemy,row));
@@ -203,19 +241,19 @@ public class PlayGame extends JPanel{
       shield1.setHealth();
       shieldOne = resize(new ImageIcon(path+(shield1.getName())),run.getSize()/5).getImage();
       if(!(shield1.getLife())) {
-        addToArrays(explosion2,convert(110),convert(555));
+        addToArrays(explosion2,convert(100),convert(545));
       }
     } else if(shield==2) {
       shield2.setHealth();
       shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
       if(!(shield2.getLife())) {
-        addToArrays(explosion2,convert(372),convert(555));
+        addToArrays(explosion2,convert(362),convert(545));
       }
     } else {
       shield3.setHealth();
       shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
       if(!(shield3.getLife())) {
-        addToArrays(explosion2,convert(634),convert(555));
+        addToArrays(explosion2,convert(624),convert(545));
       }
     }     
   }
@@ -347,18 +385,18 @@ public class PlayGame extends JPanel{
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
+    g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
     // ship.getHitBox().add(x, y);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
-      g.drawRect(shield1.hitX(), shield1.hitY(), shield1.getWidth(), shield1.getHeight());
     }
     if(shield2.getLife()) {
       g.drawImage(shieldTwo,convert(372),convert(555),null);
-      g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
+      // g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
     }
     if(shield3.getLife()) {
       g.drawImage(shieldThree,convert(634),convert(555),null);
-      g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
+      // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
     }
     if(explosions.size()>0) {
       g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);

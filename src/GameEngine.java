@@ -188,6 +188,7 @@ public class GameEngine implements Runnable{
 		if(!leftRel) {
 			myGame.setPosLeft();
 		}
+		myGame.setPlayerBox();
 	}
 	public void moveEnemy() {
 		if(myGame.getEnePos("x")<165 && myGame.getRight()) {
