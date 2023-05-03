@@ -13,6 +13,7 @@ public class PlayGame extends JPanel{
   private final String path = "images\\";
   private boolean right;
   private boolean left;
+  private boolean waveStart;
   private GameEngine run;
   private PlayerShip ship;
   private int shipNum;
@@ -25,7 +26,6 @@ public class PlayGame extends JPanel{
   private EnemyRow three;
   private EnemyRow four;
   private EnemyRow five;
-  private int enemyNum;
   private Image shipLives;
   private Image myPlayer;
   private Image backG;
@@ -59,7 +59,7 @@ public class PlayGame extends JPanel{
     lives = 3;
     x = ship.getX();
     y = ship.getY();
-    enemyNum = 50;
+    waveStart = true;
     shipName = ship.getName();
     shield1 = new ShieldShip(convert(155), convert(628), convert(100), convert(63));
     shield2 = new ShieldShip(convert(417), convert(628), convert(100), convert(63));
@@ -128,63 +128,63 @@ public class PlayGame extends JPanel{
   }
   public void detectCollisions() {
     for(int i=0; i<10; i++) {
-      if((one.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && one.getEnemy(i).getLife()) {
+      if((one.getEnemy(i).hitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && one.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, one);
-      } else if((one.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && one.getEnemy(i).getLife()) {
+      } else if((one.getEnemy(i).hitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && one.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, one);
-      } else if((one.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && one.getEnemy(i).getLife()) {
+      } else if((one.getEnemy(i).hitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && one.getEnemy(i).getLife()) {
         eneShieldCollided(3, i, one);
-      } else if((two.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && two.getEnemy(i).getLife()) {
+      } else if((two.getEnemy(i).hitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && two.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, two);
-      } else if((two.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && two.getEnemy(i).getLife()) {
+      } else if((two.getEnemy(i).hitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && two.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, two);
-      } else if((two.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife()&& two.getEnemy(i).getLife()) {
+      } else if((two.getEnemy(i).hitbox()).intersects(shield3.getHitBox()) && shield3.getLife()&& two.getEnemy(i).getLife()) {
         eneShieldCollided(3, i, two);
-      } else if((three.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && three.getEnemy(i).getLife()) {
+      } else if((three.getEnemy(i).hitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && three.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, three);
-      } else if((three.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && three.getEnemy(i).getLife()) {
+      } else if((three.getEnemy(i).hitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && three.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, three);
-      } else if((three.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && three.getEnemy(i).getLife()) {
+      } else if((three.getEnemy(i).hitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && three.getEnemy(i).getLife()) {
         eneShieldCollided(3, i, three);
-      } else if((four.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && four.getEnemy(i).getLife()) {
+      } else if((four.getEnemy(i).hitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && four.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, four);
-      } else if((four.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && four.getEnemy(i).getLife()) {
+      } else if((four.getEnemy(i).hitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && four.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, four);
-      } else if((four.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && four.getEnemy(i).getLife()) {
+      } else if((four.getEnemy(i).hitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && four.getEnemy(i).getLife()) {
         eneShieldCollided(3, i, four);
-      } else if((five.getEnemy(i).getHitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && five.getEnemy(i).getLife()) {
+      } else if((five.getEnemy(i).hitbox()).intersects(shield1.getHitBox()) && shield1.getLife() && five.getEnemy(i).getLife()) {
         eneShieldCollided(1, i, five);
-      } else if((five.getEnemy(i).getHitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && five.getEnemy(i).getLife()) {
+      } else if((five.getEnemy(i).hitbox()).intersects(shield2.getHitBox()) && shield2.getLife() && five.getEnemy(i).getLife()) {
         eneShieldCollided(2, i, five);
-      } else if((five.getEnemy(i).getHitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && five.getEnemy(i).getLife()) {
+      } else if((five.getEnemy(i).hitbox()).intersects(shield3.getHitBox()) && shield3.getLife() && five.getEnemy(i).getLife()) {
         eneShieldCollided(3, i, five);
       }
     }
     for(int i=0; i<10; i++) {
       for(int j=0;j<bullets.size();j++){
         Rectangle bullet = bullets.get(j);
-        if((one.getEnemy(i).getHitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
+        if((one.getEnemy(i).hitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
           bullets.remove(j);
           one.getEnemy(i).setLife(false);
           one.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,one),getEneY(i,one));
-        } else if((two.getEnemy(i).getHitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
+        } else if((two.getEnemy(i).hitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
           bullets.remove(j);
           two.getEnemy(i).setLife(false);
           two.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,two),getEneY(i,two));
 
-        } else if((three.getEnemy(i).getHitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
+        } else if((three.getEnemy(i).hitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
           bullets.remove(j);
           three.getEnemy(i).setLife(false);
           three.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,three),getEneY(i,three));
-        } else if((four.getEnemy(i).getHitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
+        } else if((four.getEnemy(i).hitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
           bullets.remove(j);
           four.getEnemy(i).setLife(false);
           four.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,four),getEneY(i,four));
-        } else if((five.getEnemy(i).getHitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
+        } else if((five.getEnemy(i).hitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
           bullets.remove(j);
           five.getEnemy(i).setLife(false);
           five.getEnemy(i).setHitBox(0, 0, 0, 0);
@@ -217,6 +217,31 @@ public class PlayGame extends JPanel{
           if(shield3.getHealth()==0) {
             addToArrays(explosion2,convert(624),convert(545));
           }
+        }
+      }
+    }
+    for(int j=0;j<10;j++){
+      if(lives>0) {
+        if(((ship.getHitbox()).intersects(one.getEnemy(j).hitbox())) && one.getEnemy(j).getLife()) {
+          lives--;
+          addToArrays(explosion1,getEneX(j,one),getEneY(j,one));
+          one.getEnemy(j).setLife(false);
+        } else if(((ship.getHitbox()).intersects(two.getEnemy(j).hitbox())) && two.getEnemy(j).getLife()) {
+          lives--;
+          addToArrays(explosion1,getEneX(j,two),getEneY(j,two));
+          two.getEnemy(j).setLife(false);
+        } else if(((ship.getHitbox()).intersects(three.getEnemy(j).hitbox())) && three.getEnemy(j).getLife()) {
+          lives--;
+          addToArrays(explosion1,getEneX(j,three),getEneY(j,three));
+          three.getEnemy(j).setLife(false);
+        } else if(((ship.getHitbox()).intersects(four.getEnemy(j).hitbox())) && four.getEnemy(j).getLife()) {
+          lives--;
+          addToArrays(explosion1,getEneX(j,four),getEneY(j,four));
+          four.getEnemy(j).setLife(false);
+        } else if(((ship.getHitbox()).intersects(five.getEnemy(j).hitbox())) && five.getEnemy(j).getLife()) {
+          lives--;
+          addToArrays(explosion1,getEneX(j,five),getEneY(j,five));
+          five.getEnemy(j).setLife(false);
         }
       }
     }
@@ -401,6 +426,9 @@ public class PlayGame extends JPanel{
     if(explosions.size()>0) {
       g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
       removeArrays();  
+    }
+    if(waveStart) {
+      
     }
     for(int i=0; i<one.getSize(); i++) {
       if(one.getLife(i)) {

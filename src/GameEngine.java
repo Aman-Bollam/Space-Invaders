@@ -63,9 +63,9 @@ public class GameEngine implements Runnable{
 			if (now - lastFrame >= timePerFrame) {
 				setEneHitBox();
 				moveEnemy();
-				getCollisions();
 				moveShip();
 				movebullet();
+				getCollisions();
 				getallRowsDead();
 				screen.repaint();
 				lastFrame = now;

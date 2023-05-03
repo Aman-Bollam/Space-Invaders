@@ -54,7 +54,7 @@ public class Enemy {
     public void setLife(boolean live) {
         life = live;
     }
-    public Rectangle getHitbox() {
+    public Rectangle hitbox() {
         return hitbox;
     }
     public void setHitBox(int posX, int posY, int x, int y) {
