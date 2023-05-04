@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-public class PlayGame extends JPanel{
+public class PlayGame extends JPanel implements MouseListener{
   private int x;
   private int y;
   private int lives;
@@ -15,6 +17,7 @@ public class PlayGame extends JPanel{
   private boolean right;
   private boolean left;
   private boolean waveStart;
+  private boolean gameOver;
   private GameEngine run;
   private PlayerShip ship;
   private int shipNum;
@@ -37,6 +40,7 @@ public class PlayGame extends JPanel{
   private Image shieldTwo;
   private Image shieldThree;
   private Image boss;
+  private Image end;
   private ArrayList <Image> explosions = new ArrayList();
   private ArrayList <Integer> xExplosion = new ArrayList();
   private ArrayList <Integer> yExplosion = new ArrayList();
@@ -45,10 +49,12 @@ public class PlayGame extends JPanel{
   private Image explosion1;
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
+  private ArrayList<Rectangle> enemyBullets = new ArrayList<>();
   private Font font;
   public PlayGame(GameEngine engine, PlayerShip player, String background, int maxScore) {
     this.setFocusable(true);
     this.requestFocusInWindow();
+    this.addMouseListener(this);
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
     shipNum = player.getShip();
@@ -73,6 +79,7 @@ public class PlayGame extends JPanel{
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
+    end = resize(new ImageIcon(path+"endscreen.png"),run.getSize()).getImage();
     boss = resize(new ImageIcon(path+"shield14.png"),run.getSize()/5).getImage();
     right = true;
     left = false;
@@ -178,7 +185,6 @@ public class PlayGame extends JPanel{
           two.getEnemy(i).setLife(false);
           two.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,two),getEneY(i,two));
-
         } else if((three.getEnemy(i).hitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
           score+=20;
           bullets.remove(j);
@@ -337,6 +343,9 @@ public class PlayGame extends JPanel{
       return rowLife().getY();
     }
   }
+  public boolean getOver() {
+    return gameOver;
+  }
   public void enePosChange(String direct) {
     if(direct.equals("down")) {
       one.setPosDown();
@@ -399,8 +408,31 @@ public class PlayGame extends JPanel{
     Rectangle r = new Rectangle(convert(ship.getX()+57), convert(ship.getY()-25), convert(7), convert(30));
     bullets.add(r);
   }
+  public void eneBullet(){
+    int randomRow = (int)(Math.random()*5)+1;
+    EnemyRow row = one;
+    if(randomRow==1) {
+      row = one;
+    } else if(randomRow==2) {
+      row = two;
+    } else if(randomRow==3) {
+      row = three;
+    } else if(randomRow==4) {
+      row = three;
+    } else {
+      row = five;
+    }
+    int randomCol = (int)(Math.random()*10)+1;
+    if(row.getEnemy(randomCol-1).getLife()) {
+      Rectangle r = new Rectangle(getEneX(randomCol-1, row) + convert(57), getEneY(randomCol-1, row) + convert(40), convert(7), convert(30));
+      enemyBullets.add(r);
+    }
+  }
   public ArrayList<Rectangle> getBullets(){
     return bullets;
+  }
+  public ArrayList<Rectangle> getEneBullets(){
+    return enemyBullets;
   }
   public void allRowsdead(){
     if(one.allDead() && two.allDead() && three.allDead() && four.allDead() && five.allDead()){
@@ -419,6 +451,7 @@ public class PlayGame extends JPanel{
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
+    g.drawImage(end,convert(0),convert(0),null);
     // ship.getHitBox().add(x, y);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
@@ -430,10 +463,6 @@ public class PlayGame extends JPanel{
     if(shield3.getLife()) {
       g.drawImage(shieldThree,convert(634),convert(555),null);
       // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
-    }
-    if(explosions.size()>0) {
-      g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
-      removeArrays();  
     }
     if(waveStart) {
       
@@ -471,6 +500,14 @@ public class PlayGame extends JPanel{
     for(Rectangle bullet: bullets){
       g.fillRect((int)bullet.getX(), (int)bullet.getY(), (int)bullet.getWidth(), (int)bullet.getHeight());
     }
+    g.setColor(Color.red);
+    for(Rectangle bullet: enemyBullets){
+      g.fillRect((int)bullet.getX(), (int)bullet.getY(), (int)bullet.getWidth(), (int)bullet.getHeight());
+    }
+    if(explosions.size()>0) {
+      g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
+      removeArrays();  
+    }
     g.setColor(Color.CYAN);
     g.setFont(font);
     g.drawString(Integer.toString(wave), convert(800),convert(47));
@@ -484,5 +521,30 @@ public class PlayGame extends JPanel{
   private ImageIcon resize(ImageIcon img, int height) {
     Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
     return new ImageIcon(image);
+  }
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  @Override
+  public void mouseEntered(MouseEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  @Override
+  public void mouseExited(MouseEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  @Override
+  public void mousePressed(MouseEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  @Override
+  public void mouseReleased(MouseEvent e) {
+    // TODO Auto-generated method stub
+    
   }
 }

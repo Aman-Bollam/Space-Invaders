@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
-public class GameEngine implements Runnable{
+public class GameEngine implements Runnable {
 	//private static Font ourFont = Font.createFont(Font.TRUETYPE_FONT, GameEngine.class.getResourceAsStream("fonts/minecraft_font.ttf"));
     private PlayerShip theShip;
     private JPanel screen;
@@ -67,7 +67,8 @@ public class GameEngine implements Runnable{
 				setEneHitBox();
 				moveEnemy();
 				moveShip();
-				movebullet();
+				generateEneBullet();
+				moveBullet();
 				getCollisions();
 				getallRowsDead();
 				screen.repaint();
@@ -96,6 +97,17 @@ public class GameEngine implements Runnable{
 			}
 		}
 		return max;
+	}
+	public void addScore(int score) {
+		boolean dupe = false;
+		for(int i=0; i<highScores.size(); i++) {
+			if(score==highScores.get(i)) {
+				dupe = true;
+			}
+		}
+		if(!dupe) {
+			highScores.add(score);
+		}
 	}
 	public void getallRowsDead(){
 		myGame.allRowsdead();
@@ -137,12 +149,12 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerHorizontal extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  	if(e.getKeyCode()==39) {
+		  	if(e.getKeyCode()==39 && !myGame.getOver()) {
 				myGame.setPosRight();
 				rightRel = false;
 				leftRel = true;    
 		  	} 
-		  	if(e.getKeyCode()==37) {
+		  	if(e.getKeyCode()==37 && !myGame.getOver()) {
 				myGame.setPosLeft();
 				leftRel = false;
 				rightRel = true;
@@ -159,12 +171,12 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32) {
+			if(e.getKeyCode()==32 && !myGame.getOver()) {
 			  	myGame.switchShip(true);
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32) {     
+		 	if(e.getKeyCode()==32 && !myGame.getOver()) {     
 				myGame.switchShip(false);
 				coolDown.start();
 				if(timer==0) {
@@ -186,13 +198,26 @@ public class GameEngine implements Runnable{
 		}
 		
 	}
-	public void movebullet(){
+	public void moveBullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
 			if(myGame.getBullets().get(i).getY()>0){
 				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-3), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
 			}else{
 				myGame.getBullets().remove(i);
 			}
+		}
+		for(int i=0;i<myGame.getEneBullets().size();i++){
+			if(myGame.getEneBullets().get(i).getY()>0){
+				myGame.getEneBullets().get(i).setBounds((int)myGame.getEneBullets().get(i).getX(), (int)(myGame.getEneBullets().get(i).getY()+3), (int)myGame.getEneBullets().get(i).getWidth(), (int)myGame.getEneBullets().get(i).getHeight());
+			}else{
+				myGame.getEneBullets().remove(i);
+			}
+		}
+	}
+	public void generateEneBullet() {
+		int num = (int)(Math.random()*100) + 1;
+		if(num<=2) {
+			myGame.eneBullet();
 		}
 	}
 	public void setEneHitBox() {
@@ -208,21 +233,23 @@ public class GameEngine implements Runnable{
 		myGame.setPlayerBox();
 	}
 	public void moveEnemy() {
-		if(myGame.getEnePos("x")<165 && myGame.getRight()) {
-			myGame.enePosChange("right");
-			move++;
-		} 
-		if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
-			myGame.setRight(false);
-			myGame.enePosChange("down");
-			myGame.setLeft(true);
-		}
-		if(myGame.getLeft()) {
-			myGame.enePosChange("left");
-		}
-		if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
-			myGame.setLeft(false);
-			myGame.setRight(true);
+		if(!myGame.getOver()) {
+			if(myGame.getEnePos("x")<165 && myGame.getRight()) {
+				myGame.enePosChange("right");
+				move++;
+			} 
+			if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+				myGame.setRight(false);
+				myGame.enePosChange("down");
+				myGame.setLeft(true);
+			}
+			if(myGame.getLeft()) {
+				myGame.enePosChange("left");
+			}
+			if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
+				myGame.setLeft(false);
+				myGame.setRight(true);
+			}
 		}
 	}
 	public int convert(int d){
