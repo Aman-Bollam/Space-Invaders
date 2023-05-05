@@ -216,7 +216,7 @@ public class GameEngine implements Runnable {
 	}
 	public void generateEneBullet() {
 		int num = (int)(Math.random()*100) + 1;
-		if(num<=2) {
+		if(num<2) {
 			myGame.eneBullet();
 		}
 	}
@@ -234,11 +234,11 @@ public class GameEngine implements Runnable {
 	}
 	public void moveEnemy() {
 		if(!myGame.getOver()) {
-			if(myGame.getEnePos("x")<165 && myGame.getRight()) {
+			if(myGame.eneRightBound()<845 && myGame.getRight()) {
 				myGame.enePosChange("right");
 				move++;
 			} 
-			if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+			if(myGame.eneRightBound()>=845 && myGame.getRight() && myGame.eneYBound()<=740) {
 				myGame.setRight(false);
 				myGame.enePosChange("down");
 				myGame.setLeft(true);
@@ -246,7 +246,7 @@ public class GameEngine implements Runnable {
 			if(myGame.getLeft()) {
 				myGame.enePosChange("left");
 			}
-			if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
+			if(myGame.getLeft() && myGame.eneLeftBound()<=10) {
 				myGame.setLeft(false);
 				myGame.setRight(true);
 			}

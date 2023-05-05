@@ -84,7 +84,7 @@ public class PlayGame extends JPanel implements MouseListener{
     right = true;
     left = false;
     explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/8).getImage();
-    explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/3).getImage();
+    explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/4).getImage();
     switchShip(false);
     font = new Font("fonts\\minecraft_font.ttf", Font.TRUETYPE_FONT, 40);
   }
@@ -213,7 +213,7 @@ public class PlayGame extends JPanel implements MouseListener{
         if(shield1.getLife()) {
           bullets.remove(j);
           if(shield1.getHealth()==0) {
-            addToArrays(explosion2,convert(100),convert(545));
+            addToArrays(explosion2,convert(90),convert(555));
           }
         }
       } else if(shield2.getHitBox().intersects(bullet) && shield2.getLife()) {
@@ -221,7 +221,7 @@ public class PlayGame extends JPanel implements MouseListener{
         if(shield2.getLife()) {
           bullets.remove(j);
           if(shield2.getHealth()==0) {
-            addToArrays(explosion2,convert(362),convert(545));
+            addToArrays(explosion2,convert(352),convert(555));
           }
         }
       } else if(shield3.getHitBox().intersects(bullet) && shield3.getLife()) {
@@ -229,13 +229,41 @@ public class PlayGame extends JPanel implements MouseListener{
         if(shield3.getLife()) {
           bullets.remove(j);
           if(shield3.getHealth()==0) {
+            addToArrays(explosion2,convert(614),convert(555));
+          }
+        }
+      }
+    }
+    for(int j=0;j<enemyBullets.size();j++){
+      Rectangle bullet = enemyBullets.get(j);
+      if((shield1.getHitBox()).intersects(bullet) && shield1.getLife()) {
+        shieldShot(1);
+        if(shield1.getLife()) {
+          enemyBullets.remove(j);
+          if(shield1.getHealth()==0) {
+            addToArrays(explosion2,convert(100),convert(545));
+          }
+        }
+      } else if(shield2.getHitBox().intersects(bullet) && shield2.getLife()) {
+        shieldShot(2);
+        if(shield2.getLife()) {
+          enemyBullets.remove(j);
+          if(shield2.getHealth()==0) {
+            addToArrays(explosion2,convert(362),convert(545));
+          }
+        }
+      } else if(shield3.getHitBox().intersects(bullet) && shield3.getLife()) {
+        shieldShot(3);
+        if(shield3.getLife()) {
+          enemyBullets.remove(j);
+          if(shield3.getHealth()==0) {
             addToArrays(explosion2,convert(624),convert(545));
           }
         }
       }
     }
     for(int j=0;j<10;j++){
-      if(lives>0) {
+      if(lives+1>0) {
         if(((ship.getHitbox()).intersects(one.getEnemy(j).hitbox())) && one.getEnemy(j).getLife()) {
           lives--;
           addToArrays(explosion1,getEneX(j,one),getEneY(j,one));
@@ -258,6 +286,41 @@ public class PlayGame extends JPanel implements MouseListener{
           five.getEnemy(j).setLife(false);
         }
       }
+    }
+    for(int j=0;j<enemyBullets.size();j++){
+      if(lives+1>0) {
+        if((ship.getHitbox()).intersects(enemyBullets.get(j))) {
+          lives--;
+          enemyBullets.remove(j);
+        }
+      }
+    }
+    for(int i=0; i<bullets.size(); i++) {
+      for(int j=0; j<enemyBullets.size(); j++) {
+        if(bullets.get(i).intersects(enemyBullets.get(j))) {
+          bullets.remove(i);
+          enemyBullets.remove(j);
+        }
+      }
+    }
+  }
+  public boolean colAlive(int col) {
+    if(one.getEnemy(col).getLife() || two.getEnemy(col).getLife() || three.getEnemy(col).getLife() || four.getEnemy(col).getLife() || five.getEnemy(col).getLife()) {
+      return true;
+    }
+    return false;
+  }
+  public Enemy getLiveEnemy(int col) {
+    if(one.getEnemy(col).getLife()) {
+      return one.getEnemy(col);
+    } else if(two.getEnemy(col).getLife()) {
+      return two.getEnemy(col);
+    } else if(three.getEnemy(col).getLife()) {
+      return three.getEnemy(col);
+    } else if(four.getEnemy(col).getLife()) {
+      return four.getEnemy(col);
+    } else {
+      return five.getEnemy(col);
     }
   }
   public void shieldShot(int shield) {
@@ -336,12 +399,25 @@ public class PlayGame extends JPanel implements MouseListener{
   public boolean getLeft() {
     return left;
   }
-  public int getEnePos(String pos) {
-    if(pos.equals("x")) {
-      return one.getX();
-    } else {
-      return rowLife().getY();
+  public int eneRightBound() {
+    for(int i=one.getSize()-1; i>=0; i--) {
+      if(colAlive(i)) {
+        System.out.println(getLiveEnemy(i).getX());
+        return getLiveEnemy(i).getX();
+      }
     }
+    return one.getX();
+  }
+  public int eneLeftBound() {
+    for(int i=0; i<one.getSize(); i++) {
+      if(colAlive(i)) {
+        return getLiveEnemy(i).getX();
+      } 
+    }
+    return one.getX();
+  }
+  public int eneYBound() {
+    return rowLife().getY();
   }
   public boolean getOver() {
     return gameOver;
@@ -450,8 +526,9 @@ public class PlayGame extends JPanel implements MouseListener{
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
+    
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
-    g.drawImage(end,convert(0),convert(0),null);
+    // g.drawImage(end,convert(0),convert(0),null);
     // ship.getHitBox().add(x, y);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
