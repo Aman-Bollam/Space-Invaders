@@ -287,7 +287,6 @@ public class PlayGame extends JPanel implements MouseListener{
         }
       }
     }
-<<<<<<< HEAD
     for(int j=0;j<enemyBullets.size();j++){
       if(lives+1>0) {
         if((ship.getHitbox()).intersects(enemyBullets.get(j))) {
@@ -323,14 +322,6 @@ public class PlayGame extends JPanel implements MouseListener{
     } else {
       return five.getEnemy(col);
     }
-=======
-    for(int i=0;i<enemyBullets.size();i++){
-      if(enemyBullets.get(i).intersects(ship.getHitbox())){
-        enemyBullets.remove(i);
-        lives--;
-      }
-    }
->>>>>>> 2311b3995b1c5b34efe285c004c858f4ca041569
   }
   public void shieldShot(int shield) {
     if(shield==1) {
@@ -541,10 +532,7 @@ public class PlayGame extends JPanel implements MouseListener{
     g.drawImage(myPlayer,convert(x),convert(y),null);
     
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
-<<<<<<< HEAD
     // g.drawImage(end,convert(0),convert(0),null);
-=======
->>>>>>> 2311b3995b1c5b34efe285c004c858f4ca041569
     // ship.getHitBox().add(x, y);
     if(shield1.getLife()) {
       g.drawImage(shieldOne,convert(110),convert(555),null);
