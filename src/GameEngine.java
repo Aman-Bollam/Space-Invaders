@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
-public class GameEngine implements Runnable{
+public class GameEngine implements Runnable {
 	//private static Font ourFont = Font.createFont(Font.TRUETYPE_FONT, GameEngine.class.getResourceAsStream("fonts/minecraft_font.ttf"));
     private PlayerShip theShip;
     private JPanel screen;
@@ -25,12 +25,16 @@ public class GameEngine implements Runnable{
 	private Timer coolDown;
 	private int timer = 0;
 	private PlayerShip ship = new PlayerShip(0,2);
+	private boolean released;
+	private ArrayList <Integer> highScores = new ArrayList(10);
+	private int highScore;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
 		window.setResizable(false);
-        setMenu(this, ship, "background1.jpg");
+		highScore = getHighScore();
+        setMenu(this, ship, "background1.jpg",highScore);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
 		size = (int)screenSize.getHeight()-50;
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
@@ -39,8 +43,9 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		leftRel = true;
 		rightRel = true;
-		coolDown = new Timer(0,new cool());
+		coolDown = new Timer(100,new cool());
 		move = 0;
+		released = false;
 	}
 	private void startGameLoop(){
 		gameThread = new Thread(this);
@@ -61,9 +66,10 @@ public class GameEngine implements Runnable{
 			if (now - lastFrame >= timePerFrame) {
 				setEneHitBox();
 				moveEnemy();
-				getCollisions();
 				moveShip();
-				movebullet();
+				generateEneBullet();
+				moveBullet();
+				getCollisions();
 				getallRowsDead();
 				screen.repaint();
 				lastFrame = now;
@@ -78,6 +84,31 @@ public class GameEngine implements Runnable{
 		}
 
 	}
+	public int getHighScore() {
+		int max;
+		if(highScores.size()==0) {
+			highScores.add(0);
+			return 0;
+		}
+		max = highScores.get(0);
+		for(int i=0; i<highScores.size(); i++) {
+			if(max<highScores.get(i)) {
+				max = highScores.get(i);
+			}
+		}
+		return max;
+	}
+	public void addScore(int score) {
+		boolean dupe = false;
+		for(int i=0; i<highScores.size(); i++) {
+			if(score==highScores.get(i)) {
+				dupe = true;
+			}
+		}
+		if(!dupe) {
+			highScores.add(score);
+		}
+	}
 	public void getallRowsDead(){
 		myGame.allRowsdead();
 	}
@@ -90,9 +121,9 @@ public class GameEngine implements Runnable{
 	public int getSize() {
 		return size;
 	}
-    public void setGame(PlayerShip ship, String background){
+    public void setGame(PlayerShip ship, String background, int maxScore){
         theShip = ship;
-        myGame = new PlayGame(this,theShip,background);
+        myGame = new PlayGame(this,theShip,background,maxScore);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
@@ -102,15 +133,15 @@ public class GameEngine implements Runnable{
 		window.setVisible(true);
 		startGameLoop();
     }
-    public void setMenu(GameEngine run, PlayerShip ship, String background) {
-        screen = new MenuView(this,ship,background);
+    public void setMenu(GameEngine run, PlayerShip ship, String background, int maxScore) {
+        screen = new MenuView(this,ship,background,maxScore);
 		screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
 		window.setContentPane(screen);
         window.pack();
 		window.setVisible(true);
     }
-	public void setSettings(GameEngine run, PlayerShip ship, String background) {
-		screen = new Settings(run, ship, background);
+	public void setSettings(GameEngine run, PlayerShip ship, String background, int maxScore) {
+		screen = new Settings(run, ship, background, maxScore);
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
         window.pack();
@@ -118,12 +149,12 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerHorizontal extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  	if(e.getKeyCode()==39) {
+		  	if(e.getKeyCode()==39 && !myGame.getOver()) {
 				myGame.setPosRight();
 				rightRel = false;
 				leftRel = true;    
 		  	} 
-		  	if(e.getKeyCode()==37) {
+		  	if(e.getKeyCode()==37 && !myGame.getOver()) {
 				myGame.setPosLeft();
 				leftRel = false;
 				rightRel = true;
@@ -140,38 +171,53 @@ public class GameEngine implements Runnable{
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32 && timer==0) {
+			if(e.getKeyCode()==32 && !myGame.getOver()) {
 			  	myGame.switchShip(true);
-				coolDown.start();
-				myGame.bullet();
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32) {     
+		 	if(e.getKeyCode()==32 && !myGame.getOver()) {     
 				myGame.switchShip(false);
-				coolDown.stop();
-				timer = 0;
+				coolDown.start();
+				if(timer==0) {
+					myGame.bullet();
+				}
+				// 
 		  	}
 	  	}
 	}
 	private class cool implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(timer<50) {
+			if(timer<5) {
 				timer++;
 			} else {
 				timer = 0;
+				coolDown.stop();
 			}
 		}
 		
 	}
-	public void movebullet(){
+	public void moveBullet(){
 		for(int i=0;i<myGame.getBullets().size();i++){
-			if(myGame.getBullets().get(i).getY()>37){
-				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-1), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
+			if(myGame.getBullets().get(i).getY()>0){
+				myGame.getBullets().get(i).setBounds((int)myGame.getBullets().get(i).getX(), (int)(myGame.getBullets().get(i).getY()-3), (int)myGame.getBullets().get(i).getWidth(), (int)myGame.getBullets().get(i).getHeight());
 			}else{
 				myGame.getBullets().remove(i);
 			}
+		}
+		for(int i=0;i<myGame.getEneBullets().size();i++){
+			if(myGame.getEneBullets().get(i).getY()>0){
+				myGame.getEneBullets().get(i).setBounds((int)myGame.getEneBullets().get(i).getX(), (int)(myGame.getEneBullets().get(i).getY()+3), (int)myGame.getEneBullets().get(i).getWidth(), (int)myGame.getEneBullets().get(i).getHeight());
+			}else{
+				myGame.getEneBullets().remove(i);
+			}
+		}
+	}
+	public void generateEneBullet() {
+		int num = (int)(Math.random()*100) + 1;
+		if(num<=2) {
+			myGame.eneBullet();
 		}
 	}
 	public void setEneHitBox() {
@@ -184,23 +230,26 @@ public class GameEngine implements Runnable{
 		if(!leftRel) {
 			myGame.setPosLeft();
 		}
+		myGame.setPlayerBox();
 	}
 	public void moveEnemy() {
-		if(myGame.getEnePos("x")<165 && myGame.getRight()) {
-			myGame.enePosChange("right");
-			move++;
-		} 
-		if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
-			myGame.setRight(false);
-			myGame.enePosChange("down");
-			myGame.setLeft(true);
-		}
-		if(myGame.getLeft()) {
-			myGame.enePosChange("left");
-		}
-		if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
-			myGame.setLeft(false);
-			myGame.setRight(true);
+		if(!myGame.getOver()) {
+			if(myGame.getEnePos("x")<165 && myGame.getRight()) {
+				myGame.enePosChange("right");
+				move++;
+			} 
+			if(myGame.getEnePos("x")>=165 && myGame.getRight() && myGame.getEnePos("y")<=740) {
+				myGame.setRight(false);
+				myGame.enePosChange("down");
+				myGame.setLeft(true);
+			}
+			if(myGame.getLeft()) {
+				myGame.enePosChange("left");
+			}
+			if(myGame.getLeft() && myGame.getEnePos("x")<=10) {
+				myGame.setLeft(false);
+				myGame.setRight(true);
+			}
 		}
 	}
 	public int convert(int d){

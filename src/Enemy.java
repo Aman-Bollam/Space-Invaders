@@ -16,10 +16,9 @@ public class Enemy {
         life = alive;
         name = "enemy-type"+type+".png";
         x = xPos;
-        y = yPos;;
+        y = yPos;
     }
-    public int hitX() {
-        
+    public int hitX() { 
         return hitX;
     }
     public int hitY() {
@@ -55,7 +54,7 @@ public class Enemy {
     public void setLife(boolean live) {
         life = live;
     }
-    public Rectangle getHitbox() {
+    public Rectangle hitbox() {
         return hitbox;
     }
     public void setHitBox(int posX, int posY, int x, int y) {

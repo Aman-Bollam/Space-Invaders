@@ -10,9 +10,10 @@ public class Settings extends JPanel implements MouseListener{
     private String back;
     private GameEngine game;
     private int backNum;
+    private int highScore;
     private String [] backgrounds = {"background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg","background9.jpg","background10.jpg","background11.jpg"};
     private String [] backChoices = {"settingback1.png","settingback2.png","settingback3.png","settingback4.png","settingback5.png","settingback6.png","settingback7.png","settingback8.png","settingback9.png","settingback10.png","settingback11.png"};
-    public Settings(GameEngine run, PlayerShip theShip, String background) {
+    public Settings(GameEngine run, PlayerShip theShip, String background, int maxScore) {
         this.setFocusable(true);
 		this.addMouseListener(this);
         backPage = false;
@@ -22,6 +23,7 @@ public class Settings extends JPanel implements MouseListener{
         back = background;
         game = run;
         backNum = matchBackgrounds(background);
+        highScore = maxScore;
     }
     public int matchBackgrounds(String background) {
         int num = 0;
@@ -45,66 +47,66 @@ public class Settings extends JPanel implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(convert(e.getX())<=115 && convert(e.getX())>=61 && convert(e.getY())<=189 && convert(e.getY())>=55) {
+        if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(268) && e.getY()>=convert(72)) {
             backPage = false;
             points = false;
             instructions = true;
             repaint();
-        } else if(convert(e.getX())<=115 && convert(e.getX())>=61 && convert(e.getY())<=325 && convert(e.getY())>=194) {
+        } else if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(456) && e.getY()>=convert(269)) {
             backPage = false;
             points = true;
             instructions = false;
             repaint();
-        } else if(convert(e.getX())<=115 && convert(e.getX())>=61 && convert(e.getY())<=511 && convert(e.getY())>=331) {
+        } else if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(716) && e.getY()>=convert(457)) {
             backPage = true;
             points = false;
             instructions = false;
             repaint();
-        } else if(convert(e.getX())<=115 && convert(e.getX())>=61 && convert(e.getY())<=631 && convert(e.getY())>=516) {
-            game.setMenu(game,ship,back);
+        } else if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(886) && e.getY()>=convert(717)) {
+            game.setMenu(game,ship,back,highScore);
         }
         if(backPage) {
-            if(convert(e.getX())<=287 && convert(e.getX())>=169 && convert(e.getY())<=210 && convert(e.getY())>=92) {
+            if(e.getX()<=convert(400) && e.getX()>=convert(237) && e.getY()<=convert(292) && e.getY()>=convert(129)) {
                 back = backgrounds[0];
                 backNum = 0;
                 repaint();
-            } else if(convert(e.getX())<=430 && convert(e.getX())>=312 && convert(e.getY())<=210 && convert(e.getY())>=92) {
+            } else if(e.getX()<=convert(599) && e.getX()>=convert(436) && e.getY()<=convert(292) && e.getY()>=convert(129)) {
                 back = backgrounds[1];
                 backNum = 1;
                 repaint();
-            } else if(convert(e.getX())<=573 && convert(e.getX())>=455 && convert(e.getY())<=210 && convert(e.getY())>=92) {
+            } else if(e.getX()<=convert(798) && e.getX()>=convert(633) && e.getY()<=convert(292) && e.getY()>=convert(129)) {
                 back = backgrounds[2];
                 backNum = 2;
                 repaint();
-            } else if(convert(e.getX())<=287 && convert(e.getX())>=169 && convert(e.getY())<=337 && convert(e.getY())>=219) {
+            } else if(e.getX()<=convert(400) && e.getX()>=convert(237) && e.getY()<=convert(469) && e.getY()>=convert(306)) {
                 back = backgrounds[3];
                 backNum = 3;
                 repaint();
-            } else if(convert(e.getX())<=430 && convert(e.getX())>=312 && convert(e.getY())<=337 && convert(e.getY())>=219) {
+            } else if(e.getX()<=convert(599) && e.getX()>=convert(436) && e.getY()<=convert(469) && e.getY()>=convert(306)) {
                 back = backgrounds[4];
                 backNum = 4;
                 repaint();
-            } else if(convert(e.getX())<=573 && convert(e.getX())>=455 && convert(e.getY())<=337 && convert(e.getY())>=219) {
+            } else if(e.getX()<=convert(798) && e.getX()>=convert(633) && e.getY()<=convert(469) && e.getY()>=convert(306)) {
                 back = backgrounds[5];
                 backNum = 5;
                 repaint();
-            } else if(convert(e.getX())<=287 && convert(e.getX())>=169 && convert(e.getY())<=463 && convert(e.getY())>=345) {
+            } else if(e.getX()<=convert(400) && e.getX()>=convert(237) && e.getY()<=convert(645) && e.getY()>=convert(482)) {
                 back = backgrounds[6];
                 backNum = 6;
                 repaint();
-            } else if(convert(e.getX())<=430 && convert(e.getX())>=312 && convert(e.getY())<=463 && convert(e.getY())>=345) {
+            } else if(e.getX()<=convert(599) && e.getX()>=convert(436) && e.getY()<=convert(645) && e.getY()>=convert(482)) {
                 back = backgrounds[7];
                 backNum = 7;
                 repaint();
-            } else if(convert(e.getX())<=573 && convert(e.getX())>=455 && convert(e.getY())<=463 && convert(e.getY())>=345) {
+            } else if(e.getX()<=convert(798) && e.getX()>=convert(633) && e.getY()<=convert(645) && e.getY()>=convert(482)) {
                 back = backgrounds[8];
                 backNum = 8;
                 repaint();
-            } else if(convert(e.getX())<=287 && convert(e.getX())>=169 && convert(e.getY())<=590 && convert(e.getY())>=472) {
+            } else if(e.getX()<=convert(400) && e.getX()>=convert(237) && e.getY()<=convert(821) && e.getY()>=convert(658)) {
                 back = backgrounds[9];
                 backNum = 9;
                 repaint();
-            } else if(convert(e.getX())<=430 && convert(e.getX())>=312 && convert(e.getY())<=590 && convert(e.getY())>=472) {
+            } else if(e.getX()<=convert(599) && e.getX()>=convert(436) && e.getY()<=convert(821) && e.getY()>=convert(658)) {
                 back = backgrounds[10];
                 backNum = 10;
                 repaint();
