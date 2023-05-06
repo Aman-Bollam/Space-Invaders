@@ -5,12 +5,14 @@ public class EnemyRow {
     private int size;
     private int y;
     private int enemy;
+    private int speed;
     public EnemyRow(int type, int length, int level){
         enemy = type;
         eneX = 4;
         eneY = ((level-1)*55)+10;
         size = length;
         y = level;
+        speed = 1;
         enemies = new Enemy[length];
         for(int i=0; i<length; i++){
             enemies[i] = new Enemy(type, true, eneX, eneY);;
@@ -55,7 +57,7 @@ public class EnemyRow {
     }
     public void setPosRight() {
         int num;
-        eneX++;
+        eneX=eneX+speed;
         num = eneX;
         int x;
         int y;
@@ -73,7 +75,7 @@ public class EnemyRow {
     }
     public void setPosLeft() {
         int num;
-        eneX--;
+        eneX=eneX-speed;
         num = eneX;
         int x;
         int y;
@@ -119,5 +121,8 @@ public class EnemyRow {
         }else{
             return false;
         }
+    }
+    public void setSpeed(int num) {
+        speed = num;
     }
 }

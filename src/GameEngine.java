@@ -234,6 +234,13 @@ public class GameEngine implements Runnable {
 	}
 	public void moveEnemy() {
 		if(!myGame.getOver()) {
+			if(myGame.getEneCount()==1){
+				myGame.setRowSpeeds(5);
+			} else if(myGame.getEneCount()<=3) {
+				myGame.setRowSpeeds(3);
+			} else if(myGame.getEneCount()<=5) {
+				myGame.setRowSpeeds(2);
+			}
 			if(myGame.eneRightBound()<845 && myGame.getRight()) {
 				myGame.enePosChange("right");
 				move++;

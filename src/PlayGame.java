@@ -13,6 +13,7 @@ public class PlayGame extends JPanel implements MouseListener{
   private int wave;
   private int score;
   private int highScore;
+  private int shipNum;
   private final String path = "images\\";
   private boolean right;
   private boolean left;
@@ -20,7 +21,6 @@ public class PlayGame extends JPanel implements MouseListener{
   private boolean gameOver;
   private GameEngine run;
   private PlayerShip ship;
-  private int shipNum;
   private ShieldShip shield1;
   private ShieldShip shield2;
   private ShieldShip shield3;
@@ -87,6 +87,34 @@ public class PlayGame extends JPanel implements MouseListener{
     explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/4).getImage();
     switchShip(false);
     font = new Font("fonts\\minecraft_font.ttf", Font.TRUETYPE_FONT, 40);
+  }
+  public int getEneCount() {
+    int count = 0;
+    for(int i=0; i<10; i++) {
+      if(one.getEnemy(i).getLife()) {
+        count++;
+      }
+      if(two.getEnemy(i).getLife()) {
+        count++;
+      }
+      if(three.getEnemy(i).getLife()) {
+        count++;
+      }
+      if(four.getEnemy(i).getLife()) {
+        count++;
+      }
+      if(five.getEnemy(i).getLife()) {
+        count++;
+      }
+    }
+    return count;
+  }
+  public void setRowSpeeds(int num) {
+    one.setSpeed(num);
+    two.setSpeed(num);
+    three.setSpeed(num);
+    four.setSpeed(num);
+    five.setSpeed(num);
   }
   public void addToArrays(Image exp, int x, int y) {
       explosions.add(exp);
@@ -402,7 +430,6 @@ public class PlayGame extends JPanel implements MouseListener{
   public int eneRightBound() {
     for(int i=one.getSize()-1; i>=0; i--) {
       if(colAlive(i)) {
-        System.out.println(getLiveEnemy(i).getX());
         return getLiveEnemy(i).getX();
       }
     }
