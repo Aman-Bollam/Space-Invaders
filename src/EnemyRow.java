@@ -93,7 +93,7 @@ public class EnemyRow {
     }
     public void setPosDown() {
         int num;
-        eneY+=12;
+        eneY+=16;
         num = eneY;
         int x;
         int y;

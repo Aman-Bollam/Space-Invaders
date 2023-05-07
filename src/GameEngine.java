@@ -64,13 +64,7 @@ public class GameEngine implements Runnable {
 		while (true) {
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
-				setEneHitBox();
-				moveEnemy();
-				moveShip();
-				generateEneBullet();
-				moveBullet();
-				getCollisions();
-				getallRowsDead();
+				executeMethods();
 				screen.repaint();
 				lastFrame = now;
 				frames++;
@@ -83,6 +77,17 @@ public class GameEngine implements Runnable {
 			}
 		}
 
+	}
+	public void executeMethods() {
+		if(!myGame.getOver()) {
+			setEneHitBox();
+			moveEnemy();
+			moveShip();
+			generateEneBullet();
+			moveBullet();
+			getCollisions();
+			getallRowsDead();
+		}
 	}
 	public int getHighScore() {
 		int max;
@@ -161,10 +166,10 @@ public class GameEngine implements Runnable {
 		  	}
 		}
 		public void keyReleased(KeyEvent e) {
-			if(e.getKeyCode()==39) {
+			if(e.getKeyCode()==39 && !myGame.getOver()) {
 			   	rightRel = true;
 			}
-			if(e.getKeyCode()==37) {
+			if(e.getKeyCode()==37 && !myGame.getOver()) {
 				leftRel = true;
 			}
 		}
@@ -176,7 +181,7 @@ public class GameEngine implements Runnable {
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32 && !myGame.getOver()) {     
+		 	if(e.getKeyCode()==32) {    
 				myGame.switchShip(false);
 				coolDown.start();
 				if(timer==0) {
@@ -216,9 +221,24 @@ public class GameEngine implements Runnable {
 	}
 	public void generateEneBullet() {
 		int num = (int)(Math.random()*100) + 1;
-		if(num<2) {
-			myGame.eneBullet();
+		if(myGame.getEneCount()==1) {
+			if(num<=50) {
+				myGame.eneBullet();
+			}
+		} else if(myGame.getEneCount()<=5) {
+			if(num<=10) {
+				myGame.eneBullet();
+			}
+		} else if(myGame.getEneCount()<=10) {
+			if(num<4) {
+				myGame.eneBullet();
+			}
+		} else {
+			if(num<2) {
+				myGame.eneBullet();
+			}
 		}
+		
 	}
 	public void setEneHitBox() {
 		myGame.setEneBox();
