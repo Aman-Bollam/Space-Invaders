@@ -681,7 +681,11 @@ public class PlayGame extends JPanel implements MouseListener{
   @Override
   public void mouseClicked(MouseEvent e) {
     // TODO Auto-generated method stub
-    
+    if(gameOver){
+      if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(635+175) && e.getY()>=convert(635)){
+       //hey
+      }
+    }
   }
   @Override
   public void mouseEntered(MouseEvent e) {
