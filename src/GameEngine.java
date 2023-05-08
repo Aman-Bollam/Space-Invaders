@@ -181,7 +181,7 @@ public class GameEngine implements Runnable {
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32) {    
+		 	if(e.getKeyCode()==32 && !myGame.getOver()) {    
 				myGame.switchShip(false);
 				coolDown.start();
 				if(timer==0) {

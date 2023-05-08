@@ -588,49 +588,49 @@ public class PlayGame extends JPanel implements MouseListener{
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
-    if(lives>0){
     g.drawImage(myPlayer,convert(x),convert(y),null);
-    
+    if(lives>0) {
+      if(shield1.getLife()) {
+        g.drawImage(shieldOne,convert(110),convert(555),null);
+      }
+      if(shield2.getLife()) {
+        g.drawImage(shieldTwo,convert(372),convert(555),null);
+        // g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
+      }
+      if(shield3.getLife()) {
+        g.drawImage(shieldThree,convert(634),convert(555),null);
+        // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
+      }
+      for(int i=0; i<one.getSize(); i++) {
+        if(one.getLife(i)) {
+          g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
+          // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
+        }
+      }
+      for(int i=0; i<two.getSize(); i++) {
+        if(two.getLife(i)) {
+          g.drawImage(enemyTwo,getEneX(i,two),getEneY(i,two),null);
+        }
+      }
+      for(int i=0; i<three.getSize(); i++) {
+        if(three.getLife(i)) {
+          g.drawImage(enemyTwo,getEneX(i,three),getEneY(i,three),null);
+        }
+      }
+      for(int i=0; i<four.getSize(); i++) {
+        if(four.getLife(i)) {
+          g.drawImage(enemyThree,getEneX(i,four),getEneY(i,four),null);
+        }
+      }
+      for(int i=0; i<five.getSize(); i++) {
+        if(five.getLife(i)) {
+          g.drawImage(enemyThree,getEneX(i,five),getEneY(i,five),null);
+        }
+      }
+    }
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
     // g.drawImage(end,convert(0),convert(0),null);
     // ship.getHitBox().add(x, y);
-    if(shield1.getLife()) {
-      g.drawImage(shieldOne,convert(110),convert(555),null);
-    }
-    if(shield2.getLife()) {
-      g.drawImage(shieldTwo,convert(372),convert(555),null);
-      // g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
-    }
-    if(shield3.getLife()) {
-      g.drawImage(shieldThree,convert(634),convert(555),null);
-      // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
-    }
-    for(int i=0; i<one.getSize(); i++) {
-      if(one.getLife(i)) {
-        g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-        // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
-      }
-    }
-    for(int i=0; i<two.getSize(); i++) {
-      if(two.getLife(i)) {
-        g.drawImage(enemyTwo,getEneX(i,two),getEneY(i,two),null);
-      }
-    }
-    for(int i=0; i<three.getSize(); i++) {
-      if(three.getLife(i)) {
-        g.drawImage(enemyTwo,getEneX(i,three),getEneY(i,three),null);
-      }
-    }
-    for(int i=0; i<four.getSize(); i++) {
-      if(four.getLife(i)) {
-        g.drawImage(enemyThree,getEneX(i,four),getEneY(i,four),null);
-      }
-    }
-    for(int i=0; i<five.getSize(); i++) {
-      if(five.getLife(i)) {
-        g.drawImage(enemyThree,getEneX(i,five),getEneY(i,five),null);
-      }
-    }
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
@@ -652,8 +652,9 @@ public class PlayGame extends JPanel implements MouseListener{
       removeArrays();
       // 
     }
-    }else{
+    if(lives==0){
       gameOver = true;
+      g.drawImage(explosion1,convert(x),convert(y),null);
       g.drawImage(end,convert(0),convert(0),null);
     }
     g.setColor(Color.CYAN);
