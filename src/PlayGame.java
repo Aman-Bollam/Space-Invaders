@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import javafx.scene.layout.Background;
 public class PlayGame extends JPanel implements MouseListener{
   private int x;
   private int y;
@@ -25,6 +27,7 @@ public class PlayGame extends JPanel implements MouseListener{
   private ShieldShip shield2;
   private ShieldShip shield3;
   private String shipName;
+  private String back;
   private EnemyRow one;
   private EnemyRow two;
   private EnemyRow three;
@@ -52,6 +55,7 @@ public class PlayGame extends JPanel implements MouseListener{
   private ArrayList<Rectangle> enemyBullets = new ArrayList<>();
   private Font font;
   public PlayGame(GameEngine engine, PlayerShip player, String background, int maxScore) {
+    gameOver = false;
     this.setFocusable(true);
     this.requestFocusInWindow();
     this.addMouseListener(this);
@@ -74,8 +78,13 @@ public class PlayGame extends JPanel implements MouseListener{
     shield2 = new ShieldShip(convert(417), convert(628), convert(100), convert(63));
     shield3 = new ShieldShip(convert(679), convert(628), convert(100), convert(63));
     setShields();
+    enemyBullets.clear();
+    bullets.clear();
+    explosions.clear();
+    setRowSpeeds(1);
     shipLives = resize(new ImageIcon(path+(new PlayerShip(ship.getShip(), 1)).getName()),run.getSize()/7).getImage();
     backG = resize(new ImageIcon(path+background),run.getSize()).getImage();
+    back = background;
     enemyOne = resize(new ImageIcon(path+"enemy-type3.png"),run.getSize()/9).getImage();
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
@@ -215,35 +224,35 @@ public class PlayGame extends JPanel implements MouseListener{
     for(int i=0; i<10; i++) {
       for(int j=0;j<bullets.size();j++){
         Rectangle bullet = bullets.get(j);
-        if((one.getEnemy(i).hitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && (one.getEnemy(i).hitbox()).intersects(bullet) && one.getEnemy(i).getLife()) {
           score+=30;
           bullets.remove(j);
           one.getEnemy(i).setLife(false);
           one.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,one),getEneY(i,one));
         } 
-        if((two.getEnemy(i).hitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && (two.getEnemy(i).hitbox()).intersects(bullet) && two.getEnemy(i).getLife()) {
           score+=20;
           bullets.remove(j);
           two.getEnemy(i).setLife(false);
           two.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,two),getEneY(i,two));
         } 
-        if((three.getEnemy(i).hitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && (three.getEnemy(i).hitbox()).intersects(bullet) && three.getEnemy(i).getLife()) {
           score+=20;
           bullets.remove(j);
           three.getEnemy(i).setLife(false);
           three.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,three),getEneY(i,three));
         } 
-        if((four.getEnemy(i).hitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && (four.getEnemy(i).hitbox()).intersects(bullet) && four.getEnemy(i).getLife()) {
           score+=10;
           bullets.remove(j);
           four.getEnemy(i).setLife(false);
           four.getEnemy(i).setHitBox(0, 0, 0, 0);
           addToArrays(explosion1,getEneX(i,four),getEneY(i,four));
         } 
-        if((five.getEnemy(i).hitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && (five.getEnemy(i).hitbox()).intersects(bullet) && five.getEnemy(i).getLife()) {
           score+=10;
           bullets.remove(j);
           five.getEnemy(i).setLife(false);
@@ -256,7 +265,7 @@ public class PlayGame extends JPanel implements MouseListener{
       Rectangle bullet = bullets.get(j);
       if((shield1.getHitBox()).intersects(bullet) && shield1.getLife()) {
         shieldShot(1);
-        if(shield1.getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && shield1.getLife()) {
           bullets.remove(j);
           if(shield1.getHealth()==0) {
             addToArrays(explosion2,convert(90),convert(555));
@@ -265,7 +274,7 @@ public class PlayGame extends JPanel implements MouseListener{
       } 
       if(shield2.getHitBox().intersects(bullet) && shield2.getLife()) {
         shieldShot(2);
-        if(shield2.getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && shield2.getLife()) {
           bullets.remove(j);
           if(shield2.getHealth()==0) {
             addToArrays(explosion2,convert(352),convert(555));
@@ -274,7 +283,7 @@ public class PlayGame extends JPanel implements MouseListener{
       } 
       if(shield3.getHitBox().intersects(bullet) && shield3.getLife()) {
         shieldShot(3);
-        if(shield3.getLife()) {
+        if(bullets.size()>0 && j<bullets.size() && shield3.getLife()) {
           bullets.remove(j);
           if(shield3.getHealth()==0) {
             addToArrays(explosion2,convert(614),convert(555));
@@ -286,7 +295,7 @@ public class PlayGame extends JPanel implements MouseListener{
       Rectangle bullet = enemyBullets.get(j);
       if((shield1.getHitBox()).intersects(bullet) && shield1.getLife()) {
         shieldShot(1);
-        if(shield1.getLife()) {
+        if(enemyBullets.size()>0 && j<enemyBullets.size() && shield1.getLife()) {
           enemyBullets.remove(j);
           if(shield1.getHealth()==0) {
             addToArrays(explosion2,convert(100),convert(545));
@@ -295,7 +304,7 @@ public class PlayGame extends JPanel implements MouseListener{
       } 
       if(shield2.getHitBox().intersects(bullet) && shield2.getLife()) {
         shieldShot(2);
-        if(shield2.getLife()) {
+        if(enemyBullets.size()>0 && j<enemyBullets.size() && shield2.getLife()) {
           enemyBullets.remove(j);
           if(shield2.getHealth()==0) {
             addToArrays(explosion2,convert(362),convert(545));
@@ -304,7 +313,7 @@ public class PlayGame extends JPanel implements MouseListener{
       } 
       if(shield3.getHitBox().intersects(bullet) && shield3.getLife()) {
         shieldShot(3);
-        if(shield3.getLife()) {
+        if(enemyBullets.size()>0 && j<enemyBullets.size() && shield3.getLife()) {
           enemyBullets.remove(j);
           if(shield3.getHealth()==0) {
             addToArrays(explosion2,convert(624),convert(545));
@@ -348,7 +357,7 @@ public class PlayGame extends JPanel implements MouseListener{
     }
     for(int j=0;j<enemyBullets.size();j++){
       if(lives>0) {
-        if(enemyBullets.size()>0 && (ship.getHitbox()).intersects(enemyBullets.get(j))) {
+        if(enemyBullets.size()>0 && j<enemyBullets.size() && (ship.getHitbox()).intersects(enemyBullets.get(j))) {
           lives--;
           addToArrays(explosion1,convert(x),convert(y));
           enemyBullets.remove(j);
@@ -357,7 +366,7 @@ public class PlayGame extends JPanel implements MouseListener{
     }
     for(int i=0; i<bullets.size(); i++) {
       for(int j=0; j<enemyBullets.size(); j++) {
-        if(bullets.size()>0 && enemyBullets.size()>0 && bullets.get(i).intersects(enemyBullets.get(j))) {
+        if(i<bullets.size() && j<enemyBullets.size() && bullets.size()>0 && enemyBullets.size()>0 && bullets.get(i).intersects(enemyBullets.get(j))) {
           bullets.remove(i);
           enemyBullets.remove(j);
         }
@@ -683,7 +692,8 @@ public class PlayGame extends JPanel implements MouseListener{
     // TODO Auto-generated method stub
     if(gameOver){
       if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(635+175) && e.getY()>=convert(635)){
-       //hey
+        run.addScore(score);
+        run.setMenu(run, ship, back, run.getHighScore());
       }
     }
   }

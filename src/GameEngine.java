@@ -18,6 +18,7 @@ public class GameEngine implements Runnable {
 	private PlayGame myGame;
 	private boolean leftRel;
 	private boolean rightRel;
+	private boolean startUp;
 	private Thread gameThread;
 	private final int FPS_SET = 120;
 	private int size;
@@ -33,6 +34,8 @@ public class GameEngine implements Runnable {
 		window = new JFrame("Space Invaders");
 		window.setFocusable(true);
 		window.setResizable(false);
+		window.addKeyListener(new PlayerHorizontal());
+		window.addKeyListener(new PlayerShoot());
 		highScore = getHighScore();
         setMenu(this, ship, "background1.jpg",highScore);
         window.setIconImage((new ImageIcon("images//applogo.png")).getImage());
@@ -46,10 +49,13 @@ public class GameEngine implements Runnable {
 		coolDown = new Timer(100,new cool());
 		move = 0;
 		released = false;
+		startUp = true;
 	}
 	private void startGameLoop(){
-		gameThread = new Thread(this);
-		gameThread.start();
+		if(startUp){
+			gameThread = new Thread(this);
+			gameThread.start();
+		}
 		//push
 	}
 	public void run() {
@@ -127,16 +133,15 @@ public class GameEngine implements Runnable {
 		return size;
 	}
     public void setGame(PlayerShip ship, String background, int maxScore){
-        theShip = ship;
+        theShip = new PlayerShip(ship.getShip(),ship.getPhase());
         myGame = new PlayGame(this,theShip,background,maxScore);
 		screen = myGame;
         screen.setPreferredSize(new Dimension((int)screenSize.getHeight()-50,(int)screenSize.getHeight()-50));
         window.setContentPane(screen);
-		window.addKeyListener(new PlayerHorizontal());
-		window.addKeyListener(new PlayerShoot());
         window.pack();
 		window.setVisible(true);
 		startGameLoop();
+		startUp = false;
     }
     public void setMenu(GameEngine run, PlayerShip ship, String background, int maxScore) {
         screen = new MenuView(this,ship,background,maxScore);
@@ -166,10 +171,10 @@ public class GameEngine implements Runnable {
 		  	}
 		}
 		public void keyReleased(KeyEvent e) {
-			if(e.getKeyCode()==39 && !myGame.getOver()) {
+			if(e.getKeyCode()==39) {
 			   	rightRel = true;
 			}
-			if(e.getKeyCode()==37 && !myGame.getOver()) {
+			if(e.getKeyCode()==37) {
 				leftRel = true;
 			}
 		}
