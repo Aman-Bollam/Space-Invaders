@@ -3,12 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 import javafx.scene.layout.Background;
-public class PlayGame extends JPanel implements MouseListener{
+public class PlayGame extends JPanel implements MouseListener, MouseMotionListener{
   private int x;
   private int y;
   private int lives;
@@ -21,6 +22,7 @@ public class PlayGame extends JPanel implements MouseListener{
   private boolean left;
   private boolean waveStart;
   private boolean gameOver;
+  private boolean menuHover;
   private GameEngine run;
   private PlayerShip ship;
   private ShieldShip shield1;
@@ -59,6 +61,7 @@ public class PlayGame extends JPanel implements MouseListener{
     this.setFocusable(true);
     this.requestFocusInWindow();
     this.addMouseListener(this);
+    this.addMouseMotionListener(this);
     run = engine;
     ship = new PlayerShip(player.getShip(), 2);
     shipNum = player.getShip();
@@ -92,6 +95,7 @@ public class PlayGame extends JPanel implements MouseListener{
     boss = resize(new ImageIcon(path+"shield14.png"),run.getSize()/5).getImage();
     right = true;
     left = false;
+    menuHover = false;
     explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/8).getImage();
     explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/4).getImage();
     switchShip(false);
@@ -590,6 +594,8 @@ public class PlayGame extends JPanel implements MouseListener{
       five = new EnemyRow(1, 10 ,5);
       wave++;
       waveStart = true;
+      bullets.clear();
+      enemyBullets.clear();
     }
   }
 
@@ -661,15 +667,26 @@ public class PlayGame extends JPanel implements MouseListener{
       removeArrays();
       // 
     }
-    if(lives==0){
-      gameOver = true;
-      g.drawImage(explosion1,convert(x),convert(y),null);
-      g.drawImage(end,convert(0),convert(0),null);
-    }
-    g.setColor(Color.CYAN);
+    g.setColor(Color.WHITE);
     g.setFont(font);
+    g.drawString(Integer.toString(highScore), convert(684),convert(950));
     g.drawString(Integer.toString(wave), convert(800),convert(47));
     g.drawString(Integer.toString(score), convert(160),convert(47));
+    if(lives==0){
+      gameOver = true;
+      run.addScore(score);
+      g.setColor(Color.WHITE);
+      g.setFont(font);
+      g.drawString(Integer.toString(run.getHighScore()), convert(475-Integer.toString(run.getHighScore()).length()*10),convert(567));
+      g.drawImage(explosion1,convert(x),convert(y),null);
+      bullets.clear();
+      enemyBullets.clear();
+      if(menuHover) {
+        g.drawImage(resize(new ImageIcon(path+"endscreenhovered.png"),run.getSize()).getImage(),convert(0),convert(0),null);
+      } else {
+        g.drawImage(end,convert(0),convert(0),null);
+      }
+    }
     if(waveStart) {
       // waveStart = false;
       // try{
@@ -691,8 +708,7 @@ public class PlayGame extends JPanel implements MouseListener{
   public void mouseClicked(MouseEvent e) {
     // TODO Auto-generated method stub
     if(gameOver){
-      if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(635+175) && e.getY()>=convert(635)){
-        run.addScore(score);
+      if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(710) && e.getY()>=convert(635)){
         run.setMenu(run, ship, back, run.getHighScore());
       }
     }
@@ -716,5 +732,21 @@ public class PlayGame extends JPanel implements MouseListener{
   public void mouseReleased(MouseEvent e) {
     // TODO Auto-generated method stub
     
+  }
+  @Override
+  public void mouseDragged(MouseEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+  }
+  @Override
+  public void mouseMoved(MouseEvent e) {
+    // TODO Auto-generated method stub
+    if(gameOver){
+      if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(710) && e.getY()>=convert(635)){
+        menuHover = true;
+      } else {
+        menuHover = false;
+      }
+    }
   }
 }
