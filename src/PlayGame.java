@@ -7,8 +7,8 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+//import javafx.scene.layout.Background;
 
-import javafx.scene.layout.Background;
 public class PlayGame extends JPanel implements MouseListener, MouseMotionListener{
   private int x;
   private int y;
