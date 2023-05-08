@@ -227,7 +227,7 @@ public class GameEngine implements Runnable {
 	public void generateEneBullet() {
 		int num = (int)(Math.random()*100) + 1;
 		if(myGame.getEneCount()==1) {
-			if(num<=50) {
+			if(num<=40) {
 				myGame.eneBullet();
 			}
 		} else if(myGame.getEneCount()<=5) {
