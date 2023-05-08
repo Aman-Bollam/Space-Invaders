@@ -313,7 +313,7 @@ public class PlayGame extends JPanel implements MouseListener{
       }
     }
     for(int j=0;j<10;j++){
-      if(lives+1>0) {
+      if(lives>0) {
         if(((ship.getHitbox()).intersects(one.getEnemy(j).hitbox())) && one.getEnemy(j).getLife()) {
           lives--;
           addToArrays(explosion1,getEneX(j,one),getEneY(j,one));
@@ -347,7 +347,7 @@ public class PlayGame extends JPanel implements MouseListener{
       }
     }
     for(int j=0;j<enemyBullets.size();j++){
-      if(lives+1>0) {
+      if(lives>0) {
         if(enemyBullets.size()>0 && (ship.getHitbox()).intersects(enemyBullets.get(j))) {
           lives--;
           addToArrays(explosion1,convert(x),convert(y));
@@ -588,7 +588,7 @@ public class PlayGame extends JPanel implements MouseListener{
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
-    if(lives+1>0){
+    if(lives>0){
     g.drawImage(myPlayer,convert(x),convert(y),null);
     
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
