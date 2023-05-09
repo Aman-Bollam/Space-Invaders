@@ -91,6 +91,7 @@ public class GameEngine implements Runnable {
 			moveBullet();
 			getCollisions();
 			getallRowsDead();
+			myGame.bossActions();
 		}
 	}
 	public int getHighScore() {

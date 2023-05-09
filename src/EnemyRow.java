@@ -9,7 +9,7 @@ public class EnemyRow {
     public EnemyRow(int type, int length, int level){
         enemy = type;
         eneX = 4;
-        eneY = ((level-1)*55)+10;
+        eneY = ((level-1)*55)+40;
         size = length;
         y = level;
         speed = 1;
@@ -37,7 +37,7 @@ public class EnemyRow {
     }
     public void resetCoord(){
         eneX = 4;
-        eneY = ((y-1)*55)+20;
+        eneY = ((y-1)*55)+40;
     }
     public Enemy[] getRow() {
         Enemy[] myEnemies = new Enemy[size];
