@@ -12,6 +12,8 @@ import javafx.scene.layout.Background;
 public class PlayGame extends JPanel implements MouseListener, MouseMotionListener{
   private int x;
   private int y;
+  private int bossX;
+  private int bossY;
   private int lives;
   private int wave;
   private int score;
@@ -23,6 +25,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private boolean waveStart;
   private boolean gameOver;
   private boolean menuHover;
+  // private boolean bossShip;
   private GameEngine run;
   private PlayerShip ship;
   private ShieldShip shield1;
@@ -35,6 +38,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private EnemyRow three;
   private EnemyRow four;
   private EnemyRow five;
+  private BossEnemy bigBoi;
   private Image shipLives;
   private Image myPlayer;
   private Image backG;
@@ -70,10 +74,15 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     three = new EnemyRow(2, 10 ,3);
     four = new EnemyRow(1, 10 ,4);
     five = new EnemyRow(1, 10 ,5);
+    bigBoi = new BossEnemy();
+    bigBoi.setHitBox(convert(bossX+5), convert(bossY+25), convert(96), convert(54));
     lives = 3;
     x = ship.getX();
     y = ship.getY();
+    bossX = bigBoi.getX();
+    bossY = bigBoi.getY();
     waveStart = true;
+    // bossShip = false;
     highScore = maxScore;
     wave = 1;
     shipName = ship.getName();
@@ -92,12 +101,12 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     enemyTwo = resize(new ImageIcon(path+"enemy-type2.png"),run.getSize()/9).getImage();
     enemyThree = resize(new ImageIcon(path+"enemy-type1.png"),run.getSize()/9).getImage();
     end = resize(new ImageIcon(path+"endscreen.png"),run.getSize()).getImage();
-    boss = resize(new ImageIcon(path+"shield14.png"),run.getSize()/5).getImage();
     right = true;
     left = false;
     menuHover = false;
     explosion1 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/8).getImage();
     explosion2 = resize(new ImageIcon(path+"explosion.png"),run.getSize()/4).getImage();
+    boss = resize(new ImageIcon(path+"boss.png"),run.getSize()/9).getImage();
     switchShip(false);
     font = new Font("fonts\\minecraft_font.ttf", Font.TRUETYPE_FONT, 40);
   }
@@ -376,12 +385,35 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
         }
       }
     }
+    for(int j=0;j<bullets.size();j++){
+      Rectangle bullet = bullets.get(j);
+      if((bigBoi.hitbox()).intersects(bullet) && bigBoi.getLife() && bigBoi.visibility()) {
+        resetBoss();
+        if(bullets.size()>0 && j<bullets.size() && shield1.getLife()) {
+          bullets.remove(j);
+          if(shield1.getHealth()==0) {
+            addToArrays(explosion2,convert(bossX),convert(bossY));
+          }
+        }
+      } 
+    }
   }
   public boolean colAlive(int col) {
     if(one.getEnemy(col).getLife() || two.getEnemy(col).getLife() || three.getEnemy(col).getLife() || four.getEnemy(col).getLife() || five.getEnemy(col).getLife()) {
       return true;
     }
     return false;
+  }
+  public void resetBoss() {
+    bigBoi.setX(-40);
+    bossX = bigBoi.getX();
+    bigBoi.setRight(true);
+    bigBoi.setLeft(false);
+    bigBoi.setHitBox(convert(bossX+5), convert(bossY+25), convert(96), convert(54));
+    if(lives<3) {
+      lives++;
+    }
+    score = score + (int)(Math.random()*50)+50;
   }
   public Enemy getLiveEnemy(int col) {
     if(one.getEnemy(col).getLife()) {
@@ -526,6 +558,32 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     }
     x=ship.getX();
   }
+  public void bossActions() {
+    int chance = (int)(Math.random()*600) + 1;
+    if(chance<2 && !bigBoi.visibility() && one.getY()>80) {
+      bigBoi.setVisibility(true);
+      bigBoi.setLife(true);
+    }
+    bossX = bigBoi.getX();
+    if(bigBoi.visibility() && bossX<=960 && bigBoi.getLife() && bigBoi.right()) {
+      // System.out.println(bossX);
+      bigBoi.setRight();
+    } else if(bigBoi.visibility() && bossX>=-40 && bigBoi.getLife() && bigBoi.left()) {
+      // System.out.println(bossX);
+      bigBoi.setLeft();
+    }
+    if(bossX>=960) {
+      bigBoi.setRight(false);
+      bigBoi.setLeft(true);
+      // System.out.println(bigBoi.visibility());
+      bigBoi.setVisibility(false);
+    } else if(bossX<=-40) {
+      bigBoi.setRight(true);
+      bigBoi.setLeft(false);
+      bigBoi.setVisibility(false);
+    } 
+    bigBoi.setHitBox(convert(bossX+5), convert(bossY+25), convert(96), convert(54));
+  }
   public void setPosLeft() {
     if(x-3>=0){
       ship.setPosLeft();
@@ -604,7 +662,12 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
+    // g.drawImage(boss, convert(bossX), convert(bossY), getFocusCycleRootAncestor());
     if(lives>0) {
+      if(bigBoi.visibility()) {
+        g.drawImage(boss, convert(bossX), convert(bossY), getFocusCycleRootAncestor());
+        g.drawRect(bigBoi.hitX(), bigBoi.hitY(), bigBoi.getWidth(), bigBoi.getHeight());
+      }
       if(shield1.getLife()) {
         g.drawImage(shieldOne,convert(110),convert(555),null);
       }
@@ -644,8 +707,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       }
     }
     g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
-    // g.drawImage(end,convert(0),convert(0),null);
-    // ship.getHitBox().add(x, y);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }

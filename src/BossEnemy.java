@@ -1,6 +1,10 @@
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BossEnemy {
+import javax.swing.Timer;
+
+public class BossEnemy{
     private boolean alive;
     private boolean visible;
     private Rectangle hitbox;
@@ -10,11 +14,17 @@ public class BossEnemy {
     private int height;
     private int hitX;
     private int hitY;
-    public BossEnemy(int xPos, int yPos) {
+    private boolean right;
+    private boolean left;
+    // private Timer delay;
+    public BossEnemy() {
         alive = true;
         visible = false;
-        x = xPos;
-        y = yPos;
+        x = -40;
+        y = 40;
+        right = true;
+        left = false;
+        // delay = new Timer(100,new Stop());
     }
     public boolean getLife() {
         return alive;
@@ -46,6 +56,30 @@ public class BossEnemy {
     public int getY() {
         return y;
     }
+    public void setX(int pos) {
+        x=pos;
+    }
+    public void setY(int pos) {
+        y=pos;
+    }
+    public void setRight() {
+        x+=2;
+    } 
+    public void setLeft() {
+        x-=2;
+    }
+    public void setRight(boolean direct) {
+        right = direct;
+    }
+    public void setLeft(boolean direct) {
+        left = direct;
+    }
+    public boolean right() {
+        return right;
+    }
+    public boolean left() {
+        return left;
+    }
     public void setHitBox(int posX, int posY, int x, int y) {
         width = x;
         height = y;
@@ -53,4 +87,19 @@ public class BossEnemy {
         hitY = posY;
         hitbox = new Rectangle(posX, posY, x, y);
     }
+    public Rectangle hitbox() {
+        return hitbox;
+    }
+    // private class Stop implements ActionListener {
+    //     @Override
+    //     public void actionPerformed(ActionEvent e) {
+    //     // TODO Auto-generated method stub
+    //     if(time<num) {
+    //         time++;
+    //     } else {
+    //         motion = false;
+    //         delay.stop();
+    //     }
+    //     }
+    // }
 }
