@@ -132,7 +132,6 @@ public class Settings extends JPanel implements MouseListener{
         // TODO Auto-generated method stub
     }
     public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(this.getHeight()));
 	}
 	private ImageIcon resize(ImageIcon img, int height) {

@@ -1,19 +1,13 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import javax.swing.*;
-import java.io.*;
 import java.util.ArrayList;
 public class GameEngine implements Runnable {
-	//private static Font ourFont = Font.createFont(Font.TRUETYPE_FONT, GameEngine.class.getResourceAsStream("fonts/minecraft_font.ttf"));
     private PlayerShip theShip;
     private JPanel screen;
     JFrame window;
     int panelHeight;
     int panelWidth;
-	private int eneFrame;
     private Dimension screenSize;
 	private PlayGame myGame;
 	private boolean leftRel;
@@ -82,6 +76,7 @@ public class GameEngine implements Runnable {
 				frames = 0;
 			}
 		}
+
 	}
 	public void executeMethods() {
 		if(!myGame.getOver()) {
@@ -191,6 +186,7 @@ public class GameEngine implements Runnable {
 				if(timer==0) {
 					myGame.bullet();
 				}
+				// 
 		  	}
 	  	}
 	}
@@ -283,15 +279,12 @@ public class GameEngine implements Runnable {
 		}
 	}
 	public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(size));
 	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
 	public static void main(String[] args) {
-	    /* Methods that create and show a GUI should be 
-	       run from an event-dispatching thread */
 	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	        	runGUI();

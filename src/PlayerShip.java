@@ -1,5 +1,4 @@
 import java.awt.*;
-//import javax.swing.*;
 public class PlayerShip {
     private boolean [] equipped = {false,false,false,false,false,false,false,false,false};
     private String ship;
@@ -26,7 +25,6 @@ public class PlayerShip {
         y = 740;
         }
         equipped[num]=true;
-        // hitbox = new Rectangle(x, y, , pos);
     }
     public void setPos(int pos) {
         phase = pos;

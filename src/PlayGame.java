@@ -1,13 +1,9 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-
+import java.util.*;
 import javax.swing.*;
-//import javafx.scene.layout.Background;
 
 public class PlayGame extends JPanel implements MouseListener, MouseMotionListener{
   private int x;
@@ -598,7 +594,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       enemyBullets.clear();
     }
   }
-
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -610,16 +605,13 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       }
       if(shield2.getLife()) {
         g.drawImage(shieldTwo,convert(372),convert(555),null);
-        // g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
       }
       if(shield3.getLife()) {
         g.drawImage(shieldThree,convert(634),convert(555),null);
-        // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
       }
       for(int i=0; i<one.getSize(); i++) {
         if(one.getLife(i)) {
           g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-          // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
         }
       }
       for(int i=0; i<two.getSize(); i++) {
@@ -642,10 +634,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
           g.drawImage(enemyThree,getEneX(i,five),getEneY(i,five),null);
         }
       }
-    }
-    //g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
-    // g.drawImage(end,convert(0),convert(0),null);
-    // ship.getHitBox().add(x, y);
+    };
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
@@ -659,13 +648,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     }
     if(explosions.size()>0) {
       g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
-      // try{
-      //   Thread.sleep( 100 );
-      // }
-      // catch (InterruptedException ex) { }
-      
       removeArrays();
-      // 
     }
     g.setColor(Color.WHITE);
     g.setFont(font);
@@ -688,16 +671,10 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       }
     }
     if(waveStart) {
-      // waveStart = false;
-      // try{
-      //   wait( 5000 );
-      // }
-      // catch (InterruptedException ex) { }
     }
     waveStart = false;
   }
   public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(run.getSize()));
 	}
   private ImageIcon resize(ImageIcon img, int height) {
@@ -706,7 +683,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   }
   @Override
   public void mouseClicked(MouseEvent e) {
-    // TODO Auto-generated method stub
     if(gameOver){
       if(e.getX()<=convert(395+175) && e.getX()>=convert(395) && e.getY()<=convert(710) && e.getY()>=convert(635)){
         run.setMenu(run, ship, back, run.getHighScore());
