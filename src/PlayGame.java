@@ -21,7 +21,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private boolean waveStart;
   private boolean gameOver;
   private boolean menuHover;
-  // private boolean bossShip;
   private GameEngine run;
   private PlayerShip ship;
   private ShieldShip shield1;
@@ -49,8 +48,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private ArrayList <Image> explosions = new ArrayList();
   private ArrayList <Integer> xExplosion = new ArrayList();
   private ArrayList <Integer> yExplosion = new ArrayList();
-  private int height;
-  private ShieldShip [] shields;
   private Image explosion1;
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
@@ -78,7 +75,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     bossX = bigBoi.getX();
     bossY = bigBoi.getY();
     waveStart = true;
-    // bossShip = false;
     highScore = maxScore;
     wave = 1;
     shipName = ship.getName();
@@ -556,22 +552,19 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   }
   public void bossActions() {
     int chance = (int)(Math.random()*600) + 1;
-    if(chance<2 && !bigBoi.visibility() && one.getY()>80) {
+    if(chance<2 && !bigBoi.visibility() && one.getY()>80 && getEneCount()>2) {
       bigBoi.setVisibility(true);
       bigBoi.setLife(true);
     }
     bossX = bigBoi.getX();
     if(bigBoi.visibility() && bossX<=960 && bigBoi.getLife() && bigBoi.right()) {
-      // System.out.println(bossX);
       bigBoi.setRight();
     } else if(bigBoi.visibility() && bossX>=-40 && bigBoi.getLife() && bigBoi.left()) {
-      // System.out.println(bossX);
       bigBoi.setLeft();
     }
     if(bossX>=960) {
       bigBoi.setRight(false);
       bigBoi.setLeft(true);
-      // System.out.println(bigBoi.visibility());
       bigBoi.setVisibility(false);
     } else if(bossX<=-40) {
       bigBoi.setRight(true);
@@ -657,11 +650,9 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
-    // g.drawImage(boss, convert(bossX), convert(bossY), getFocusCycleRootAncestor());
     if(lives>0) {
       if(bigBoi.visibility()) {
         g.drawImage(boss, convert(bossX), convert(bossY), getFocusCycleRootAncestor());
-        g.drawRect(bigBoi.hitX(), bigBoi.hitY(), bigBoi.getWidth(), bigBoi.getHeight());
       }
       if(shield1.getLife()) {
         g.drawImage(shieldOne,convert(110),convert(555),null);
