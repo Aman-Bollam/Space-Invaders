@@ -122,9 +122,6 @@ public class GameEngine implements Runnable {
 	public void getallRowsDead(){
 		myGame.allRowsdead();
 	}
-	public void setDefenses() {
-		
-	}
 	public void getCollisions() {
 		myGame.detectCollisions();
 	}

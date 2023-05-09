@@ -651,7 +651,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     super.paintComponent(g);
     g.drawImage(backG, convert(0),convert(0),null);
     g.drawImage(myPlayer,convert(x),convert(y),null);
-    if(lives>0) {
+    if(lives>0 && eneYBound()<740) {
       if(bigBoi.visibility()) {
         g.drawImage(boss, convert(bossX), convert(bossY), getFocusCycleRootAncestor());
       }
@@ -722,13 +722,15 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     g.drawString(Integer.toString(highScore), convert(684),convert(950));
     g.drawString(Integer.toString(wave), convert(800),convert(47));
     g.drawString(Integer.toString(score), convert(160),convert(47));
-    if(lives==0){
+    if(lives==0 || (eneYBound()>=740)){
       gameOver = true;
       run.addScore(score);
       g.setColor(Color.WHITE);
       g.setFont(font);
       g.drawString(Integer.toString(run.getHighScore()), convert(475-Integer.toString(run.getHighScore()).length()*10),convert(567));
-      g.drawImage(explosion1,convert(x),convert(y),null);
+      if(lives==0) {
+        g.drawImage(explosion1,convert(x),convert(y),null);
+      }
       bullets.clear();
       enemyBullets.clear();
       if(menuHover) {
