@@ -1,5 +1,4 @@
-import java.awt.Rectangle;
-
+import java.awt.*;
 public class Enemy {
     private int model;
     private boolean life;
