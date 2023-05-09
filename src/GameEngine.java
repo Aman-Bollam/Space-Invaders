@@ -82,7 +82,6 @@ public class GameEngine implements Runnable {
 				frames = 0;
 			}
 		}
-
 	}
 	public void executeMethods() {
 		if(!myGame.getOver()) {
@@ -192,7 +191,6 @@ public class GameEngine implements Runnable {
 				if(timer==0) {
 					myGame.bullet();
 				}
-				// 
 		  	}
 	  	}
 	}

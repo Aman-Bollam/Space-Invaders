@@ -1,5 +1,4 @@
 import java.awt.Rectangle;
-
 public class ShieldShip {
     private int health;
     private Rectangle hitbox;
@@ -20,14 +19,12 @@ public class ShieldShip {
         hitbox = new Rectangle(x,y,length,hight);
     }
     public int getWidth() {
-        
         return width;
     }
     public int getHeight() {
         return height;
     }
     public int hitX() {
-        
         return hitX;
     }
     public int hitY() {

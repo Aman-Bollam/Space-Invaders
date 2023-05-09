@@ -44,8 +44,6 @@ public class Settings extends JPanel implements MouseListener{
             g.drawImage(resize(new ImageIcon(path+backChoices[backNum]), this.getHeight()).getImage(),0,0,null);
         }
     }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(268) && e.getY()>=convert(72)) {
             backPage = false;
@@ -139,10 +137,6 @@ public class Settings extends JPanel implements MouseListener{
 	}
 	private ImageIcon resize(ImageIcon img, int height) {
 		Image image = img.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
-		return new ImageIcon(image);
-	}
-	private ImageIcon resizeSettings(ImageIcon img) {
-		Image image = img.getImage().getScaledInstance(convert(img.getIconWidth()), convert(img.getIconHeight()), Image.SCALE_SMOOTH);
 		return new ImageIcon(image);
 	}
 }

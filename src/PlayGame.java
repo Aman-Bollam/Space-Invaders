@@ -643,7 +643,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
         }
       }
     }
-    g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
+    //g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
     // g.drawImage(end,convert(0),convert(0),null);
     // ship.getHitBox().add(x, y);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
