@@ -1,5 +1,8 @@
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import java.util.ArrayList;
 public class GameEngine implements Runnable {
@@ -8,6 +11,7 @@ public class GameEngine implements Runnable {
     JFrame window;
     int panelHeight;
     int panelWidth;
+	private int eneFrame;
     private Dimension screenSize;
 	private PlayGame myGame;
 	private boolean leftRel;
@@ -58,7 +62,7 @@ public class GameEngine implements Runnable {
 		long lastFrame = System.nanoTime();
 		long now = System.nanoTime();
 		
-		int frames = 0;
+		// int frames = 0;
 		long lastCheck = System.currentTimeMillis();
 
 		while (true) {
@@ -67,13 +71,13 @@ public class GameEngine implements Runnable {
 				executeMethods();
 				screen.repaint();
 				lastFrame = now;
-				frames++;
+				// frames++;
 			}
 			
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
 				//System.out.println("FPS: " + frames);
-				frames = 0;
+				// frames = 0;
 			}
 		}
 
@@ -280,12 +284,15 @@ public class GameEngine implements Runnable {
 		}
 	}
 	public int convert(int d){
+		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(size));
 	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
 	public static void main(String[] args) {
+	    /* Methods that create and show a GUI should be 
+	       run from an event-dispatching thread */
 	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	        	runGUI();

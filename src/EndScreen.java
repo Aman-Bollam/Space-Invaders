@@ -1,5 +1,7 @@
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import javax.swing.JPanel;
 public class EndScreen extends JPanel implements MouseListener, MouseMotionListener{
 
     @Override
