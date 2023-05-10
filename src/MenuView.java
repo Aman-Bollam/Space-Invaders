@@ -75,7 +75,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 				g.drawImage(resizeMenu(new ImageIcon(path+"equip.png")).getImage(),convert(159),convert(347),null);
 			}
 		}
-		// g.drawImage(resize(new ImageIcon(path+"enemy-type3.png"),this.getHeight()/6).getImage(), convert(159),convert(347),null);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -83,7 +82,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		//System.out.println(convert(e.getX()));
 		if(!skins){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				mouseHoveredPlay = true;
@@ -128,8 +126,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// System.out.println("X:" + e.getX());
-		// System.out.println("Y:" + e.getY());
 		if(!skins){
 			if(e.getX()>=convert(325) && e.getX()<=convert(637) && e.getY()>=convert(558) && e.getY()<=convert(678)){
 				engine.setGame(new PlayerShip(ship.getShip(),1),back,highScore);
@@ -174,7 +170,6 @@ public class MenuView extends JPanel implements MouseListener, MouseMotionListen
 		// TODO Auto-generated method stub
 	}
 	public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(this.getHeight()));
 	}
 	private ImageIcon resize(ImageIcon img, int height) {

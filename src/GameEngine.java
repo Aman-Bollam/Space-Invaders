@@ -25,7 +25,7 @@ public class GameEngine implements Runnable {
 	private int timer = 0;
 	private PlayerShip ship = new PlayerShip(0,2);
 	private boolean released;
-	private ArrayList <Integer> highScores = new ArrayList(10);
+	private ArrayList <Integer> highScores = new ArrayList<Integer>();
 	private int highScore;
 	public GameEngine() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -282,15 +282,12 @@ public class GameEngine implements Runnable {
 		}
 	}
 	public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(size));
 	}
 	private static void runGUI() {
 	  	GameEngine drive = new GameEngine();
 	}
 	public static void main(String[] args) {
-	    /* Methods that create and show a GUI should be 
-	       run from an event-dispatching thread */
 	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	        	runGUI();

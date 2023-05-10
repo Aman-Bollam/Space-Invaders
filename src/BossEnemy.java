@@ -1,9 +1,4 @@
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
-
 public class BossEnemy{
     private boolean alive;
     private boolean visible;
@@ -16,7 +11,6 @@ public class BossEnemy{
     private int hitY;
     private boolean right;
     private boolean left;
-    // private Timer delay;
     public BossEnemy() {
         alive = true;
         visible = false;
@@ -24,7 +18,6 @@ public class BossEnemy{
         y = 40;
         right = true;
         left = false;
-        // delay = new Timer(100,new Stop());
     }
     public boolean getLife() {
         return alive;
@@ -90,16 +83,4 @@ public class BossEnemy{
     public Rectangle hitbox() {
         return hitbox;
     }
-    // private class Stop implements ActionListener {
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //     // TODO Auto-generated method stub
-    //     if(time<num) {
-    //         time++;
-    //     } else {
-    //         motion = false;
-    //         delay.stop();
-    //     }
-    //     }
-    // }
 }

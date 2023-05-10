@@ -21,7 +21,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private final String path = "images\\";
   private boolean right;
   private boolean left;
-  private boolean waveStart;
   private boolean gameOver;
   private boolean menuHover;
   private boolean wait;
@@ -49,9 +48,9 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private Image shieldThree;
   private Image boss;
   private Image end;
-  private ArrayList <Image> explosions = new ArrayList();
-  private ArrayList <Integer> xExplosion = new ArrayList();
-  private ArrayList <Integer> yExplosion = new ArrayList();
+  private ArrayList <Image> explosions = new ArrayList<Image>();
+  private ArrayList <Integer> xExplosion = new ArrayList<Integer>();
+  private ArrayList <Integer> yExplosion = new ArrayList<Integer>();
   private Image explosion1;
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
@@ -79,7 +78,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     y = ship.getY();
     bossX = bigBoi.getX();
     bossY = bigBoi.getY();
-    waveStart = true;
     highScore = maxScore;
     wave = 1;
     shipName = ship.getName();
@@ -648,7 +646,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       four = new EnemyRow(1, 10 ,4);
       five = new EnemyRow(1, 10 ,5);
       wave++;
-      waveStart = true;
       stall.start();
       bullets.clear();
       enemyBullets.clear();
@@ -671,16 +668,13 @@ public boolean getWaveTime() {
       }
       if(shield2.getLife()) {
         g.drawImage(shieldTwo,convert(372),convert(555),null);
-        // g.drawRect(shield2.hitX(), shield2.hitY(), shield2.getWidth(), shield2.getHeight());
       }
       if(shield3.getLife()) {
         g.drawImage(shieldThree,convert(634),convert(555),null);
-        // g.drawRect(shield3.hitX(), shield3.hitY(), shield3.getWidth(), shield3.getHeight());
       }
       for(int i=0; i<one.getSize(); i++) {
         if(one.getLife(i)) {
           g.drawImage(enemyOne,getEneX(i,one),getEneY(i,one),null);
-          // g.drawRect(getEneX(i,one)+convert(28), getEneY(i,one)+convert(35), convert(52),convert(28));
         }
       }
       for(int i=0; i<two.getSize(); i++) {
@@ -704,9 +698,6 @@ public boolean getWaveTime() {
         }
       }
     }
-    //g.drawRect(ship.hitX(), ship.hitY(), ship.getWidth(), ship.getHeight());
-    // g.drawImage(end,convert(0),convert(0),null);
-    // ship.getHitBox().add(x, y);
     for(int i=1, j=125; i<=lives; i++, j=j+110) {
       g.drawImage(shipLives,convert(j),convert(842),null);
     }
@@ -720,13 +711,7 @@ public boolean getWaveTime() {
     }
     if(explosions.size()>0) {
       g.drawImage(explosions.get(0), xExplosion.get(0), yExplosion.get(0),null);
-      // try{
-      //   Thread.sleep( 100 );
-      // }
-      // catch (InterruptedException ex) { }
-      
       removeArrays();
-      // 
     }
     g.setColor(Color.WHITE);
     g.setFont(font);
@@ -756,7 +741,6 @@ public boolean getWaveTime() {
     }
   }
   public int convert(int d){
-		//return (int)((d/960)*(this.getHeight()-50));
 		return (int)(((double)d/(double)960)*(run.getSize()));
 	}
   private ImageIcon resize(ImageIcon img, int height) {
