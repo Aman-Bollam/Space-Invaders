@@ -48,9 +48,9 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private Image shieldThree;
   private Image boss;
   private Image end;
-  private ArrayList <Image> explosions = new ArrayList();
-  private ArrayList <Integer> xExplosion = new ArrayList();
-  private ArrayList <Integer> yExplosion = new ArrayList();
+  private ArrayList <Image> explosions = new ArrayList<Image>();
+  private ArrayList <Integer> xExplosion = new ArrayList<Integer>();
+  private ArrayList <Integer> yExplosion = new ArrayList<Integer>();
   private Image explosion1;
   private Image explosion2;
   private ArrayList<Rectangle> bullets = new ArrayList<>();
