@@ -559,7 +559,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     x=ship.getX();
   }
   public void bossActions() {
-    int chance = (int)(Math.random()*600) + 1;
+    int chance = (int)(Math.random()*650) + 1;
     if(chance<2 && !bigBoi.visibility() && one.getY()>80 && getEneCount()>2) {
       bigBoi.setVisibility(true);
       bigBoi.setLife(true);
@@ -795,7 +795,6 @@ public boolean getWaveTime() {
   @Override
   public void mouseDragged(MouseEvent e) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
   }
   @Override
   public void mouseMoved(MouseEvent e) {
