@@ -83,4 +83,4 @@ public class BossEnemy{
     public Rectangle hitbox() {
         return hitbox;
     }
-}
+ }

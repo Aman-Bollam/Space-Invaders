@@ -71,8 +71,6 @@ public class GameEngine implements Runnable {
 				executeMethods();
 				screen.repaint();
 				lastFrame = now;
-				//System.out.print(file.getScore());
-				// frames++;
 			}
 			
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
@@ -81,7 +79,6 @@ public class GameEngine implements Runnable {
 				// frames = 0;
 			}
 		}
-
 	}
 	public void executeMethods() {
 		if(!myGame.getOver() && !myGame.getWaveTime()) {
