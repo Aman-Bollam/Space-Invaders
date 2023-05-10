@@ -44,7 +44,6 @@ public class Settings extends JPanel implements MouseListener{
             g.drawImage(resize(new ImageIcon(path+backChoices[backNum]), this.getHeight()).getImage(),0,0,null);
         }
     }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getX()<=convert(168) && e.getX()>=convert(82) && e.getY()<=convert(268) && e.getY()>=convert(72)) {
@@ -113,22 +112,18 @@ public class Settings extends JPanel implements MouseListener{
             }
         }
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
