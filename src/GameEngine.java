@@ -71,6 +71,7 @@ public class GameEngine implements Runnable {
 				executeMethods();
 				screen.repaint();
 				lastFrame = now;
+				//System.out.print(file.getScore());
 				// frames++;
 			}
 			
