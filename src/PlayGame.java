@@ -1,11 +1,13 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class PlayGame extends JPanel implements MouseListener, MouseMotionListener{
+public class PlayGame extends JPanel implements MouseListener, MouseMotionListener, ActionListener{
   private int x;
   private int y;
   private int bossX;
@@ -15,12 +17,14 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private int score;
   private int highScore;
   private int shipNum;
+  private int time = 0;
   private final String path = "images\\";
   private boolean right;
   private boolean left;
   private boolean waveStart;
   private boolean gameOver;
   private boolean menuHover;
+  private boolean wait;
   private GameEngine run;
   private PlayerShip ship;
   private ShieldShip shield1;
@@ -53,6 +57,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
   private ArrayList<Rectangle> bullets = new ArrayList<>();
   private ArrayList<Rectangle> enemyBullets = new ArrayList<>();
   private Font font;
+  private Timer stall;
   public PlayGame(GameEngine engine, PlayerShip player, String background, int maxScore) {
     gameOver = false;
     this.setFocusable(true);
@@ -101,6 +106,9 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     boss = resize(new ImageIcon(path+"boss.png"),run.getSize()/9).getImage();
     switchShip(false);
     font = new Font("fonts\\minecraft_font.ttf", Font.TRUETYPE_FONT, 40);
+    stall = new Timer(100,this);
+    wait = true;
+    stall.start();
   }
   public int getEneCount() {
     int count = 0;
@@ -641,11 +649,14 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       five = new EnemyRow(1, 10 ,5);
       wave++;
       waveStart = true;
+      stall.start();
       bullets.clear();
       enemyBullets.clear();
     }
   }
-
+public boolean getWaveTime() {
+  return wait;
+}
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -722,6 +733,10 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
     g.drawString(Integer.toString(highScore), convert(684),convert(950));
     g.drawString(Integer.toString(wave), convert(800),convert(47));
     g.drawString(Integer.toString(score), convert(160),convert(47));
+    if(wait) {
+      g.drawImage(resize(new ImageIcon(path+"wavenum.png"),run.getSize()/2).getImage(), convert(265), convert(230), null);
+      g.drawString(Integer.toString(wave), convert(535),convert(472));
+    }
     if(lives==0 || (eneYBound()>=740)){
       gameOver = true;
       run.addScore(score);
@@ -739,14 +754,6 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
         g.drawImage(end,convert(0),convert(0),null);
       }
     }
-    if(waveStart) {
-      // waveStart = false;
-      // try{
-      //   wait( 5000 );
-      // }
-      // catch (InterruptedException ex) { }
-    }
-    waveStart = false;
   }
   public int convert(int d){
 		//return (int)((d/960)*(this.getHeight()-50));
@@ -799,6 +806,20 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       } else {
         menuHover = false;
       }
+    }
+  }
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+    wait = true;
+    bullets.clear();
+    enemyBullets.clear();
+    if(time<20) {
+      time++;
+    } else {
+      time = 0;
+      wait = false;
+      stall.stop();
     }
   }
 }

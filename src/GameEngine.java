@@ -83,7 +83,7 @@ public class GameEngine implements Runnable {
 
 	}
 	public void executeMethods() {
-		if(!myGame.getOver()) {
+		if(!myGame.getOver() && !myGame.getWaveTime()) {
 			setEneHitBox();
 			moveEnemy();
 			moveShip();
@@ -155,12 +155,12 @@ public class GameEngine implements Runnable {
 	}
 	private class PlayerHorizontal extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-		  	if(e.getKeyCode()==39 && !myGame.getOver()) {
+		  	if(e.getKeyCode()==39 && !myGame.getOver() && !myGame.getWaveTime()) {
 				myGame.setPosRight();
 				rightRel = false;
 				leftRel = true;    
 		  	} 
-		  	if(e.getKeyCode()==37 && !myGame.getOver()) {
+		  	if(e.getKeyCode()==37 && !myGame.getOver() && !myGame.getWaveTime()) {
 				myGame.setPosLeft();
 				leftRel = false;
 				rightRel = true;
@@ -177,12 +177,12 @@ public class GameEngine implements Runnable {
 	}
 	private class PlayerShoot extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode()==32 && !myGame.getOver()) {
+			if(e.getKeyCode()==32 && !myGame.getOver() && !myGame.getWaveTime()) {
 			  	myGame.switchShip(true);
 			}
 	  	}
 	  	public void keyReleased(KeyEvent e) {
-		 	if(e.getKeyCode()==32 && !myGame.getOver()) {    
+		 	if(e.getKeyCode()==32 && !myGame.getOver() && !myGame.getWaveTime()) {    
 				myGame.switchShip(false);
 				coolDown.start();
 				if(timer==0) {
