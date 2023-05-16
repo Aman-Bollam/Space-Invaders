@@ -434,7 +434,7 @@ public class PlayGame extends JPanel implements MouseListener, MouseMotionListen
       shield2.setHealth();
       shieldTwo = resize(new ImageIcon(path+(shield2.getName())),run.getSize()/5).getImage();
       
-    } else{
+    } else {
       shield3.setHealth();
       shieldThree = resize(new ImageIcon(path+(shield3.getName())),run.getSize()/5).getImage();
     }
